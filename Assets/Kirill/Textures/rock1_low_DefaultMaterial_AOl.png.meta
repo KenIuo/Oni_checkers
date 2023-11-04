@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Kirya3D/rock1_low_DefaultMaterial_AOl.png.meta
 guid: 51c4e687f5b1cf846b50d9b73c56c87d
+========
+guid: fa14ac10761ac2e47818350da2e8992e
+>>>>>>>> fab579e (Добавил портал нейтральный,синий и красный):Assets/Edik/Textures/circle.psd.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

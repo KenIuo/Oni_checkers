@@ -1,38 +1,84 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PointerSystemController : MonoBehaviour
 {
-    [SerializeField] float _speed = 2f;
+    [SerializeField] GameObject _playerChecker;
     [SerializeField] GameObject _pointingArrow; // настраивается только местоположение (на середине шашки игрока) и поворот (изначально смотрит вперёд)
     [SerializeField] GameObject _tensionForce; // настраивается только длина (Z координата) (изначально на максимальной или почти максимальной длине)
     [SerializeField] LayerMask _layerMask;
-
-    public GameObject _playerChecker;
+    [SerializeField] float _speed = 2f;
+    [SerializeField] float _launchStrength = 30f;
 
     Camera _camera;
-    Vector3 _pointerPos;
+    Vector3 _playerPos;
+    /// <summary>
+    /// соотношение 5 к 1, если расстояние больше заданного, то оно равно ему, если меньше, то 0
+    /// </summary>
+    float _max_radius = 5.00f, // max_size = 1.00f
+          _min_radius = 1.25f; // min_size = 0.25f
+    float _current_radius;
     //KeyValuePair<Vector3, Vector3> _launchVector;
 
 
 
-    void DrawArrow(Vector3 launch_vector)
+    void DrawArrow(Vector3 hit_position)
     {
+        _playerPos = new Vector3(_playerChecker.transform.position.x, 0.1f, _playerChecker.transform.position.z);
+        
+        Vector3 direction_move = GetDirectionVector(hit_position);
+
         if (Input.GetMouseButton(0))
         {
-            _pointingArrow.SetActive(true);
-            _pointingArrow.transform.position = _playerChecker.transform.position;
-            _pointingArrow.transform.rotation = Quaternion.LookRotation(launch_vector);
+            GetCurrentRadius(hit_position);
+
+            if (_current_radius != 0)
+                TransformPointingArrow(direction_move);
+            else
+                _pointingArrow.SetActive(false);
         }
         else if(Input.GetMouseButtonUp(0))
         {
-            Rigidbody rigidbody = _playerChecker.GetComponentInChildren<Rigidbody>();
-            rigidbody.velocity = launch_vector * 4;
+            if (_current_radius != 0)
+            {
+                Rigidbody rigidbody = _playerChecker.GetComponent<Rigidbody>();
+                rigidbody.velocity = direction_move * _launchStrength;
+            }
 
             _pointingArrow.SetActive(false);
         }
+    }
+
+    Vector3 GetDirectionVector(Vector3 hit_position)
+    {
+        hit_position.y = _playerPos.y;
+
+        Vector3 direction_move = _playerPos - hit_position;
+        direction_move.Normalize();
+
+        return direction_move;
+    }
+
+    void GetCurrentRadius(Vector3 hit_position)
+    {
+        _current_radius = Vector3.Distance(hit_position, _playerPos);
+
+        if (_current_radius > _max_radius)
+            _current_radius = _max_radius;
+        else if (_current_radius < _min_radius)
+            _current_radius = 0;
+    }
+
+    void TransformPointingArrow(Vector3 direction_move)
+    {
+        _pointingArrow.SetActive(true);
+        _pointingArrow.transform.position = _playerPos;
+        _pointingArrow.transform.rotation = Quaternion.LookRotation(direction_move);
+
+        _tensionForce.transform.localScale = new Vector3(1, 1, _current_radius / 5);
     }
 
     void RotateCamera()
@@ -58,10 +104,7 @@ public class PointerSystemController : MonoBehaviour
         {
             if (_playerChecker.activeInHierarchy) // && 
             {
-                Vector3 launch_vector = new Vector3(_playerChecker.transform.position.x, 0, _playerChecker.transform.position.z);
-                launch_vector += new Vector3(-hit.point.x, 0, -hit.point.z);
-
-                DrawArrow(launch_vector);
+                DrawArrow(hit.point);
             }
         }
         else

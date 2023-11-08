@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DeathByFall : MonoBehaviour
 {
+    [SerializeField] GameObject _playerCheckerObject;
+    [SerializeField] GameObject _LoseScreen;
+
     List<GameObject> _eliminationQueue = new List<GameObject>();
 
 
@@ -20,17 +23,26 @@ public class DeathByFall : MonoBehaviour
 
             _eliminationQueue.Clear();
         }
-        else if (_eliminationQueue.Count == 1)
+        else if (_eliminationQueue.Count == 1) // дополнить условие на проверку был ли водящий в списке
         {
-            _eliminationQueue[0].SetActive(false);
+            if (_eliminationQueue[0] == _playerCheckerObject)
+                _LoseScreen.SetActive(true);
+
+            // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
+            // исчезновение из системы ходов
             _eliminationQueue.Clear();
         }
     }
 
 
 
-    void OnTriggerEnter(Collider other)
+    public void OnEnter(Collider other)
     {
         _eliminationQueue.Add(other.gameObject);
+
+        if (other.TryGetComponent(out DefaultState default_state))
+            default_state._isCheckable = false;
+
+        CheckQueue(); // убрать отсюда и вызывать из перехода хода
     }
 }

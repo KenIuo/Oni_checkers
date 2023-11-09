@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DeathByFall : MonoBehaviour
 {
-    [SerializeField] GameObject _playerCheckerObject;
-    [SerializeField] GameObject _LoseScreen;
+    public GameObject _LoseScreen;
 
-    List<GameObject> _eliminationQueue = new List<GameObject>();
+    List<GameObject> _eliminationQueue = new();
+    MoveSystem _moveSystem;
 
 
 
@@ -25,24 +25,28 @@ public class DeathByFall : MonoBehaviour
         }
         else if (_eliminationQueue.Count == 1) // дополнить условие на проверку был ли водящий в списке
         {
-            if (_eliminationQueue[0] == _playerCheckerObject)
-                _LoseScreen.SetActive(true);
+            if (_eliminationQueue[0] == _moveSystem._playerCheckerObject)
+                GameObject.Find("Lose").SetActive(true);
 
             // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
             // исчезновение из системы ходов
+            _moveSystem._playersQueue.Remove(_eliminationQueue[0]);
+
+            // обновление очереди игроков в интерфейсе
+
             _eliminationQueue.Clear();
         }
     }
 
-
-
-    public void OnEnter(Collider other)
+    public void OnEnter(GameObject other)
     {
-        _eliminationQueue.Add(other.gameObject);
+        _eliminationQueue.Add(other);
+    }
 
-        if (other.TryGetComponent(out DefaultState default_state))
-            default_state._isCheckable = false;
 
-        CheckQueue(); // убрать отсюда и вызывать из перехода хода
+
+    void Awake()
+    {
+        _moveSystem = gameObject.GetComponent<MoveSystem>();
     }
 }

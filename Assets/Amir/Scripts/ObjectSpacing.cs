@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObjectSpacing : MonoBehaviour
 {
     [Min(2)]
-    [SerializeField] List<GameObject> _gameObjects = new List<GameObject>();
+    [SerializeField] List<GameObject> _gameObjects = new();
     [SerializeField] float _radius;
 
     Vector3 _center = Vector3.zero;

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetColliding : MonoBehaviour
+public class GetCollision : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
         other.gameObject.SetActive(false);
 
-        gameObject.GetComponentInParent<DeathByFall>().OnEnter(other);
+        gameObject.GetComponentInParent<DeathByFall>().OnEnter(other.gameObject);
     }
 }

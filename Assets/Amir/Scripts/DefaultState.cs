@@ -7,7 +7,6 @@ public class DefaultState : MonoBehaviour
 {
     [NonSerialized] public Transform _standardPosition;
     [NonSerialized] public float _currentSpeed;
-    [NonSerialized] public bool _isCheckable;
 
 
     
@@ -18,9 +17,9 @@ public class DefaultState : MonoBehaviour
 
     void Update()
     {
-       if (_isCheckable)
+        if (gameObject.activeSelf && gameObject.name == "Checker 1") 
             if (gameObject.TryGetComponent(out Rigidbody rigidbody))
-                //if (rigidbody.velocity.magnitude != 0)
-                    print(rigidbody.name + ": " + rigidbody.velocity.magnitude);
+                if (rigidbody.velocity.magnitude == 0) // вызов проверки состояния, что все оставшиеся шашки не двигаются
+                    print("magnituda: " + rigidbody.velocity.magnitude);
     }
 }

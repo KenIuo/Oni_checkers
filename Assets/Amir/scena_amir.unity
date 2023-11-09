@@ -1076,6 +1076,16 @@ PrefabInstance:
       propertyPath: _playerCheckerObject
       value: 
       objectReference: {fileID: 781760451}
+    - target: {fileID: 1044540692031325360, guid: 66b8e0b8a6248364eafba3204b8285a8,
+        type: 3}
+      propertyPath: _LoseScreen
+      value: 
+      objectReference: {fileID: 1033434480}
+    - target: {fileID: 1044540692031325360, guid: 66b8e0b8a6248364eafba3204b8285a8,
+        type: 3}
+      propertyPath: _playerCheckerObject
+      value: 
+      objectReference: {fileID: 781760451}
     - target: {fileID: 1596044783404845677, guid: 66b8e0b8a6248364eafba3204b8285a8,
         type: 3}
       propertyPath: m_LocalPosition.x

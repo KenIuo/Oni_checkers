@@ -7,30 +7,27 @@ public class DeathByFall : MonoBehaviour
     public GameObject _LoseScreen;
 
     List<GameObject> _eliminationQueue = new();
-    MoveSystem _moveSystem;
+    TurnSystem _turnSystem;
 
 
 
     public void CheckQueue()
     {
-        if (_eliminationQueue.Count > 1)
+        if (_eliminationQueue.Count > 1) // дополнить условие на проверку был ли водящий в списке
         {
-            foreach (GameObject go in _eliminationQueue)
-            {
-                if (go.TryGetComponent(out DefaultState default_state))
-                    go.transform.position = default_state._standardPosition.position;
-            }
+            foreach (GameObject player in _eliminationQueue)
+                player.transform.position = player.GetComponent<CheckerState>()._standardPosition.position;
 
             _eliminationQueue.Clear();
         }
-        else if (_eliminationQueue.Count == 1) // дополнить условие на проверку был ли водящий в списке
+        else if (_eliminationQueue.Count == 1)
         {
-            if (_eliminationQueue[0] == _moveSystem._playerCheckerObject)
+            if (_eliminationQueue[0] == _turnSystem._playerCheckerObject)
                 GameObject.Find("Lose").SetActive(true);
 
             // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
             // исчезновение из системы ходов
-            _moveSystem._playersQueue.Remove(_eliminationQueue[0]);
+            _turnSystem._playersQueue.RemoveAt(_turnSystem._playersQueue.IndexOf(_eliminationQueue[0]));
 
             // обновление очереди игроков в интерфейсе
 
@@ -47,6 +44,6 @@ public class DeathByFall : MonoBehaviour
 
     void Awake()
     {
-        _moveSystem = gameObject.GetComponent<MoveSystem>();
+        _turnSystem = gameObject.GetComponent<TurnSystem>();
     }
 }

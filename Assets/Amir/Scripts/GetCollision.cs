@@ -8,6 +8,8 @@ public class GetCollision : MonoBehaviour
     {
         other.gameObject.SetActive(false);
 
+        // воспроизводить анимацию смерти шашки
+
         gameObject.GetComponentInParent<DeathByFall>().OnEnter(other.gameObject);
     }
 }

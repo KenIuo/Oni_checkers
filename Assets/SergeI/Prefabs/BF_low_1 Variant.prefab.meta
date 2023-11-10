@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/SergeI/Prefabs/BF_low_1 Variant.prefab.meta
 guid: a1899ed6a53f2ae40851d84e824e40e3
 PrefabImporter:
+========
+guid: d2271b1e4e340034b81bad556eebb5ba
+NativeFormatImporter:
+>>>>>>>> c356d71 (Исправил ошибку):Assets/Eduard/Deathaterial 2.mat.meta
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

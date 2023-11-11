@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeathByFall : MonoBehaviour
 {
-    public GameObject _LoseScreen;
+    /*public GameObject _LoseScreen;
 
     List<GameObject> _eliminationQueue = new();
     TurnSystem _turnSystem;
@@ -13,14 +13,15 @@ public class DeathByFall : MonoBehaviour
 
     public void CheckQueue()
     {
-        if (_eliminationQueue.Count > 1) // дополнить условие на проверку был ли водящий в списке
+        if (_eliminationQueue.Count > 1
+        &&  _eliminationQueue.Contains(_turnSystem._playersQueue[_turnSystem._currentPlayer]))
         {
             foreach (GameObject player in _eliminationQueue)
                 player.transform.position = player.GetComponent<CheckerState>()._standardPosition.position;
 
             _eliminationQueue.Clear();
         }
-        else if (_eliminationQueue.Count == 1)
+        else if (_eliminationQueue.Count > 0)
         {
             if (_eliminationQueue[0] == _turnSystem._playerCheckerObject)
                 GameObject.Find("Lose").SetActive(true);
@@ -45,5 +46,5 @@ public class DeathByFall : MonoBehaviour
     void Awake()
     {
         _turnSystem = gameObject.GetComponent<TurnSystem>();
-    }
+    }*/
 }

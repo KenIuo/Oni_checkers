@@ -7,12 +7,13 @@ using UnityEngine.VFX;
 
 public class PointerSystemController : MonoBehaviour
 {
-    [SerializeField] GameObject _playerChecker;
+    /*[SerializeField] GameObject _playerChecker;
     [SerializeField] GameObject _pointingArrow; // настраивается только местоположение (на середине шашки игрока) и поворот (изначально смотрит вперёд)
     [SerializeField] GameObject _tensionForce; // настраивается только длина (Z координата) (изначально на максимальной или почти максимальной длине)
     [SerializeField] LayerMask _layerMask;
     [SerializeField] float _launchStrength;
 
+    TurnSystem _turnSystem;
     Camera _camera;
     Vector3 _playerPos;
     /// <summary>
@@ -28,7 +29,9 @@ public class PointerSystemController : MonoBehaviour
 
     void DrawArrow(Vector3 hit_position)
     {
-        _playerPos = new Vector3(_playerChecker.transform.position.x, 0.1f, _playerChecker.transform.position.z);
+        _playerPos = new Vector3(_playerChecker.transform.position.x,
+                                 0.1f,
+                                 _playerChecker.transform.position.z);
         
         Vector3 direction_move = GetDirectionVector(hit_position);
 
@@ -98,15 +101,14 @@ public class PointerSystemController : MonoBehaviour
     void RotateCamera()
     {
         if (Input.GetMouseButton(1))
-        {
             gameObject.transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * _speed);
-        }
     }
 
 
 
     void Start()
     {
+        _turnSystem = FindFirstObjectByType<TurnSystem>();
         _camera = GetComponentInChildren<Camera>();
     }
 
@@ -114,18 +116,16 @@ public class PointerSystemController : MonoBehaviour
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _layerMask))
+        if (_turnSystem._canMove
+        &&  _turnSystem._playersQueue[_turnSystem._currentPlayer] == _playerChecker
+        &&  Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _layerMask))
         {
-            if (_playerChecker.activeInHierarchy) // && 
-            {
+            if (_playerChecker.activeInHierarchy)
                 DrawArrow(hit.point);
-            }
         }
         else
-        {
             _pointingArrow.SetActive(false);
-        }
 
         RotateCamera();
-    }
+    }*/
 }

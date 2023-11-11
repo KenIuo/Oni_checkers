@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class TurnSystem : MonoBehaviour
 {
-    public List<GameObject> _playersQueue = new(4);
+    /*public List<GameObject> _playersQueue = new (4);
     public GameObject _playerCheckerObject;
+    public byte _currentPlayer = 0;
+    public bool _canMove = false;
 
-    List<bool> _is_ready_list = new(4);
-    byte _currentPlayer = 0;
+    List<Transform> _gameScreen = new (4);
+    List<bool> _is_ready_list = new (4);
 
 
 
@@ -22,10 +24,10 @@ public class TurnSystem : MonoBehaviour
 
         foreach (GameObject player in _playersQueue)
         {
+            _playerCheckerObject.SetActive(true);
+
             if (player != _playerCheckerObject)
-            {
-                //p.AddComponent<AIScript>();
-            }
+                player.AddComponent<AIScript>();
         }
 
         NewTurn();
@@ -33,7 +35,6 @@ public class TurnSystem : MonoBehaviour
 
     public void CheckConditions()
     {
-
         byte _is_all_ready = 0;
 
         foreach (GameObject player in _playersQueue)
@@ -45,7 +46,7 @@ public class TurnSystem : MonoBehaviour
         if (_is_all_ready == _playersQueue.Count) // если условия подходят, то вызывать новый ход
         {
             gameObject.GetComponent<DeathByFall>().CheckQueue(); // правильное место для проверки ?
-            NewTurn();
+            //NewTurn();
         }
 
         if (_playersQueue.Count == 1)
@@ -61,19 +62,22 @@ public class TurnSystem : MonoBehaviour
 
     void NewTurn()
     {
+        ++_currentPlayer;
+        _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 400);
         // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
-        // 
-        // проверять ведущего хода на игрока
-        // если ведущий - игрок
-        // разблокировать управление
-        // иначе
-        // разблокировать компонент ии ИЛИ вызывать функцию выбора вектора и выстрела
+
+        if (_playersQueue[_currentPlayer] == _playerCheckerObject) // если ведущий - игрок
+            ; // разблокировать управление
+        else // иначе
+            _playersQueue[_currentPlayer].GetComponent<AIScript>().ChooseAttackVector(); // разблокировать компонент ai ИЛИ вызывать функцию выбора вектора и выстрела
     }
 
 
 
-    private void Start()
+    private void Awake()
     {
-        //
-    }
+        for (byte i = 0; i < _gameScreen.Count; i++)
+            _gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
+        //GameObject.Find("Game");.transform.GetChild(1).gameObject.SetActive(false);
+    }*/
 }

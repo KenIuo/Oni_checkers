@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AIScript : MonoBehaviour
 {
-    public void ChooseAttackVector()
+    /*public void ChooseAttackVector()
     {
 
-    }
+    }*/
 }

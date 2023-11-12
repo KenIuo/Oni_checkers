@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 public static class UniversalStaticClass
 {
-    /*public static void Shuffle<T>(this IList<T> list)
+    public static void Shuffle<T>(this IList<T> list)
     {
         RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
 
@@ -21,5 +21,5 @@ public static class UniversalStaticClass
             list[k] = list[n];
             list[n] = value;
         }
-    }*/
+    }
 }

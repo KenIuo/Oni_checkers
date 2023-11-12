@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,15 +6,34 @@ using UnityEngine;
 
 public class TurnSystem : MonoBehaviour
 {
-    /*public List<GameObject> _playersQueue = new (4);
+    [NonSerialized] public bool _canMove = true;
+    [NonSerialized] public List<GameObject> _playersQueue = new ();
+
+    [SerializeField] GameObject LoseScreen;
+    [SerializeField] GameObject WinScreen;
+
     public GameObject _playerCheckerObject;
     public byte _currentPlayer = 0;
-    public bool _canMove = false;
 
     List<Transform> _gameScreen = new (4);
-    List<bool> _is_ready_list = new (4);
+    List<bool> _isReadyList = new (4);
+    DeathByFall _deathByFall;
 
 
+
+    #region Singleton
+    private static TurnSystem _instance;
+    public static TurnSystem Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = FindObjectOfType<TurnSystem>();
+
+            return _instance;
+        }
+    }
+    #endregion
 
     /// <summary>
     ///  должен вызываться при старте игры (т.е. после нажатия на кнопку играть в гл. меню)
@@ -45,7 +65,7 @@ public class TurnSystem : MonoBehaviour
 
         if (_is_all_ready == _playersQueue.Count) // если условия подходят, то вызывать новый ход
         {
-            gameObject.GetComponent<DeathByFall>().CheckQueue(); // правильное место для проверки ?
+            _deathByFall.CheckQueue(); // правильное место для проверки ?
             //NewTurn();
         }
 
@@ -58,6 +78,11 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
+    public DeathByFall GetDeathByFall()
+    {
+        return _deathByFall;
+    }
+
 
 
     void NewTurn()
@@ -67,7 +92,7 @@ public class TurnSystem : MonoBehaviour
         // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
 
         if (_playersQueue[_currentPlayer] == _playerCheckerObject) // если ведущий - игрок
-            ; // разблокировать управление
+            _currentPlayer = _currentPlayer; // разблокировать управление
         else // иначе
             _playersQueue[_currentPlayer].GetComponent<AIScript>().ChooseAttackVector(); // разблокировать компонент ai ИЛИ вызывать функцию выбора вектора и выстрела
     }
@@ -79,5 +104,5 @@ public class TurnSystem : MonoBehaviour
         for (byte i = 0; i < _gameScreen.Count; i++)
             _gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
         //GameObject.Find("Game");.transform.GetChild(1).gameObject.SetActive(false);
-    }*/
+    }
 }

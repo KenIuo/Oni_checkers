@@ -257,7 +257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2762913659347606754}
         m_TargetAssemblyTypeName: BackButtonScript, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnBackClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

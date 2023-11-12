@@ -7,7 +7,7 @@ using UnityEngine.VFX;
 
 public class PointerSystemController : MonoBehaviour
 {
-    /*[SerializeField] GameObject _playerChecker;
+    [SerializeField] GameObject _playerChecker;
     [SerializeField] GameObject _pointingArrow; // настраивается только местоположение (на середине шашки игрока) и поворот (изначально смотрит вперёд)
     [SerializeField] GameObject _tensionForce; // настраивается только длина (Z координата) (изначально на максимальной или почти максимальной длине)
     [SerializeField] LayerMask _layerMask;
@@ -106,7 +106,7 @@ public class PointerSystemController : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
         _turnSystem = FindFirstObjectByType<TurnSystem>();
         _camera = GetComponentInChildren<Camera>();
@@ -127,5 +127,5 @@ public class PointerSystemController : MonoBehaviour
             _pointingArrow.SetActive(false);
 
         RotateCamera();
-    }*/
+    }
 }

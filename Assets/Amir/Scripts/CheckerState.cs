@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CheckerState : MonoBehaviour
 {
-    /*[NonSerialized] public Transform _standardPosition;
+    [NonSerialized] public Transform _standardPosition;
     [NonSerialized] public float _currentSpeed;
     [NonSerialized] public bool _isStopped = true;
 
@@ -14,6 +14,7 @@ public class CheckerState : MonoBehaviour
     
     void Start()
     {
+        FindFirstObjectByType<TurnSystem>()._playersQueue.Add(gameObject);
         _standardPosition = gameObject.transform;
     }
 
@@ -37,5 +38,5 @@ public class CheckerState : MonoBehaviour
 
         if (collision.gameObject != GameObject.Find("PlayingField"))
             gameObject.transform.GetChild(2).gameObject.SetActive(false);
-    }*/
+    }
 }

@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class GetCollision : MonoBehaviour
 {
-    /*void OnTriggerEnter(Collider other)
+    void Awake()
+    {
+        
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         other.gameObject.SetActive(false);
 
         // воспроизводить анимацию смерти шашки
 
-        FindFirstObjectByType<DeathByFall>().OnEnter(other.gameObject);
-    }*/
+        TurnSystem.Instance.GetDeathByFall().OnEnter(other.gameObject);
+        //FindFirstObjectByType<DeathByFall>().OnEnter(other.gameObject);
+    }
 }

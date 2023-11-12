@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class TurnSystem : MonoBehaviour
 {
-    [NonSerialized] public bool _canMove = true;
     [NonSerialized] public List<GameObject> _playersQueue = new ();
+    [NonSerialized] public byte _currentPlayer = 4;
+    [NonSerialized] public bool _canMove = false;
 
     [SerializeField] GameObject LoseScreen;
     [SerializeField] GameObject WinScreen;
 
     public GameObject _playerCheckerObject;
-    public byte _currentPlayer = 0;
+    public List<Transform> _gameScreen = new();
 
-    List<Transform> _gameScreen = new (4);
     List<bool> _isReadyList = new (4);
     DeathByFall _deathByFall;
 
@@ -40,17 +40,15 @@ public class TurnSystem : MonoBehaviour
     /// </summary>
     public void ShuffleListOfPlayers()
     {
-        _playersQueue.Shuffle();
+        //_playersQueue.Shuffle();
 
         foreach (GameObject player in _playersQueue)
         {
-            _playerCheckerObject.SetActive(true);
+            player.SetActive(true);
 
             if (player != _playerCheckerObject)
                 player.AddComponent<AIScript>();
         }
-
-        NewTurn();
     }
 
     public void CheckConditions()
@@ -85,10 +83,14 @@ public class TurnSystem : MonoBehaviour
 
 
 
-    void NewTurn()
+    public void NewTurn()
     {
-        ++_currentPlayer;
-        _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 400);
+        if (_currentPlayer == 4)
+            _currentPlayer = 0;
+        else
+            ++_currentPlayer;
+
+        _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 940);
         // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
 
         if (_playersQueue[_currentPlayer] == _playerCheckerObject) // если ведущий - игрок
@@ -99,10 +101,10 @@ public class TurnSystem : MonoBehaviour
 
 
 
-    private void Awake()
+    /*private void Awake()
     {
-        for (byte i = 0; i < _gameScreen.Count; i++)
-            _gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
+        //for (byte i = 0; i < 4; i++)
+            //_gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
         //GameObject.Find("Game");.transform.GetChild(1).gameObject.SetActive(false);
-    }
+    }*/
 }

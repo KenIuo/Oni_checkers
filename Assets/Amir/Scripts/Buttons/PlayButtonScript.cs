@@ -9,10 +9,11 @@ public class PlayButtonScript : MonoBehaviour
 
     public void OnPlayClick()
     {
-        FindFirstObjectByType<TurnSystem>().ShuffleListOfPlayers();
-        FindFirstObjectByType<TurnSystem>()._canMove = true;
-
         _currentScreen.SetActive(false);
         _screenToOpen.SetActive(true);
+
+        TurnSystem.Instance._canMove = true;
+        TurnSystem.Instance.ShuffleListOfPlayers();
+        TurnSystem.Instance.NewTurn();
     }
 }

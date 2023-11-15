@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Amir/scena_amir.unity
     guid: 66ae548e4e764234d83ec4be134f17f1
   m_configObjects: {}

@@ -219,5 +219,6 @@ MonoBehaviour:
   _tensionForce: {fileID: 0}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
-  _launchStrength: 0
+    m_Bits: 8
+  _launchStrength: 8
+  _playerCheckerController: {fileID: 0}

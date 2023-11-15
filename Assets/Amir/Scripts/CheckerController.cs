@@ -7,11 +7,11 @@ using UnityEngine.Events;
 
 public class CheckerController : MonoBehaviour
 {
-    public GameObject Marker;
     public UnityEvent<CheckerController> OnCheckerReady;
-    public bool _gameStarted = false;
 
+    internal GameObject _marker;
     internal Transform _standardPosition;
+    internal bool _gameStarted = false;
 
     Rigidbody _rigidbody;
     bool _isStopped = true;

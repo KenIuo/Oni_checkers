@@ -2,22 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class TurnSystem : MonoBehaviour
 {
-    [NonSerialized] public List<GameObject> _playersQueue = new ();
-    [NonSerialized] public byte _currentPlayer = 4;
-    [NonSerialized] public bool _canMove = false;
+    public GameObject _playerCheckerObject;
+    public List<Transform> _gameScreen = new();
+
+    internal List<CheckerController> _playersQueue = new ();
+    internal byte _currentPlayer = 4;
+    internal byte _playerID;
+    internal bool _didMoved = false;
+    //[NonSerialized] public bool _canMove = false;
 
     [SerializeField] GameObject LoseScreen;
     [SerializeField] GameObject WinScreen;
 
-    public GameObject _playerCheckerObject;
-    public List<Transform> _gameScreen = new();
-
     List<bool> _isReadyList = new (4);
     DeathByFall _deathByFall;
+    byte _isAllReady = 0;
+
+    List<GameObject> _eliminationQueue = new(); // ? и убрать DeathByFall скрипт ?
 
 
 
@@ -35,37 +41,91 @@ public class TurnSystem : MonoBehaviour
     }
     #endregion
 
-    /// <summary>
-    ///  должен вызываться при старте игры (т.е. после нажатия на кнопку играть в гл. меню)
-    /// </summary>
-    public void ShuffleListOfPlayers()
+
+
+    /*public void ShuffleListOfPlayers()
     {
         //_playersQueue.Shuffle();
 
-        foreach (GameObject player in _playersQueue)
+        for (byte i = 0; i < _playersQueue.Count; i++)
         {
-            player.SetActive(true);
+            _playersQueue[i].SetActive(true);
 
-            if (player != _playerCheckerObject)
-                player.AddComponent<AIScript>();
+            //if (_playersQueue[i] == _playerCheckerObject)
+                //_playerID = i;
+        }
+    }*/
+
+    public void AddToList(CheckerController checker)
+    {
+        if (!_playersQueue.Contains(checker))
+        {
+            _playersQueue.Add(checker);
+            checker.OnCheckerReady.AddListener(CheckConditions);
         }
     }
 
-    public void CheckConditions()
+    public void CheckConditions(CheckerController player)
     {
-        byte _is_all_ready = 0;
+        _isAllReady++;
 
-        foreach (GameObject player in _playersQueue)
-        {
-            if (!player.activeSelf || player.GetComponent<CheckerState>()._isStopped)
-                _is_all_ready++;
-        }
+        _playersQueue.RemoveAt(_playersQueue.IndexOf(player)); // ?
 
-        if (_is_all_ready == _playersQueue.Count) // если условия подходят, то вызывать новый ход
+        if (_didMoved && _isAllReady == _playersQueue.Count) // если условия подходят, то вызывать новый ход
         {
             _deathByFall.CheckQueue(); // правильное место для проверки ?
-            //NewTurn();
+            
+            // вызывать смену интерфейса
+
+            NewTurn();
         }
+    }
+
+    public void NewTurn()
+    {
+        CheckerController checker_controller;
+
+        if (_currentPlayer >= 4)
+        {
+            _currentPlayer = 0;
+            _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 1040);
+            SetMassToOther(1);
+        }
+        else
+        {
+            checker_controller = _playersQueue[_currentPlayer];
+            checker_controller._gameStarted = false;
+
+            _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 1040);
+            SetMassToOther(1);
+            ++_currentPlayer;
+        }
+
+        checker_controller = _playersQueue[_currentPlayer];
+        //checker_controller._isStopped = false;
+        checker_controller._gameStarted = true;
+        _didMoved = false;
+
+        _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 940);
+        // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
+
+        if (_playersQueue[_currentPlayer] != _playerCheckerObject) // если ведущий - НЕ игрок
+            checker_controller.ChooseAttackVector(); // вызывать функцию выбора вектора и выстрела
+        //else // иначе
+            //_currentPlayer = _currentPlayer; // разблокировать управление
+    }
+
+    public void SetMassToOther(float mass)
+    {
+        for (byte i = 0; i < _playersQueue.Count; i++)
+            if (i != _currentPlayer)
+                _playersQueue[i].GetComponent<Rigidbody>().mass = mass;
+    }
+
+    public void CheckEndOfGameConditions(CheckerController checker)
+    {
+        checker.SetAlive(false);
+        //GetDeathByFall().OnEnter(checker.gameObject);
 
         if (_playersQueue.Count == 1)
         {
@@ -74,6 +134,9 @@ public class TurnSystem : MonoBehaviour
             else
                 GameObject.Find("Lose").SetActive(true);
         }
+        //else
+            //CheckConditions(checker);
+
     }
 
     public DeathByFall GetDeathByFall()
@@ -83,28 +146,11 @@ public class TurnSystem : MonoBehaviour
 
 
 
-    public void NewTurn()
+    void Awake()
     {
-        if (_currentPlayer == 4)
-            _currentPlayer = 0;
-        else
-            ++_currentPlayer;
-
-        _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 940);
-        // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
-
-        if (_playersQueue[_currentPlayer] == _playerCheckerObject) // если ведущий - игрок
-            _currentPlayer = _currentPlayer; // разблокировать управление
-        else // иначе
-            _playersQueue[_currentPlayer].GetComponent<AIScript>().ChooseAttackVector(); // разблокировать компонент ai ИЛИ вызывать функцию выбора вектора и выстрела
-    }
-
-
-
-    /*private void Awake()
-    {
+        //Instance.GetDeathByFall();
         //for (byte i = 0; i < 4; i++)
-            //_gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
+        //_gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
         //GameObject.Find("Game");.transform.GetChild(1).gameObject.SetActive(false);
-    }*/
+    }
 }

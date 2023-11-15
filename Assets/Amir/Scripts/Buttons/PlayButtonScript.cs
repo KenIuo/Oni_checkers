@@ -12,8 +12,10 @@ public class PlayButtonScript : MonoBehaviour
         _currentScreen.SetActive(false);
         _screenToOpen.SetActive(true);
 
-        TurnSystem.Instance._canMove = true;
-        TurnSystem.Instance.ShuffleListOfPlayers();
+        EventSystem.Instance.StartGame(true);
+
+        //TurnSystem.Instance._canMove = true;
+        //TurnSystem.Instance.ShuffleListOfPlayers();
         TurnSystem.Instance.NewTurn();
     }
 }

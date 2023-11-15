@@ -13,11 +13,11 @@ public class DeathByFall
 
     public void CheckQueue()
     {
-        if (_eliminationQueue.Count > 1
+        /*if (_eliminationQueue.Count > 1
         &&  _eliminationQueue.Contains(TurnSystem.Instance._playersQueue[TurnSystem.Instance._currentPlayer]))
         {
             foreach (GameObject player in _eliminationQueue)
-                player.transform.position = player.GetComponent<CheckerState>()._standardPosition.position;
+                player.transform.position = player.GetComponent<CheckerController>()._standardPosition.position;
 
             _eliminationQueue.Clear();
         }
@@ -33,7 +33,7 @@ public class DeathByFall
             // обновление очереди игроков в интерфейсе
 
             _eliminationQueue.Clear();
-        }
+        }*/
     }
 
     public void OnEnter(GameObject other)

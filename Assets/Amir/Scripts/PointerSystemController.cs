@@ -12,8 +12,8 @@ public class PointerSystemController : MonoBehaviour
     [SerializeField] GameObject _tensionForce; // настраивается только длина (Z координата) (изначально на максимальной или почти максимальной длине)
     [SerializeField] LayerMask _layerMask;
     [SerializeField] float _launchStrength;
+    [SerializeField] CheckerController _playerCheckerController;
 
-    TurnSystem _turnSystem;
     Camera _camera;
     Vector3 _playerPos;
     /// <summary>
@@ -48,7 +48,11 @@ public class PointerSystemController : MonoBehaviour
         {
             if (_current_radius != 0)
             {
-                _playerChecker.GetComponent<CheckerState>()._isStopped = false;
+                if(_current_radius == _max_radius)
+                    TurnSystem.Instance.SetMassToOther(0.1f);
+
+                TurnSystem.Instance._didMoved = true;
+                //_checkerController._isStopped = false;
                 _playerChecker.transform.GetChild(2).gameObject.SetActive(true);
 
                 Rigidbody rigidbody = _playerChecker.GetComponent<Rigidbody>();
@@ -108,23 +112,24 @@ public class PointerSystemController : MonoBehaviour
 
     void Awake()
     {
-        _turnSystem = FindFirstObjectByType<TurnSystem>();
         _camera = GetComponentInChildren<Camera>();
     }
 
     void Update()
     {
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-        if (_turnSystem._canMove
-        &&  _turnSystem._playersQueue[_turnSystem._currentPlayer] == _playerChecker
-        &&  Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _layerMask))
+        if (_playerCheckerController._gameStarted)
         {
-            if (_playerChecker.activeInHierarchy)
-                DrawArrow(hit.point);
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+            if (TurnSystem.Instance._playerID == TurnSystem.Instance._currentPlayer
+            &&  Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _layerMask))
+            {
+                if (_playerChecker.activeInHierarchy)
+                    DrawArrow(hit.point);
+            }
+            else
+                _pointingArrow.SetActive(false);
         }
-        else
-            _pointingArrow.SetActive(false);
 
         RotateCamera();
     }

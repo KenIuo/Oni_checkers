@@ -113,6 +113,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6981477080507766064}
     m_Modifications:
+    - target: {fileID: 832573981359081447, guid: 05916300d04cc43469fcf077b3b75cd8,
+        type: 3}
+      propertyPath: m_text
+      value: 'P2
+
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 2978420860305686569, guid: 05916300d04cc43469fcf077b3b75cd8,
         type: 3}
       propertyPath: m_Color.b
@@ -252,6 +260,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6981477080507766064}
     m_Modifications:
+    - target: {fileID: 832573981359081447, guid: 05916300d04cc43469fcf077b3b75cd8,
+        type: 3}
+      propertyPath: m_text
+      value: 'P3
+
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 2978420860305686569, guid: 05916300d04cc43469fcf077b3b75cd8,
         type: 3}
       propertyPath: m_Color.b
@@ -391,6 +407,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6981477080507766064}
     m_Modifications:
+    - target: {fileID: 832573981359081447, guid: 05916300d04cc43469fcf077b3b75cd8,
+        type: 3}
+      propertyPath: m_text
+      value: 'P4
+
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 2978420860305686569, guid: 05916300d04cc43469fcf077b3b75cd8,
         type: 3}
       propertyPath: m_Color.b

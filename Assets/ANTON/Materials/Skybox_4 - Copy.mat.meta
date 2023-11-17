@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ANTON/Materials/Skybox_4 - Copy.mat.meta
 guid: 611e443629f23a24c8ad74b0838e70b7
+========
+guid: 263ee7cce3ca2b04c86d18c112452174
+>>>>>>>> a8169ca (Новые эффекты и исправления):Assets/Eduard/Materials/Checer.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

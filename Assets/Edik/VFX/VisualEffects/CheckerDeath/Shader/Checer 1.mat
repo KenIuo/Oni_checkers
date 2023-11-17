@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7710611795132316630
+--- !u!114 &-345342599175398727
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,26 +20,31 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Deathaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 0692179823448ad48ba3426c95d9fa37,
+  m_Name: Checer 1
+  m_Shader: {fileID: -6465566751694194690, guid: 1a9712dfb1e102649ad406375767de5e,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2450
   stringTagMap:
-    RenderType: Opaque
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _albedo:
-        m_Texture: {fileID: 0}
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: d46a9af91cb31d64baab61f1b6ea9aa5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 3c17923bd4479b94dbaad63516253f58, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -56,16 +61,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
+    - _AlphaClip: 1
+    - _AlphaToMask: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
     - _Cull: 2
+    - _DisolveWidth: 0.02
+    - _DissolveAmount: 1
+    - _DissolveScale: 40
     - _DstBlend: 0
+    - _Metallic: 0
+    - _Normals_strenght: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Smothness: 0.5
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
@@ -73,5 +84,6 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DisolveColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

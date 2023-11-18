@@ -8,16 +8,28 @@ public class CheckerController : MonoBehaviour
 {
     public UnityEvent OnCheckerReady;
     public GameObject _marker;
+    /// <summary>
+    /// соотношение 5 к 1, если расстояние больше заданного, то оно равно ему, если меньше, то 0
+    /// </summary>
+    public readonly float _max_radius = 5.00f; // max_size = 1.00f
+    public readonly float _min_radius = 1.25f; // min_size = 0.25f
+    public readonly float _launchStrength = 8;
 
     internal Transform _standardPosition;
     internal CheckerState _state { get; private set; } = CheckerState.Died;
     internal bool _gameStarted { get; private set; } = false;
 
     Rigidbody _rigidbody;
+    float _current_radius;
     bool _isStopped = false;
     bool _isAlive = true;
 
 
+
+    public void ChangeGameStat(bool stat_to)
+    {
+        _gameStarted = stat_to;
+    }
 
     public void SetMass(float mass)
     {
@@ -64,8 +76,30 @@ public class CheckerController : MonoBehaviour
 
     //public void SetMovedState()
     //{
-        //Invoke(nameof(DelaySkip), 0.1f);
+    //Invoke(nameof(DelaySkip), 0.1f);
     //}
+
+
+
+    public float GetCurrentRadius(Vector3 hit_position)
+    {
+        _current_radius = Vector3.Distance(hit_position, gameObject.transform.position);
+
+        if (_current_radius > _max_radius)
+        {
+            _current_radius = _max_radius;
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else if (_current_radius < _min_radius)
+        {
+            _current_radius = 0;
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        else
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+
+        return _current_radius;
+    }
 
 
 
@@ -73,11 +107,6 @@ public class CheckerController : MonoBehaviour
     {
         TurnSystem.Instance._didMoved = true;
         SetState(CheckerState.Standing);
-    }
-
-    public void ChangeGameStat(bool stat_to)
-    {
-        _gameStarted = stat_to;
     }
 
     void CheckReadyState()
@@ -121,10 +150,7 @@ public class CheckerController : MonoBehaviour
 
     void Update()
     {
-        //if (!_isStopped)
-            //CheckReadyState();
-
-        if (!_state.Equals(CheckerState.Died) || !_state.Equals(CheckerState.Turning))
+        if (!_state.Equals(CheckerState.Died) && !_state.Equals(CheckerState.Turning))
             CheckReadyState();
     }
 

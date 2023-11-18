@@ -6,19 +6,12 @@ public class PointerSystemController : MonoBehaviour
     [SerializeField] GameObject _pointingArrow; // настраивается только местоположение (на середине шашки игрока) и поворот (изначально смотрит вперёд)
     [SerializeField] GameObject _tensionForce; // настраивается только длина (Z координата) (изначально на максимальной или почти максимальной длине)
     [SerializeField] LayerMask _layerMask;
-    [SerializeField] float _launchStrength;
-    [SerializeField] CheckerController _playerCheckerController;
 
     Camera _camera;
+    CheckerController _playerCheckerController;
     Vector3 _playerPos;
-    /// <summary>
-    /// соотношение 5 к 1, если расстояние больше заданного, то оно равно ему, если меньше, то 0
-    /// </summary>
-    float _max_radius = 5.00f, // max_size = 1.00f
-          _min_radius = 1.25f; // min_size = 0.25f
     float _current_radius;
     float _speed = 2f;
-    //KeyValuePair<Vector3, Vector3> _launchVector;
 
 
 
@@ -27,31 +20,32 @@ public class PointerSystemController : MonoBehaviour
         _playerPos = new Vector3(_playerChecker.transform.position.x,
                                  0.1f,
                                  _playerChecker.transform.position.z);
-        
+
         Vector3 direction_move = GetDirectionVector(hit_position);
 
         if (Input.GetMouseButton(0))
         {
-            GetCurrentRadius(hit_position);
+            _current_radius = _playerCheckerController.GetCurrentRadius(hit_position);
 
             if (_current_radius != 0)
                 TransformPointingArrow(direction_move);
             else
                 _pointingArrow.SetActive(false);
         }
-        else if(Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
             if (_current_radius != 0)
             {
-                if (_current_radius == _max_radius)
+                if (_current_radius == _playerCheckerController._max_radius)
                     TurnSystem.Instance.SetMassToOther(0.1f);
 
+                GameManager.Instance.SoundManager.PlayLaunchSound();
                 //_playerCheckerController.SetMovedState();
                 _playerCheckerController.SetState(CheckerState.Moving);
                 _playerChecker.transform.GetChild(2).gameObject.SetActive(true);
 
                 Rigidbody rigidbody = _playerChecker.GetComponent<Rigidbody>();
-                rigidbody.velocity = direction_move * (_current_radius * _launchStrength);
+                rigidbody.velocity = direction_move * (_current_radius * _playerCheckerController._launchStrength);
             }
 
             _pointingArrow.SetActive(false);
@@ -66,24 +60,6 @@ public class PointerSystemController : MonoBehaviour
         direction_move.Normalize();
 
         return direction_move;
-    }
-
-    void GetCurrentRadius(Vector3 hit_position)
-    {
-        _current_radius = Vector3.Distance(hit_position, _playerPos);
-
-        if (_current_radius > _max_radius)
-        {
-            _current_radius = _max_radius;
-            _playerChecker.transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else if (_current_radius < _min_radius)
-        {
-            _current_radius = 0;
-            _playerChecker.transform.GetChild(1).gameObject.SetActive(false);
-        }
-        else
-            _playerChecker.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     void TransformPointingArrow(Vector3 direction_move)
@@ -108,11 +84,13 @@ public class PointerSystemController : MonoBehaviour
     void Awake()
     {
         _camera = GetComponentInChildren<Camera>();
+        _playerCheckerController = _playerChecker.GetComponent<CheckerController>();
     }
 
     void Update()
     {
-        if (_playerCheckerController._state.Equals(CheckerState.Turning)) // (_playerCheckerController._gameStarted && !TurnSystem.Instance._didMoved)
+        // (_playerCheckerController._gameStarted && !TurnSystem.Instance._didMoved)
+        if (_playerCheckerController._state.Equals(CheckerState.Turning))
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 

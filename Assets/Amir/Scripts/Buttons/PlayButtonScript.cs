@@ -8,7 +8,7 @@ public class PlayButtonScript : MonoBehaviour
 
 
 
-    public void OnPlayClick(List<GameObject> players)
+    public void OnPlayClick()
     {
         _currentScreen.SetActive(false);
         _screenToOpen.SetActive(true);

@@ -4,6 +4,7 @@ using UnityEngine;
 public class TurnSystem : MonoBehaviour
 {
     public CheckerController _playerCheckerObject;
+    public List<GameObject> players;
 
     internal List<Transform> _markers = new();
     internal List<CheckerController> _playersQueue = new ();
@@ -18,10 +19,9 @@ public class TurnSystem : MonoBehaviour
     [SerializeField] GameObject WinScreen;
 
     List<CheckerController> _isReadyList = new ();
-    //DeathByFall _deathByFall;
     //byte _isAllReady = 0;
 
-    List<CheckerController> _eliminationQueue = new(); // ? и убрать DeathByFall скрипт ?
+    List<CheckerController> _eliminationQueue = new(); // ?
 
 
 

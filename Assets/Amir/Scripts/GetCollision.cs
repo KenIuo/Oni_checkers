@@ -12,6 +12,6 @@ public class GetCollision : MonoBehaviour
         //TurnSystem.Instance.GetDeathByFall().OnEnter(other.gameObject);
         //FindFirstObjectByType<DeathByFall>().OnEnter(other.gameObject);
 
-        GameManager.Instance.SoundManager.PlayCollision();
+        GameManager.Instance.SoundManager.PlayDeathSound();
     }
 }

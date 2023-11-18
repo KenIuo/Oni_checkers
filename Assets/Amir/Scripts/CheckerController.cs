@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,11 +7,11 @@ public enum CheckerState { Died, Standing, Moving, Turning }
 public class CheckerController : MonoBehaviour
 {
     public UnityEvent OnCheckerReady;
-    public bool _gameStarted { get; private set; } = false;
     public GameObject _marker;
 
     internal Transform _standardPosition;
     internal CheckerState _state { get; private set; } = CheckerState.Died;
+    internal bool _gameStarted { get; private set; } = false;
 
     Rigidbody _rigidbody;
     bool _isStopped = false;

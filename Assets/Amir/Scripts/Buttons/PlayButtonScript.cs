@@ -6,6 +6,8 @@ public class PlayButtonScript : MonoBehaviour
     [SerializeField] GameObject _currentScreen;
     [SerializeField] GameObject _screenToOpen;
 
+
+
     public void OnPlayClick(List<GameObject> players)
     {
         _currentScreen.SetActive(false);

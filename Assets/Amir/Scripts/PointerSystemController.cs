@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class PointerSystemController : MonoBehaviour
 {
@@ -48,11 +43,11 @@ public class PointerSystemController : MonoBehaviour
         {
             if (_current_radius != 0)
             {
-                if(_current_radius == _max_radius)
+                if (_current_radius == _max_radius)
                     TurnSystem.Instance.SetMassToOther(0.1f);
 
-                TurnSystem.Instance._didMoved = true;
-                //_checkerController._isStopped = false;
+                //_playerCheckerController.SetMovedState();
+                _playerCheckerController.SetState(CheckerState.Moving);
                 _playerChecker.transform.GetChild(2).gameObject.SetActive(true);
 
                 Rigidbody rigidbody = _playerChecker.GetComponent<Rigidbody>();
@@ -117,7 +112,7 @@ public class PointerSystemController : MonoBehaviour
 
     void Update()
     {
-        if (_playerCheckerController._gameStarted)
+        if (_playerCheckerController._state.Equals(CheckerState.Turning)) // (_playerCheckerController._gameStarted && !TurnSystem.Instance._didMoved)
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 

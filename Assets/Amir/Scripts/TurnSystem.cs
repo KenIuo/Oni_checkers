@@ -1,29 +1,27 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class TurnSystem : MonoBehaviour
 {
-    public GameObject _playerCheckerObject;
-    public List<Transform> _gameScreen = new();
+    public CheckerController _playerCheckerObject;
 
+    internal List<Transform> _markers = new();
     internal List<CheckerController> _playersQueue = new ();
     internal byte _currentPlayer = 4;
     internal byte _playerID;
     internal bool _didMoved = false;
+    internal bool _gameStarted = false;
     //[NonSerialized] public bool _canMove = false;
 
+    [SerializeField] GameObject GameScreen;
     [SerializeField] GameObject LoseScreen;
     [SerializeField] GameObject WinScreen;
 
-    List<bool> _isReadyList = new (4);
-    DeathByFall _deathByFall;
-    byte _isAllReady = 0;
+    List<CheckerController> _isReadyList = new ();
+    //DeathByFall _deathByFall;
+    //byte _isAllReady = 0;
 
-    List<GameObject> _eliminationQueue = new(); // ? и убрать DeathByFall скрипт ?
+    List<CheckerController> _eliminationQueue = new(); // ? и убрать DeathByFall скрипт ?
 
 
 
@@ -56,61 +54,86 @@ public class TurnSystem : MonoBehaviour
         }
     }*/
 
-    public void AddToList(CheckerController checker)
+    public void AddToLists(CheckerController checker, Transform marker)
     {
         if (!_playersQueue.Contains(checker))
         {
             _playersQueue.Add(checker);
+            _markers.Add(marker);
             checker.OnCheckerReady.AddListener(CheckConditions);
         }
     }
 
-    public void CheckConditions(CheckerController player)
+    public void ResetMarkers()
     {
-        _isAllReady++;
-
-        _playersQueue.RemoveAt(_playersQueue.IndexOf(player)); // ?
-
-        if (_didMoved && _isAllReady == _playersQueue.Count) // если условия подходят, то вызывать новый ход
+        for (byte i = 0; i < _playersQueue.Count; i++)
         {
-            _deathByFall.CheckQueue(); // правильное место для проверки ?
-            
-            // вызывать смену интерфейса
+            _playersQueue[i]._marker.SetActive(true);
+            _markers[i].position = new Vector3(_markers[0].position.x + (i * 140), Screen.height);
+        }
+    }
 
-            NewTurn();
+    public void SetCheckerReady(CheckerController checker, bool state)
+    {
+        if (state)
+        {
+            if (!_isReadyList.Contains(checker))
+                _isReadyList.Add(checker);
+
+            if (checker._state.Equals(CheckerState.Died)
+            && !_eliminationQueue.Contains(checker))
+                _eliminationQueue.Add(checker);
+        }
+        else
+        {
+            if (_isReadyList.Contains(checker))
+                _isReadyList.RemoveAt(_isReadyList.IndexOf(checker));
+        }
+
+        CheckConditions();
+    }
+
+    public void CheckConditions()
+    {
+        if (_isReadyList.Count == _playersQueue.Count) // если условия подходят, то вызывать новый ход
+        {
+            //_deathByFall.CheckQueue(); // правильное место для проверки ?
+
+            // вызывать смену интерфейса
+            CheckQueue();
+            CheckEndOfGameConditions();
         }
     }
 
     public void NewTurn()
     {
-        CheckerController checker_controller;
+        _isReadyList.Clear();
 
-        if (_currentPlayer >= 4)
+        if (_currentPlayer >= _playersQueue.Count)
         {
             _currentPlayer = 0;
-            _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 1040);
+            _markers[_currentPlayer].position = new Vector3(_markers[_currentPlayer].position.x, Screen.height);
             SetMassToOther(1);
         }
         else
         {
-            checker_controller = _playersQueue[_currentPlayer];
-            checker_controller._gameStarted = false;
+            _playersQueue[_currentPlayer].ChangeGameStat(false);
 
-            _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 1040);
+            _markers[_currentPlayer].position = new Vector3(_markers[_currentPlayer].position.x, Screen.height);
             SetMassToOther(1);
             ++_currentPlayer;
         }
 
-        checker_controller = _playersQueue[_currentPlayer];
-        //checker_controller._isStopped = false;
-        checker_controller._gameStarted = true;
+        _playersQueue[_currentPlayer].ChangeGameStat(true);
         _didMoved = false;
 
-        _gameScreen[_currentPlayer].position = new Vector3(_gameScreen[_currentPlayer].position.x, 940);
+        ResetStates();
+
+        _markers[_currentPlayer].position = new Vector3(_markers[_currentPlayer].position.x, Screen.height - 80);
         // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
 
         if (_playersQueue[_currentPlayer] != _playerCheckerObject) // если ведущий - НЕ игрок
-            checker_controller.ChooseAttackVector(); // вызывать функцию выбора вектора и выстрела
+            _playersQueue[_currentPlayer].ChooseAttackVector(); // вызывать функцию выбора вектора и выстрела
         //else // иначе
             //_currentPlayer = _currentPlayer; // разблокировать управление
     }
@@ -119,38 +142,79 @@ public class TurnSystem : MonoBehaviour
     {
         for (byte i = 0; i < _playersQueue.Count; i++)
             if (i != _currentPlayer)
-                _playersQueue[i].GetComponent<Rigidbody>().mass = mass;
+                _playersQueue[i].SetMass(mass);
     }
 
-    public void CheckEndOfGameConditions(CheckerController checker)
+    public void CheckEndOfGameConditions() // проверяет выполнились ли условия победы
     {
-        checker.SetAlive(false);
+        //_playersQueue.RemoveAt(_playersQueue.IndexOf(checker)); // ?
         //GetDeathByFall().OnEnter(checker.gameObject);
 
         if (_playersQueue.Count == 1)
         {
+            GameScreen.SetActive(false);
+
             if (_playersQueue[0] == _playerCheckerObject)
-                GameObject.Find("Win").SetActive(true);
+                WinScreen.SetActive(true);
             else
-                GameObject.Find("Lose").SetActive(true);
+                LoseScreen.SetActive(true);
         }
-        //else
-            //CheckConditions(checker);
+        else
+            NewTurn();
 
+        //CheckConditions();
     }
 
-    public DeathByFall GetDeathByFall()
+    //public DeathByFall GetDeathByFall()
+    //{
+        //return _deathByFall;
+    //}
+
+    void ResetStates()
     {
-        return _deathByFall;
+        foreach (CheckerController checker in _playersQueue)
+        {
+            if (checker == _playersQueue[_currentPlayer])
+                checker.SetState(CheckerState.Turning);
+            else
+                checker.SetState(CheckerState.Standing);
+        }
+    }
+
+    void CheckQueue() // удаляет игроков со сцены
+    {
+        if (_eliminationQueue.Count > 1
+        &&  _eliminationQueue.Contains(_playersQueue[_currentPlayer]))
+        {
+            foreach (CheckerController player in _eliminationQueue)
+                player.transform.position = player._standardPosition.position;
+        }
+        else if (_eliminationQueue.Count > 0)
+        {
+            if (_eliminationQueue[0] == _playerCheckerObject)
+            {
+                GameScreen.SetActive(false);
+                LoseScreen.SetActive(true);
+            }
+
+            // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
+            // исчезновение из системы ходов
+            foreach (CheckerController player in _eliminationQueue)
+                _playersQueue.RemoveAt(_playersQueue.IndexOf(player));
+
+            // обновление очереди игроков в интерфейсе
+        }
+
+        _eliminationQueue.Clear();
     }
 
 
 
-    void Awake()
-    {
+    //void Awake()
+    //{
         //Instance.GetDeathByFall();
         //for (byte i = 0; i < 4; i++)
         //_gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
         //GameObject.Find("Game");.transform.GetChild(1).gameObject.SetActive(false);
-    }
+    //}
 }

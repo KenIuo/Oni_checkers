@@ -1,20 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum CheckerState { Died, Standing, Moving, Turning }
+
 public class CheckerController : MonoBehaviour
 {
-    public UnityEvent<CheckerController> OnCheckerReady;
+    public UnityEvent OnCheckerReady;
+    public bool _gameStarted { get; private set; } = false;
+    public GameObject _marker;
 
-    internal GameObject _marker;
     internal Transform _standardPosition;
-    internal bool _gameStarted = false;
+    internal CheckerState _state { get; private set; } = CheckerState.Died;
 
     Rigidbody _rigidbody;
-    bool _isStopped = true;
+    bool _isStopped = false;
     bool _isAlive = true;
 
 
@@ -24,12 +23,35 @@ public class CheckerController : MonoBehaviour
         _rigidbody.mass = mass;
     }
 
-    public void SetAlive(bool state)
-    {
-        _isAlive = state;
-        gameObject.SetActive(state);
+    //public void SetAlive(bool state)
+    //{
+        //_isAlive = state;
+        //SetState(CheckerState.Died);
+        //gameObject.SetActive(state);
 
         //OnCheckerReady.Invoke(this); // ?
+    //}
+
+    public void SetState(CheckerState state)
+    {
+        _state = state;
+
+        switch (_state)
+        {
+            case CheckerState.Died:
+                gameObject.SetActive(false);
+                TurnSystem.Instance.SetCheckerReady(this, true);
+                break;
+            case CheckerState.Standing:
+                TurnSystem.Instance.SetCheckerReady(this, true);
+                break;
+            case CheckerState.Moving:
+                TurnSystem.Instance.SetCheckerReady(this, false);
+                break;
+            case CheckerState.Turning:
+                TurnSystem.Instance.SetCheckerReady(this, false);
+                break;
+        }
     }
 
     public void ChooseAttackVector()
@@ -39,30 +61,41 @@ public class CheckerController : MonoBehaviour
         //_checkerState._isStopped = false;
     }
 
+    //public void SetMovedState()
+    //{
+        //Invoke(nameof(DelaySkip), 0.1f);
+    //}
+
 
 
     void DelaySkip()
     {
         TurnSystem.Instance._didMoved = true;
+        SetState(CheckerState.Standing);
     }
 
-    void ChangeGameStat(bool stat_to)
+    public void ChangeGameStat(bool stat_to)
     {
         _gameStarted = stat_to;
     }
 
-    void SayReady()
+    void CheckReadyState()
     {
-        if (_gameStarted)
-            if (!gameObject.activeSelf || _rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
-            {
-                _isStopped = true;
+        if (_rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
+        {
+            _isStopped = true;
+            _gameStarted = false;
+            SetState(CheckerState.Standing);
 
-                gameObject.transform.GetChild(1).gameObject.SetActive(false);
-                gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            gameObject.transform.GetChild(2).gameObject.SetActive(false);
 
-                OnCheckerReady.Invoke(this);
-            }
+            OnCheckerReady.Invoke();
+        }
+        else // иначе (шашка не ходит) и она (активна и двигается)
+        {
+            SetState(CheckerState.Moving);
+        }
     }
 
 
@@ -70,7 +103,7 @@ public class CheckerController : MonoBehaviour
     void Awake()
     {
         if (gameObject == TurnSystem.Instance._playerCheckerObject)
-            TurnSystem.Instance.AddToList(this);
+            TurnSystem.Instance.AddToLists(this, _marker.transform);
 
         EventSystem.Instance.OnStartGame.AddListener(ChangeGameStat);
         _rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -82,13 +115,16 @@ public class CheckerController : MonoBehaviour
     void Start()
     {
         if (gameObject != TurnSystem.Instance._playerCheckerObject)
-            TurnSystem.Instance.AddToList(this);
+            TurnSystem.Instance.AddToLists(this, _marker.transform);
     }
 
     void Update()
     {
-        if (!_isStopped)
-            SayReady();
+        //if (!_isStopped)
+            //CheckReadyState();
+
+        if (!_state.Equals(CheckerState.Died) || !_state.Equals(CheckerState.Turning))
+            CheckReadyState();
     }
 
     void OnCollisionEnter(Collision collision)

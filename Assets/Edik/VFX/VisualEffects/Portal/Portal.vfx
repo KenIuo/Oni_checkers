@@ -24,34 +24,13 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614747}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661614796}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 8926484042661614752}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614779}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614783}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614785}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614788}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614790}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614810}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614801}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614793}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614804}
@@ -190,7 +169,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d4c867f6b72b714dbb5fd1780afe208, type: 3}
-  m_Name: SimpleParticleSystem
+  m_Name: Portal
   m_EditorClassIdentifier: 
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 0}
@@ -15364,7 +15343,7 @@ MonoBehaviour:
       slotIndex: 0
   m_OutputFlowSlot:
   - link: []
-  blendMode: 1
+  blendMode: 0
   cullMode: 0
   zWriteMode: 0
   zTestMode: 0

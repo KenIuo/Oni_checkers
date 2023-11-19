@@ -6,8 +6,8 @@ public enum CheckerState { Died, Standing, Moving, Turning }
 
 public class CheckerController : MonoBehaviour
 {
-    public UnityEvent OnCheckerReady;
-    public GameObject _marker;
+    public UnityEvent onCheckerReady;
+    public GameObject marker;
     /// <summary>
     /// соотношение 5 к 1, если расстояние больше заданного, то оно равно ему, если меньше, то 0
     /// </summary>
@@ -21,8 +21,8 @@ public class CheckerController : MonoBehaviour
 
     Rigidbody _rigidbody;
     float _current_radius;
-    bool _isStopped = false;
-    bool _isAlive = true;
+    //bool _isStopped = false;
+    //bool _isAlive = true;
 
 
 
@@ -71,7 +71,7 @@ public class CheckerController : MonoBehaviour
     {
         Invoke(nameof(DelaySkip), 0.5f);
 
-        //_checkerState._isStopped = false;
+        
     }
 
     //public void SetMovedState()
@@ -113,14 +113,14 @@ public class CheckerController : MonoBehaviour
     {
         if (_rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
         {
-            _isStopped = true;
+            //_isStopped = true;
             _gameStarted = false;
             SetState(CheckerState.Standing);
 
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
             gameObject.transform.GetChild(2).gameObject.SetActive(false);
 
-            OnCheckerReady.Invoke();
+            onCheckerReady.Invoke();
         }
         else // иначе (шашка не ходит) и она (активна и двигается)
         {
@@ -133,7 +133,7 @@ public class CheckerController : MonoBehaviour
     void Awake()
     {
         if (gameObject == TurnSystem.Instance._playerCheckerObject)
-            TurnSystem.Instance.AddToLists(this, _marker.transform);
+            TurnSystem.Instance.AddToLists(this, marker);
 
         EventSystem.Instance.OnStartGame.AddListener(ChangeGameStat);
         _rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -145,7 +145,7 @@ public class CheckerController : MonoBehaviour
     void Start()
     {
         if (gameObject != TurnSystem.Instance._playerCheckerObject)
-            TurnSystem.Instance.AddToLists(this, _marker.transform);
+            TurnSystem.Instance.AddToLists(this, marker);
     }
 
     void Update()

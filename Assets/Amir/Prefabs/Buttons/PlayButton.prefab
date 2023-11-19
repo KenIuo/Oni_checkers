@@ -257,7 +257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 750929478861977585}
         m_TargetAssemblyTypeName: PlayButtonScript, Assembly-CSharp
-        m_MethodName: OnPlayClick
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -291,8 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85485367473fdf544919404f43417bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentScreen: {fileID: 0}
-  _screenToOpen: {fileID: 0}
 --- !u!1 &7350502342458793984
 GameObject:
   m_ObjectHideFlags: 0

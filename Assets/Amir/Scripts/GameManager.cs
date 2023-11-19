@@ -1,9 +1,18 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject MainMenuScreen;
+    public GameObject GameScreen;
+    public GameObject PauseScreen;
+    public GameObject LoseScreen;
+    public GameObject WinScreen;
+
     [SerializeField] SoundManager _soundManager;
+
+    GameObject _currentScreen;
 
 
 
@@ -25,10 +34,48 @@ public class GameManager : MonoBehaviour
 
     public SoundManager SoundManager => _soundManager;
 
-    
 
-    private void Update()
+
+    public void ChangeScreen(GameObject screen, bool disable = true)
     {
+        _currentScreen.SetActive(disable);
+        _currentScreen = screen;
+        _currentScreen.SetActive(true);
+    }
+
+
+
+    void Awake()
+    {
+        _currentScreen = MainMenuScreen;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_currentScreen == MainMenuScreen)
+            {
+                ButtonScript.OnExitClick();
+            }
+            if (_currentScreen == GameScreen)
+            {
+                ChangeScreen(PauseScreen, false);
+            }
+            if (_currentScreen == PauseScreen)
+            {
+                ChangeScreen(GameScreen);
+            }
+            if (_currentScreen == LoseScreen)
+            {
+                ChangeScreen(MainMenuScreen);
+            }
+            if (_currentScreen == WinScreen)
+            {
+                ChangeScreen(MainMenuScreen);
+            }
+        }
+
         SoundManager.Update();
     }
 }

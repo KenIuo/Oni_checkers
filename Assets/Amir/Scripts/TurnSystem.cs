@@ -6,17 +6,13 @@ public class TurnSystem : MonoBehaviour
     public CheckerController _playerCheckerObject;
     public List<GameObject> players;
 
-    internal List<Transform> _markers = new();
+    internal List<GameObject> _markers = new();
     internal List<CheckerController> _playersQueue = new ();
     internal byte _currentPlayer = 4;
     internal byte _playerID;
     internal bool _didMoved = false;
     internal bool _gameStarted = false;
     //[NonSerialized] public bool _canMove = false;
-
-    [SerializeField] GameObject GameScreen;
-    [SerializeField] GameObject LoseScreen;
-    [SerializeField] GameObject WinScreen;
 
     List<CheckerController> _isReadyList = new ();
     //byte _isAllReady = 0;
@@ -54,13 +50,13 @@ public class TurnSystem : MonoBehaviour
         }
     }*/
 
-    public void AddToLists(CheckerController checker, Transform marker)
+    public void AddToLists(CheckerController checker, GameObject marker)
     {
         if (!_playersQueue.Contains(checker))
         {
             _playersQueue.Add(checker);
             _markers.Add(marker);
-            checker.OnCheckerReady.AddListener(CheckConditions);
+            checker.onCheckerReady.AddListener(CheckConditions);
         }
     }
 
@@ -68,8 +64,8 @@ public class TurnSystem : MonoBehaviour
     {
         for (byte i = 0; i < _playersQueue.Count; i++)
         {
-            _playersQueue[i]._marker.SetActive(true);
-            _markers[i].position = new Vector3(_markers[0].position.x + (i * 140), Screen.height);
+            _markers[i].SetActive(true);
+            _markers[i].transform.position = new Vector3(_markers[0].transform.position.x + (i * 140), Screen.height);
         }
     }
 
@@ -112,14 +108,14 @@ public class TurnSystem : MonoBehaviour
         if (_currentPlayer >= _playersQueue.Count)
         {
             _currentPlayer = 0;
-            _markers[_currentPlayer].position = new Vector3(_markers[_currentPlayer].position.x, Screen.height);
+            _markers[_currentPlayer].transform.position = new Vector3(_markers[_currentPlayer].transform.position.x, Screen.height);
             SetMassToOther(1);
         }
         else
         {
             _playersQueue[_currentPlayer].ChangeGameStat(false);
 
-            _markers[_currentPlayer].position = new Vector3(_markers[_currentPlayer].position.x, Screen.height);
+            _markers[_currentPlayer].transform.position = new Vector3(_markers[_currentPlayer].transform.position.x, Screen.height);
             SetMassToOther(1);
             ++_currentPlayer;
         }
@@ -129,7 +125,7 @@ public class TurnSystem : MonoBehaviour
 
         ResetStates();
 
-        _markers[_currentPlayer].position = new Vector3(_markers[_currentPlayer].position.x, Screen.height - 80);
+        _markers[_currentPlayer].transform.position = new Vector3(_markers[_currentPlayer].transform.position.x, Screen.height - 80);
         // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
 
         if (_playersQueue[_currentPlayer] != _playerCheckerObject) // если ведущий - НЕ игрок
@@ -152,12 +148,11 @@ public class TurnSystem : MonoBehaviour
 
         if (_playersQueue.Count == 1)
         {
-            GameScreen.SetActive(false);
-
             if (_playersQueue[0] == _playerCheckerObject)
-                WinScreen.SetActive(true);
+
+                GameManager.Instance.ChangeScreen(GameManager.Instance.WinScreen);
             else
-                LoseScreen.SetActive(true);
+                GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen);
         }
         else
             NewTurn();
@@ -192,10 +187,7 @@ public class TurnSystem : MonoBehaviour
         else if (_eliminationQueue.Count > 0)
         {
             if (_eliminationQueue[0] == _playerCheckerObject)
-            {
-                GameScreen.SetActive(false);
-                LoseScreen.SetActive(true);
-            }
+                GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen);
 
             // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
             // исчезновение из системы ходов

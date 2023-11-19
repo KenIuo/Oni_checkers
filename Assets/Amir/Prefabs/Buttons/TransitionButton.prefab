@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 5182923536589277602}
   - component: {fileID: 156492363352283802}
   - component: {fileID: 2726016720853725097}
-  - component: {fileID: 7449029910264281810}
+  - component: {fileID: -8261863723064882206}
   m_Layer: 5
   m_Name: TransitionButton
   m_TagString: Untagged
@@ -255,9 +255,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7449029910264281810}
+      - m_Target: {fileID: -8261863723064882206}
         m_TargetAssemblyTypeName: TransitionButtonScript, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7449029910264281810
+--- !u!114 &-8261863723064882206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4971272883774145613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47897124b8bc7ce449de5120f5964782, type: 3}
+  m_Script: {fileID: 11500000, guid: 85485367473fdf544919404f43417bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7350502342458793984

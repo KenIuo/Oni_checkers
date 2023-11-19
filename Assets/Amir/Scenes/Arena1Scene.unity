@@ -449,11 +449,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: e31be789de3e48142b99981c7a06a011, type: 2}
-    - target: {fileID: 4003899521967927762, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4033817332290136335, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: m_Enabled
@@ -490,11 +485,6 @@ PrefabInstance:
       value: Checker 2
       objectReference: {fileID: 0}
     - target: {fileID: 6764211504394987261, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9100852573303857561, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: m_IsActive
       value: 1

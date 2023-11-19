@@ -24,13 +24,13 @@ public class ButtonScript : MonoBehaviour
     public static void OnSettingsClick()
     {
         GameManager.Instance.SoundManager.PlayMenuTransit();
-        //GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen);
+        GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen);
     }
 
     public static void OnCreditsClick()
     {
         GameManager.Instance.SoundManager.PlayMenuTransit();
-        //GameManager.Instance.ChangeScreen(GameManager.Instance.CreditsScreen);
+        GameManager.Instance.ChangeScreen(GameManager.Instance.CreditsScreen);
     }
 
     public static void OnResumeClick()

@@ -18,7 +18,7 @@ public class CheckerController : MonoBehaviour
     
     internal Transform _standardPosition;
     internal CheckerState _state { get; private set; } = CheckerState.Died;
-    internal bool _gameStarted { get; private set; } = false;
+    //internal bool _gameStarted { get; private set; } = false;
     internal bool _isPlayer { get; private set; } = false;
 
     [SerializeField] bool IsPlayer;
@@ -30,10 +30,10 @@ public class CheckerController : MonoBehaviour
 
 
 
-    public void ChangeGameStat(bool stat_to)
-    {
-        _gameStarted = stat_to;
-    }
+    //public void ChangeGameStat(bool stat_to)
+    //{
+        //_gameStarted = stat_to;
+    //}
 
     public void SetMass(float mass)
     {
@@ -118,7 +118,7 @@ public class CheckerController : MonoBehaviour
         if (_rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
         {
             //_isStopped = true;
-            _gameStarted = false;
+            //_gameStarted = false;
             SetState(CheckerState.Standing);
 
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
@@ -141,7 +141,7 @@ public class CheckerController : MonoBehaviour
         if (IsPlayer)
             TurnSystem.Instance.AddToLists(this, marker);
 
-        EventSystem.Instance.OnStartGame.AddListener(ChangeGameStat);
+        //EventSystem.Instance.OnStartGame.AddListener(ChangeGameStat);
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _standardPosition = gameObject.transform;
 

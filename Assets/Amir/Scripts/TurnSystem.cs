@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class TurnSystem : MonoBehaviour
         for (byte i = 0; i < _playersQueue.Count; i++)
         {
             _markers[i].SetActive(true);
-            _markers[i].transform.position = new Vector3(_markers[0].transform.position.x + (i * 140), Screen.height, 0);
+            //_markers[i].transform.SetLocalPositionAndRotation(new Vector3(0, 0), new Quaternion()); // _markers[i].transform.localPosition.x + (i * 140)
         }
     }
 
@@ -107,24 +108,24 @@ public class TurnSystem : MonoBehaviour
         if (_currentPlayer >= _playersQueue.Count)
         {
             _currentPlayer = 0;
-            _markers[_currentPlayer].transform.position = new Vector3(_markers[_currentPlayer].transform.position.x, Screen.height);
+            _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 540);
             SetMassToOther(1);
         }
         else
         {
-            _playersQueue[_currentPlayer].ChangeGameStat(false);
+            //_playersQueue[_currentPlayer].ChangeGameStat(false);
 
-            _markers[_currentPlayer].transform.position = new Vector3(_markers[_currentPlayer].transform.position.x, Screen.height);
+            _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 540);
             SetMassToOther(1);
             ++_currentPlayer;
         }
 
-        _playersQueue[_currentPlayer].ChangeGameStat(true);
+        //_playersQueue[_currentPlayer].ChangeGameStat(true);
         _didMoved = false;
 
         ResetStates();
 
-        _markers[_currentPlayer].transform.position = new Vector3(_markers[_currentPlayer].transform.position.x, Screen.height - 80);
+        _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 460);
         // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
 
         if (!_playersQueue[_currentPlayer]._isPlayer) // если ведущий - НЕ игрок
@@ -190,7 +191,10 @@ public class TurnSystem : MonoBehaviour
             // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
             // исчезновение из системы ходов
             foreach (CheckerController player in _eliminationQueue)
+            {
+                _markers[_playersQueue.IndexOf(player)].SetActive(false);
                 _playersQueue.RemoveAt(_playersQueue.IndexOf(player));
+            }
 
             if (_eliminationQueue[0]._isPlayer)
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen);

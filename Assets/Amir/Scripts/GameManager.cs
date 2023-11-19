@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject MainMenuScreen;
+    public GameObject SettingsScreen;
+    public GameObject CreditsScreen;
     public GameObject GameScreen;
     public GameObject PauseScreen;
     public GameObject LoseScreen;
@@ -57,6 +59,14 @@ public class GameManager : MonoBehaviour
             if (_currentScreen == MainMenuScreen)
             {
                 ButtonScript.OnExitClick();
+            }
+            if (_currentScreen == SettingsScreen)
+            {
+                ChangeScreen(MainMenuScreen);
+            }
+            if (_currentScreen == CreditsScreen)
+            {
+                ChangeScreen(MainMenuScreen);
             }
             if (_currentScreen == GameScreen)
             {

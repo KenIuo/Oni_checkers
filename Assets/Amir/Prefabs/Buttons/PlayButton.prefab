@@ -46,7 +46,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9a123baf1f707d84ebc9cf7294cc5f3c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1ea7c1b2914647743be7cfb61699db1a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -144,9 +144,9 @@ GameObject:
   - component: {fileID: 5182923536589277602}
   - component: {fileID: 156492363352283802}
   - component: {fileID: 2726016720853725097}
-  - component: {fileID: 2762913659347606754}
+  - component: {fileID: 750929478861977585}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,9 +255,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2762913659347606754}
-        m_TargetAssemblyTypeName: BackButtonScript, Assembly-CSharp
-        m_MethodName: OnClick
+      - m_Target: {fileID: 750929478861977585}
+        m_TargetAssemblyTypeName: PlayButtonScript, Assembly-CSharp
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2762913659347606754
+--- !u!114 &750929478861977585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,11 +288,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4971272883774145613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b702a6b592b4a741be2ab4f95812b79, type: 3}
+  m_Script: {fileID: 11500000, guid: 85485367473fdf544919404f43417bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentScreen: {fileID: 0}
-  _screenToOpen: {fileID: 0}
 --- !u!1 &7350502342458793984
 GameObject:
   m_ObjectHideFlags: 0

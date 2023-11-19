@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GetCollision : MonoBehaviour
 {
-    /*void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        other.gameObject.SetActive(false);
+        other.GetComponent<CheckerController>().SetState(CheckerState.Died);
+        //TurnSystem.Instance.CheckEndOfGameConditions(other.gameObject.GetComponent<CheckerController>());
 
         // воспроизводить анимацию смерти шашки
 
-        FindFirstObjectByType<DeathByFall>().OnEnter(other.gameObject);
-    }*/
+        //TurnSystem.Instance.GetDeathByFall().OnEnter(other.gameObject);
+        //FindFirstObjectByType<DeathByFall>().OnEnter(other.gameObject);
+
+        GameManager.Instance.SoundManager.PlayDeathSound();
+    }
 }

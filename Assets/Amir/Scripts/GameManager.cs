@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScreen(GameObject screen, bool disable = true)
     {
-        _currentScreen.SetActive(disable);
+        _currentScreen.SetActive(!disable);
         _currentScreen = screen;
         _currentScreen.SetActive(true);
     }

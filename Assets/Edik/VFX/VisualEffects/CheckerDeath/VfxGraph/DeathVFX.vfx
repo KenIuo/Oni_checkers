@@ -2413,7 +2413,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.SkinnedMeshRenderer, UnityEngine.CoreModule,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: 
+      m_SerializableObject: '{"obj":{"instanceID":0}}'
     m_Space: 2147483647
   m_Property:
     name: o

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Checer 1
+  m_Name: Face 4
   m_Shader: {fileID: -6465566751694194690, guid: 1a9712dfb1e102649ad406375767de5e,
     type: 3}
   m_Parent: {fileID: 0}
@@ -40,7 +40,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: d46a9af91cb31d64baab61f1b6ea9aa5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7ab7bce1d1f31c84984cda26164a0a36, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
@@ -68,7 +68,7 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DisolveWidth: 0.02
-    - _DissolveAmount: 0
+    - _DissolveAmount: 1
     - _DissolveScale: 40
     - _DstBlend: 0
     - _Metallic: 0

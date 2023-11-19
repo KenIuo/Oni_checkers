@@ -8,16 +8,20 @@ public class CheckerController : MonoBehaviour
 {
     public UnityEvent onCheckerReady;
     public GameObject marker;
+
     /// <summary>
     /// соотношение 5 к 1, если расстояние больше заданного, то оно равно ему, если меньше, то 0
     /// </summary>
     public readonly float _max_radius = 5.00f; // max_size = 1.00f
     public readonly float _min_radius = 1.25f; // min_size = 0.25f
     public readonly float _launchStrength = 8;
-
+    
     internal Transform _standardPosition;
     internal CheckerState _state { get; private set; } = CheckerState.Died;
     internal bool _gameStarted { get; private set; } = false;
+    internal bool _isPlayer { get; private set; } = false;
+
+    [SerializeField] bool IsPlayer;
 
     Rigidbody _rigidbody;
     float _current_radius;
@@ -132,7 +136,9 @@ public class CheckerController : MonoBehaviour
 
     void Awake()
     {
-        if (gameObject == TurnSystem.Instance._playerCheckerObject)
+        _isPlayer = IsPlayer;
+
+        if (IsPlayer)
             TurnSystem.Instance.AddToLists(this, marker);
 
         EventSystem.Instance.OnStartGame.AddListener(ChangeGameStat);
@@ -144,7 +150,7 @@ public class CheckerController : MonoBehaviour
 
     void Start()
     {
-        if (gameObject != TurnSystem.Instance._playerCheckerObject)
+        if (!IsPlayer)
             TurnSystem.Instance.AddToLists(this, marker);
     }
 

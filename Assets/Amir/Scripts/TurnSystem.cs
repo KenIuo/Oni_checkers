@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class TurnSystem : MonoBehaviour
 {
-    public CheckerController _playerCheckerObject;
     public List<GameObject> players;
 
     internal List<GameObject> _markers = new();
@@ -128,7 +127,7 @@ public class TurnSystem : MonoBehaviour
         _markers[_currentPlayer].transform.position = new Vector3(_markers[_currentPlayer].transform.position.x, Screen.height - 80);
         // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
 
-        if (_playersQueue[_currentPlayer] != _playerCheckerObject) // если ведущий - НЕ игрок
+        if (!_playersQueue[_currentPlayer]._isPlayer) // если ведущий - НЕ игрок
             _playersQueue[_currentPlayer].ChooseAttackVector(); // вызывать функцию выбора вектора и выстрела
         //else // иначе
             //_currentPlayer = _currentPlayer; // разблокировать управление
@@ -148,7 +147,7 @@ public class TurnSystem : MonoBehaviour
 
         if (_playersQueue.Count == 1)
         {
-            if (_playersQueue[0] == _playerCheckerObject)
+            if (_playersQueue[0]._isPlayer)
 
                 GameManager.Instance.ChangeScreen(GameManager.Instance.WinScreen);
             else
@@ -186,7 +185,7 @@ public class TurnSystem : MonoBehaviour
         }
         else if (_eliminationQueue.Count > 0)
         {
-            if (_eliminationQueue[0] == _playerCheckerObject)
+            if (_eliminationQueue[0]._isPlayer)
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen);
 
             // _eliminationQueue[0].transform.position; // воспроизведение звука смерти

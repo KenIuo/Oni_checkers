@@ -163,9 +163,14 @@ public class CheckerController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<CheckerController>())
+        {
+            GameManager.Instance.SoundManager.PlayHitSound();
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
-
-        if (collision.gameObject.name != "PlayingField")
+        }
+        else if (collision.gameObject.name != "PlayingField")
+        {
+            GameManager.Instance.SoundManager.PlayCollideSound();
             gameObject.transform.GetChild(2).gameObject.SetActive(false);
+        }
     }
 }

@@ -3466,6 +3466,9 @@ MonoBehaviour:
     audioLaunch: {fileID: 204169350}
     audioCollide1: {fileID: 848010171}
     audioCollide2: {fileID: 848010171}
+    audioMenuChoose: {fileID: 1352136167868515752}
+    audioMenuTransit: {fileID: 1352136167868515751}
+    audioMenuBack: {fileID: 1352136167868515750}
     soundRate: 1
 --- !u!1 &1934028816
 GameObject:
@@ -4028,6 +4031,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06e0bc3566d116540bf19b19a75eab4e, type: 3}
+--- !u!82 &1352136167868515750 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6390897210471092104, guid: 06e0bc3566d116540bf19b19a75eab4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1352136167868515749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1352136167868515751 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9064534859458279327, guid: 06e0bc3566d116540bf19b19a75eab4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1352136167868515749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1352136167868515752 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 946455822347933416, guid: 06e0bc3566d116540bf19b19a75eab4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1352136167868515749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1404923181246721092
 PrefabInstance:
   m_ObjectHideFlags: 0

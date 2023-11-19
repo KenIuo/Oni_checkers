@@ -64,7 +64,7 @@ public class TurnSystem : MonoBehaviour
         for (byte i = 0; i < _playersQueue.Count; i++)
         {
             _markers[i].SetActive(true);
-            _markers[i].transform.position = new Vector3(_markers[0].transform.position.x + (i * 140), Screen.height);
+            _markers[i].transform.position = new Vector3(_markers[0].transform.position.x + (i * 140), Screen.height, 0);
         }
     }
 

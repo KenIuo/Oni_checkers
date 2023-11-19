@@ -89,6 +89,9 @@ public class SoundManager
     [SerializeField] AudioSource audioLaunch;
     [SerializeField] AudioSource audioCollide1;
     [SerializeField] AudioSource audioCollide2;
+    [SerializeField] AudioSource audioMenuChoose;
+    [SerializeField] AudioSource audioMenuTransit;
+    [SerializeField] AudioSource audioMenuBack;
     [SerializeField] float soundRate;
 
     float _soundRate1 = 1, _soundRate2 = 1;
@@ -127,6 +130,21 @@ public class SoundManager
     public void PlayLaunchSound()
     {
         audioLaunch.Play();
+    }
+
+    public void PlayMenuChoose()
+    {
+        audioMenuChoose.Play();
+    }
+
+    public void PlayMenuTransit()
+    {
+        audioMenuTransit.Play();
+    }
+
+    public void PlayMenuBack()
+    {
+        audioMenuBack.Play();
     }
 
     public void Update()

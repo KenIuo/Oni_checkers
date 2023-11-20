@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,36 +19,59 @@ public class CheckerController : MonoBehaviour
     
     internal Transform _standardPosition;
     internal CheckerState _state { get; private set; } = CheckerState.Died;
-    //internal bool _gameStarted { get; private set; } = false;
     internal bool _isPlayer { get; private set; } = false;
 
     [SerializeField] bool IsPlayer;
 
+    GameObject _chargeVFX;
+    GameObject _speedVFX;
     Rigidbody _rigidbody;
-    float _current_radius;
-    //bool _isStopped = false;
-    //bool _isAlive = true;
+    Vector3 _directionMove;
+    float _currentRadius;
 
 
 
-    //public void ChangeGameStat(bool stat_to)
-    //{
-        //_gameStarted = stat_to;
-    //}
+    public float GetCurrentRadius(Vector3 hit_position)
+    {
+        float current_radius = Vector3.Distance(hit_position, gameObject.transform.position);
+
+        if (current_radius > _max_radius)
+        {
+            current_radius = _max_radius;
+            _chargeVFX.SetActive(true);
+        }
+        else if (current_radius < _min_radius)
+        {
+            current_radius = 0;
+            _chargeVFX.SetActive(false);
+        }
+        else
+            _chargeVFX.SetActive(false);
+
+        return current_radius;
+    }
+    public float GetCurrentRadius(float current_radius)
+    {
+        if (current_radius > _max_radius)
+        {
+            current_radius = _max_radius;
+            _chargeVFX.SetActive(true);
+        }
+        else if (current_radius < _min_radius)
+        {
+            current_radius = 0;
+            _chargeVFX.SetActive(false);
+        }
+        else
+            _chargeVFX.SetActive(false);
+
+        return current_radius;
+    }
 
     public void SetMass(float mass)
     {
         _rigidbody.mass = mass;
     }
-
-    //public void SetAlive(bool state)
-    //{
-        //_isAlive = state;
-        //SetState(CheckerState.Died);
-        //gameObject.SetActive(state);
-
-        //OnCheckerReady.Invoke(this); // ?
-    //}
 
     public void SetState(CheckerState state)
     {
@@ -73,56 +97,56 @@ public class CheckerController : MonoBehaviour
 
     public void ChooseAttackVector()
     {
-        Invoke(nameof(DelaySkip), 0.5f);
 
-        
+        byte player_to_attack = (byte)UnityEngine.Random.Range(0, 3);
+
+        while (player_to_attack == TurnSystem.Instance._currentPlayer)
+            player_to_attack = (byte)UnityEngine.Random.Range(0, 3);
+
+        Vector3 random_player_position = TurnSystem.Instance._playersQueue[player_to_attack].gameObject.transform.position;
+
+        _currentRadius = GetCurrentRadius(UnityEngine.Random.Range(0.0f, 8.0f));
+        _directionMove = GetRandomPosition(random_player_position);
+
+        Invoke(nameof(DelayLaunch), 2.0f);
+        //LaunchChecker(random_radius, random_player_position);
     }
 
-    //public void SetMovedState()
-    //{
-    //Invoke(nameof(DelaySkip), 0.1f);
-    //}
-
-
-
-    public float GetCurrentRadius(Vector3 hit_position)
+    public void LaunchChecker(float current_radius, Vector3 direction_move)
     {
-        _current_radius = Vector3.Distance(hit_position, gameObject.transform.position);
+        if (current_radius == _max_radius)
+            TurnSystem.Instance.SetMassToOther(0.1f);
 
-        if (_current_radius > _max_radius)
-        {
-            _current_radius = _max_radius;
-            gameObject.transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else if (_current_radius < _min_radius)
-        {
-            _current_radius = 0;
-            gameObject.transform.GetChild(1).gameObject.SetActive(false);
-        }
-        else
-            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        GameManager.Instance.SoundManager.PlayLaunchSound();
+        //_playerCheckerController.SetMovedState();
+        SetState(CheckerState.Moving);
+        _speedVFX.SetActive(true);
 
-        return _current_radius;
+        _rigidbody.velocity = direction_move * (current_radius * _launchStrength);
     }
 
 
 
-    void DelaySkip()
+    Vector3 GetRandomPosition(Vector3 initial_position)
     {
-        TurnSystem.Instance._didMoved = true;
-        SetState(CheckerState.Standing);
+        //initial_position.Normalize();
+        return initial_position;
+    }
+
+    void DelayLaunch()
+    {
+        LaunchChecker(_currentRadius, _directionMove);
+        //SetState(CheckerState.Standing);
     }
 
     void CheckReadyState()
     {
         if (_rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
         {
-            //_isStopped = true;
-            //_gameStarted = false;
             SetState(CheckerState.Standing);
 
-            gameObject.transform.GetChild(1).gameObject.SetActive(false);
-            gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            _chargeVFX.SetActive(false);
+            _speedVFX.SetActive(false);
 
             onCheckerReady.Invoke();
         }
@@ -142,6 +166,8 @@ public class CheckerController : MonoBehaviour
             TurnSystem.Instance.AddToLists(this, marker);
 
         //EventSystem.Instance.OnStartGame.AddListener(ChangeGameStat);
+        _chargeVFX = gameObject.transform.GetChild(1).gameObject;
+        _speedVFX = gameObject.transform.GetChild(2).gameObject;
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _standardPosition = gameObject.transform;
 
@@ -165,12 +191,12 @@ public class CheckerController : MonoBehaviour
         if (collision.gameObject.GetComponent<CheckerController>())
         {
             GameManager.Instance.SoundManager.PlayHitSound();
-            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            _chargeVFX.SetActive(false);
         }
         else if (collision.gameObject.name != "PlayingField")
         {
             GameManager.Instance.SoundManager.PlayCollideSound();
-            gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            _speedVFX.SetActive(false);
         }
     }
 }

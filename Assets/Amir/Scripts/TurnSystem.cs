@@ -8,9 +8,8 @@ public class TurnSystem : MonoBehaviour
 
     internal List<GameObject> _markers = new();
     internal List<CheckerController> _playersQueue = new ();
-    internal byte _currentPlayer = 4;
+    internal byte _currentPlayer = 3;
     internal byte _playerID;
-    internal bool _didMoved = false;
     internal bool _gameStarted = false;
     //[NonSerialized] public bool _canMove = false;
 
@@ -60,15 +59,6 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
-    public void ResetMarkers()
-    {
-        for (byte i = 0; i < _playersQueue.Count; i++)
-        {
-            _markers[i].SetActive(true);
-            //_markers[i].transform.SetLocalPositionAndRotation(new Vector3(0, 0), new Quaternion()); // _markers[i].transform.localPosition.x + (i * 140)
-        }
-    }
-
     public void SetCheckerReady(CheckerController checker, bool state)
     {
         if (state)
@@ -105,23 +95,15 @@ public class TurnSystem : MonoBehaviour
     {
         _isReadyList.Clear();
 
-        if (_currentPlayer >= _playersQueue.Count)
-        {
-            _currentPlayer = 0;
-            _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 540);
-            SetMassToOther(1);
-        }
-        else
-        {
-            //_playersQueue[_currentPlayer].ChangeGameStat(false);
+        _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 540);
+        SetMassToOther(1);
 
-            _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 540);
-            SetMassToOther(1);
+        if (_currentPlayer >= _playersQueue.Count - 1)
+            _currentPlayer = 0;
+        else
             ++_currentPlayer;
-        }
 
         //_playersQueue[_currentPlayer].ChangeGameStat(true);
-        _didMoved = false;
 
         ResetStates();
 
@@ -130,8 +112,19 @@ public class TurnSystem : MonoBehaviour
 
         if (!_playersQueue[_currentPlayer]._isPlayer) // если ведущий - Ќ≈ игрок
             _playersQueue[_currentPlayer].ChooseAttackVector(); // вызывать функцию выбора вектора и выстрела
-        //else // иначе
-            //_currentPlayer = _currentPlayer; // разблокировать управление
+                                                                //else // иначе
+                                                                //_currentPlayer = _currentPlayer; // разблокировать управление
+    }
+
+    public void ResetMarkers()
+    {
+        for (byte i = 0; i < _playersQueue.Count; i++)
+        {
+            _markers[i].SetActive(true);
+
+            _markers[0].transform.localPosition = new Vector3(_markers[0].transform.localPosition.x, 540);
+            //_markers[i].transform.SetLocalPositionAndRotation(new Vector3(0, 0), new Quaternion()); // _markers[i].transform.localPosition.x + (i * 140)
+        }
     }
 
     public void SetMassToOther(float mass)
@@ -186,7 +179,7 @@ public class TurnSystem : MonoBehaviour
 
             _eliminationQueue.Clear();
         }
-        else if (_eliminationQueue.Count > 0)
+        else if (_eliminationQueue.Count > 0) /////////////////////////////////////////////////////////////////////// перепроверить условие
         {
             // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
             // исчезновение из системы ходов

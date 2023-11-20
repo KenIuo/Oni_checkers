@@ -10,7 +10,7 @@ public class PointerSystemController : MonoBehaviour
     Camera _camera;
     CheckerController _playerCheckerController;
     Vector3 _playerPos;
-    float _current_radius;
+    float _currentRadius;
     float _speed = 2f;
 
 
@@ -25,28 +25,17 @@ public class PointerSystemController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            _current_radius = _playerCheckerController.GetCurrentRadius(hit_position);
+            _currentRadius = _playerCheckerController.GetCurrentRadius(hit_position);
 
-            if (_current_radius != 0)
+            if (_currentRadius != 0)
                 TransformPointingArrow(direction_move);
             else
                 _pointingArrow.SetActive(false);
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            if (_current_radius != 0)
-            {
-                if (_current_radius == _playerCheckerController._max_radius)
-                    TurnSystem.Instance.SetMassToOther(0.1f);
-
-                GameManager.Instance.SoundManager.PlayLaunchSound();
-                //_playerCheckerController.SetMovedState();
-                _playerCheckerController.SetState(CheckerState.Moving);
-                _playerChecker.transform.GetChild(2).gameObject.SetActive(true);
-
-                Rigidbody rigidbody = _playerChecker.GetComponent<Rigidbody>();
-                rigidbody.velocity = direction_move * (_current_radius * _playerCheckerController._launchStrength);
-            }
+            if (_currentRadius != 0)
+                _playerCheckerController.LaunchChecker(_currentRadius, direction_move);
 
             _pointingArrow.SetActive(false);
         }
@@ -70,7 +59,7 @@ public class PointerSystemController : MonoBehaviour
 
         _playerChecker.transform.rotation = Quaternion.LookRotation(direction_move);
 
-        _tensionForce.transform.localScale = new Vector3(1, 1, _current_radius / 5);
+        _tensionForce.transform.localScale = new Vector3(1, 1, _currentRadius / 5);
     }
 
     void RotateCamera()

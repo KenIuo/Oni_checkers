@@ -21,8 +21,6 @@ public class CheckerController : MonoBehaviour
     internal CheckerState _state { get; private set; } = CheckerState.Died;
     internal bool _isPlayer { get; private set; } = false;
 
-    [SerializeField] bool IsPlayer;
-
     GameObject _chargeVFX;
     GameObject _speedVFX;
     Rigidbody _rigidbody;
@@ -50,7 +48,8 @@ public class CheckerController : MonoBehaviour
 
         return current_radius;
     }
-    public float GetCurrentRadius(float current_radius)
+
+    float GetCurrentRadius(float current_radius)
     {
         if (current_radius > _max_radius)
         {
@@ -97,7 +96,6 @@ public class CheckerController : MonoBehaviour
 
     public void ChooseAttackVector()
     {
-
         byte player_to_attack = (byte)UnityEngine.Random.Range(0, 3);
 
         while (player_to_attack == TurnSystem.Instance._currentPlayer)
@@ -106,7 +104,9 @@ public class CheckerController : MonoBehaviour
         Vector3 random_player_position = TurnSystem.Instance._playersQueue[player_to_attack].gameObject.transform.position;
 
         _currentRadius = GetCurrentRadius(UnityEngine.Random.Range(0.0f, 8.0f));
-        _directionMove = GetRandomPosition(random_player_position);
+
+        random_player_position = GetDirectionVector(random_player_position);
+        _directionMove = GetPositionToKill(random_player_position);
 
         Invoke(nameof(DelayLaunch), 2.0f);
         //LaunchChecker(random_radius, random_player_position);
@@ -127,10 +127,21 @@ public class CheckerController : MonoBehaviour
 
 
 
-    Vector3 GetRandomPosition(Vector3 initial_position)
+    Vector3 GetDirectionVector(Vector3 direction_vector)
     {
+        direction_vector.y = gameObject.transform.position.y;
+
+        Vector3 direction_move = direction_vector - gameObject.transform.position;
+        direction_move.Normalize();
+
+        return direction_move;
+    }
+
+    Vector3 GetPositionToKill(Vector3 direction_vector)
+    {
+        gameObject.transform.rotation = Quaternion.LookRotation(direction_vector);
         //initial_position.Normalize();
-        return initial_position;
+        return direction_vector;
     }
 
     void DelayLaunch()
@@ -160,9 +171,9 @@ public class CheckerController : MonoBehaviour
 
     void Awake()
     {
-        _isPlayer = IsPlayer;
+        _isPlayer = gameObject.TryGetComponent(out PointerSystemController _);
 
-        if (IsPlayer)
+        if (_isPlayer)
             TurnSystem.Instance.AddToLists(this, marker);
 
         //EventSystem.Instance.OnStartGame.AddListener(ChangeGameStat);
@@ -176,7 +187,7 @@ public class CheckerController : MonoBehaviour
 
     void Start()
     {
-        if (!IsPlayer)
+        if (!_isPlayer)
             TurnSystem.Instance.AddToLists(this, marker);
     }
 

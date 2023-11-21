@@ -2,24 +2,22 @@ using UnityEngine;
 
 public class PointerSystemController : MonoBehaviour
 {
-    [SerializeField] GameObject _playerChecker;
     [SerializeField] GameObject _pointingArrow; // настраивается только местоположение (на середине шашки игрока) и поворот (изначально смотрит вперёд)
     [SerializeField] GameObject _tensionForce; // настраивается только длина (Z координата) (изначально на максимальной или почти максимальной длине)
+    [SerializeField] Camera _camera;
     [SerializeField] LayerMask _layerMask;
 
-    Camera _camera;
     CheckerController _playerCheckerController;
     Vector3 _playerPos;
     float _currentRadius;
-    float _speed = 2f;
 
 
 
     void DrawArrow(Vector3 hit_position)
     {
-        _playerPos = new Vector3(_playerChecker.transform.position.x,
+        _playerPos = new Vector3(gameObject.transform.position.x,
                                  0.1f,
-                                 _playerChecker.transform.position.z);
+                                 gameObject.transform.position.z);
 
         Vector3 direction_move = GetDirectionVector(hit_position);
 
@@ -28,7 +26,11 @@ public class PointerSystemController : MonoBehaviour
             _currentRadius = _playerCheckerController.GetCurrentRadius(hit_position);
 
             if (_currentRadius != 0)
+            {
+                gameObject.transform.rotation = Quaternion.LookRotation(direction_move);
+
                 TransformPointingArrow(direction_move);
+            }
             else
                 _pointingArrow.SetActive(false);
         }
@@ -57,28 +59,18 @@ public class PointerSystemController : MonoBehaviour
         _pointingArrow.transform.position = _playerPos;
         _pointingArrow.transform.rotation = Quaternion.LookRotation(direction_move);
 
-        _playerChecker.transform.rotation = Quaternion.LookRotation(direction_move);
-
         _tensionForce.transform.localScale = new Vector3(1, 1, _currentRadius / 5);
-    }
-
-    void RotateCamera()
-    {
-        if (Input.GetMouseButton(1))
-            gameObject.transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * _speed);
     }
 
 
 
     void Awake()
     {
-        _camera = GetComponentInChildren<Camera>();
-        _playerCheckerController = _playerChecker.GetComponent<CheckerController>();
+        _playerCheckerController = gameObject.GetComponent<CheckerController>();
     }
 
     void Update()
     {
-        // (_playerCheckerController._gameStarted && !TurnSystem.Instance._didMoved)
         if (_playerCheckerController._state.Equals(CheckerState.Turning))
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
@@ -86,13 +78,11 @@ public class PointerSystemController : MonoBehaviour
             if (TurnSystem.Instance._playerID == TurnSystem.Instance._currentPlayer
             &&  Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _layerMask))
             {
-                if (_playerChecker.activeInHierarchy)
+                if (gameObject.activeInHierarchy)
                     DrawArrow(hit.point);
             }
             else
                 _pointingArrow.SetActive(false);
         }
-
-        RotateCamera();
     }
 }

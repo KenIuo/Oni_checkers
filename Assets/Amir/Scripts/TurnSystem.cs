@@ -4,7 +4,7 @@ using UnityEngine.SocialPlatforms;
 
 public class TurnSystem : MonoBehaviour
 {
-    public List<GameObject> players;
+    //public List<GameObject> players;
 
     internal List<GameObject> _markers = new();
     internal List<CheckerController> _playersQueue = new ();

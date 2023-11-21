@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -47,6 +48,20 @@ public class GameManager : MonoBehaviour
         _currentScreen.SetActive(true);
     }
 
+    void ToPauseScreen()
+    {
+        ChangeScreen(PauseScreen, false);
+
+        TurnSystem.Instance.LockAllCheckers(true);
+    }
+
+    void FromPauseScreen()
+    {
+        ChangeScreen(GameScreen);
+
+        TurnSystem.Instance.LockAllCheckers(false);
+    }
+
 
 
     void Awake()
@@ -58,30 +73,18 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (_currentScreen == SettingsScreen)
-            {
+                 if (_currentScreen == SettingsScreen)
                 ChangeScreen(MainMenuScreen);
-            }
-            if (_currentScreen == CreditsScreen)
-            {
+            else if (_currentScreen == CreditsScreen)
                 ChangeScreen(MainMenuScreen);
-            }
-            if (_currentScreen == GameScreen)
-            {
-                ChangeScreen(PauseScreen, false);
-            }
-            if (_currentScreen == PauseScreen)
-            {
-                ChangeScreen(GameScreen);
-            }
-            if (_currentScreen == LoseScreen)
-            {
+            else if (_currentScreen == GameScreen)
+                ToPauseScreen();
+            else if (_currentScreen == PauseScreen)
+                FromPauseScreen();
+            else if (_currentScreen == LoseScreen)
                 ChangeScreen(MainMenuScreen);
-            }
-            if (_currentScreen == WinScreen)
-            {
+            else if (_currentScreen == WinScreen)
                 ChangeScreen(MainMenuScreen);
-            }
         }
 
         SoundManager.Update();

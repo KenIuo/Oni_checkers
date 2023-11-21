@@ -75,12 +75,10 @@ public class PointerSystemController : MonoBehaviour
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (TurnSystem.Instance._playerID == TurnSystem.Instance._currentPlayer
-            &&  Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _layerMask))
-            {
-                if (gameObject.activeInHierarchy)
-                    DrawArrow(hit.point);
-            }
+            if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _layerMask)
+            && !TurnSystem.Instance._isOnPause
+            &&  gameObject.activeInHierarchy)
+                DrawArrow(hit.point);
             else
                 _pointingArrow.SetActive(false);
         }

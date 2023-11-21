@@ -67,6 +67,12 @@ public class CheckerController : MonoBehaviour
         return current_radius;
     }
 
+    public void ResetPosition()
+    {
+        gameObject.transform.position = _standardPosition.position;
+        gameObject.SetActive(true);
+    }
+
     public void SetMass(float mass)
     {
         _rigidbody.mass = mass;

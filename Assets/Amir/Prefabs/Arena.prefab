@@ -24,21 +24,21 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742345325082971163}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.19509031, z: 0, w: 0.98078537}
+  m_LocalRotation: {x: 0, y: -0.19509031, z: 0, w: 0.98078537}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4358777057229248123}
-  - {fileID: 2543232781369231406}
-  - {fileID: 2851181122062180434}
-  - {fileID: 2900862561969243038}
-  - {fileID: 7601760040044248584}
-  - {fileID: 3541389657039886038}
-  - {fileID: 4436462111898879214}
   - {fileID: 811814739682427391}
+  - {fileID: 4358777057229248123}
+  - {fileID: 7601760040044248584}
+  - {fileID: 2543232781369231406}
+  - {fileID: 3541389657039886038}
+  - {fileID: 2851181122062180434}
+  - {fileID: 4436462111898879214}
+  - {fileID: 2900862561969243038}
   m_Father: {fileID: 1596044783404845677}
-  m_LocalEulerAnglesHint: {x: 0, y: 22.5, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -22.5, z: 0}
 --- !u!1 &1495458312957606008
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +166,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6884061025545262389}
-  - component: {fileID: 3332842997148321512}
   m_Layer: 0
   m_Name: DeathZone
   m_TagString: Untagged
@@ -198,19 +197,6 @@ Transform:
   - {fileID: 6971423794004006810}
   m_Father: {fileID: 1596044783404845677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3332842997148321512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2395332078830697399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d84ffac4d5339049a35ce707b2454cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players: []
 --- !u!1 &3509306987491682028
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 3986625446403062364, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
       propertyPath: m_Name
-      value: Pillar5
+      value: Pillar3
       objectReference: {fileID: 0}
     - target: {fileID: 6467964561289282858, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
@@ -1083,7 +1069,7 @@ PrefabInstance:
     - target: {fileID: 3986625446403062364, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
       propertyPath: m_Name
-      value: Pillar8
+      value: Pillar1
       objectReference: {fileID: 0}
     - target: {fileID: 6467964561289282858, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
@@ -1404,7 +1390,7 @@ PrefabInstance:
     - target: {fileID: 3986625446403062364, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
       propertyPath: m_Name
-      value: Pillar1
+      value: Pillar2
       objectReference: {fileID: 0}
     - target: {fileID: 6467964561289282858, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
@@ -1478,7 +1464,7 @@ PrefabInstance:
     - target: {fileID: 3986625446403062364, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
       propertyPath: m_Name
-      value: Pillar6
+      value: Pillar5
       objectReference: {fileID: 0}
     - target: {fileID: 6467964561289282858, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
@@ -1552,7 +1538,7 @@ PrefabInstance:
     - target: {fileID: 3986625446403062364, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
       propertyPath: m_Name
-      value: Pillar4
+      value: Pillar8
       objectReference: {fileID: 0}
     - target: {fileID: 6467964561289282858, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
@@ -1700,7 +1686,7 @@ PrefabInstance:
     - target: {fileID: 3986625446403062364, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
       propertyPath: m_Name
-      value: Pillar2
+      value: Pillar4
       objectReference: {fileID: 0}
     - target: {fileID: 6467964561289282858, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
@@ -1774,7 +1760,7 @@ PrefabInstance:
     - target: {fileID: 3986625446403062364, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}
       propertyPath: m_Name
-      value: Pillar3
+      value: Pillar6
       objectReference: {fileID: 0}
     - target: {fileID: 6467964561289282858, guid: aa7025118d68ef44e8f95498ec7a1fe0,
         type: 3}

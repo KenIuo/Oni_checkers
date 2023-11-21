@@ -4,20 +4,15 @@ using UnityEngine.SocialPlatforms;
 
 public class TurnSystem : MonoBehaviour
 {
-    //public List<GameObject> players;
-
-    internal List<GameObject> _markers = new();
     internal List<CheckerController> _playersQueue = new ();
     internal byte _currentPlayer = 3;
-    internal byte _playerID;
     internal bool _gameStarted = false;
-    //[NonSerialized] public bool _canMove = false;
+    internal bool _isOnPause { get; private set; } = false;
 
+    List<GameObject> _markers = new();
+    List<CheckerController> _eliminationQueue = new();
     List<CheckerController> _isReadyList = new ();
-    //byte _isAllReady = 0;
-
-    List<CheckerController> _eliminationQueue = new(); // ?
-
+    bool _isReady = false;
 
 
     #region Singleton
@@ -36,18 +31,10 @@ public class TurnSystem : MonoBehaviour
 
 
 
-    /*public void ShuffleListOfPlayers()
+    public void LockAllCheckers(bool lock_all_checkers)
     {
-        //_playersQueue.Shuffle();
-
-        for (byte i = 0; i < _playersQueue.Count; i++)
-        {
-            _playersQueue[i].SetActive(true);
-
-            //if (_playersQueue[i] == _playerCheckerObject)
-                //_playerID = i;
-        }
-    }*/
+        _isOnPause = lock_all_checkers;
+    }
 
     public void AddToLists(CheckerController checker, GameObject marker)
     {
@@ -156,10 +143,7 @@ public class TurnSystem : MonoBehaviour
         //CheckConditions();
     }
 
-    //public DeathByFall GetDeathByFall()
-    //{
-        //return _deathByFall;
-    //}
+
 
     void ResetStates()
     {
@@ -178,11 +162,11 @@ public class TurnSystem : MonoBehaviour
         &&  _eliminationQueue.Contains(_playersQueue[_currentPlayer]))
         {
             foreach (CheckerController player in _eliminationQueue)
-                player.transform.position = player._standardPosition.position;
+                player.ResetPosition();
 
             _eliminationQueue.Clear();
         }
-        else if (_eliminationQueue.Count > 0) /////////////////////////////////////////////////////////////////////// перепроверить условие
+        else if (_eliminationQueue.Count > 0) /////////////////////////////////////////////////////////////////////// перепроверить условия
         {
             // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
             // исчезновение из системы ходов
@@ -211,5 +195,18 @@ public class TurnSystem : MonoBehaviour
         //for (byte i = 0; i < 4; i++)
         //_gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
         //GameObject.Find("Game");.transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+
+
+    void Update()
+    {
+        if (!_isOnPause)
+        {
+            if (_isReady)
+            {
+
+            }
+        }
     }
 }

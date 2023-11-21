@@ -34,6 +34,8 @@ public class ButtonScript : MonoBehaviour
     {
         GameManager.Instance.SoundManager.PlayMenuTransit();
         GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
+
+        TurnSystem.Instance.LockAllCheckers(false);
     }
 
     public static void OnMainMenuClick()

@@ -1,8 +1,5 @@
 using UnityEngine.SceneManagement;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEditor.Networking.PlayerConnection;
-using Unity.VisualScripting;
 
 public class ButtonScript : MonoBehaviour
 {
@@ -11,12 +8,6 @@ public class ButtonScript : MonoBehaviour
         GameManager.Instance.SoundManager.PlayMenuChoose();
         SceneManager.LoadScene("Arena1Scene");
     }
-
-    /*public static void OnRestartClick()
-    {
-        GameManager.Instance.SoundManager.PlayMenuChoose();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }*/
 
     public static void OnSettingsClick()
     {

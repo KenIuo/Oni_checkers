@@ -161,9 +161,8 @@ public class TurnSystem : MonoBehaviour
 
             _eliminationQueue.Clear();
         }
-        else if (_eliminationQueue.Count > 0) /////////////////////////////////////////////////////////////////////// перепроверить условия
+        else if (_eliminationQueue.Count > 0)
         {
-            // _eliminationQueue[0].transform.position; // воспроизведение звука смерти
             // исчезновение из системы ходов
             foreach (CheckerController player in _eliminationQueue)
             {
@@ -173,6 +172,14 @@ public class TurnSystem : MonoBehaviour
 
             if (_eliminationQueue[0]._isPlayer)
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
+
+            if (!_eliminationQueue.Contains(_playersQueue[_currentPlayer]))
+            {
+                if (_currentPlayer <= 0)
+                    _currentPlayer = (byte)(_playersQueue.Count - 1);
+                else
+                    _currentPlayer--;
+            }
 
             // обновление очереди игроков в интерфейсе
             _eliminationQueue.Clear();

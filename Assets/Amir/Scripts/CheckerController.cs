@@ -22,6 +22,7 @@ public class CheckerController : MonoBehaviour
     GameObject _chargeVFX;
     GameObject _speedVFX;
     Rigidbody _rigidbody;
+    DissolveControl _dissolveControl;
     Vector3 _standartPosition;
     Quaternion _standartRotation;
     Vector3 _directionMove;
@@ -90,11 +91,12 @@ public class CheckerController : MonoBehaviour
     public void ResetPosition()
     {
         gameObject.SetActive(true);
-
+        
         gameObject.transform.position = _standartPosition;
         gameObject.transform.rotation = _standartRotation;
 
         SetState(CheckerState.Moving);
+        StartCoroutine(_dissolveControl.SpawnCoroutine());
     }
 
     public void SetState(CheckerState state)
@@ -106,7 +108,10 @@ public class CheckerController : MonoBehaviour
             case CheckerState.Died:
                 _rigidbody.angularVelocity -= _rigidbody.angularVelocity;
                 _rigidbody.velocity -= _rigidbody.velocity;
+
+                _dissolveControl.SetDissolve(1);
                 gameObject.SetActive(false);
+
                 TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Standing:
@@ -189,7 +194,9 @@ public class CheckerController : MonoBehaviour
 
         _chargeVFX = gameObject.transform.GetChild(1).gameObject;
         _speedVFX = gameObject.transform.GetChild(2).gameObject;
+
         _rigidbody = gameObject.GetComponent<Rigidbody>();
+        _dissolveControl = gameObject.GetComponent<DissolveControl>();
 
         _standartPosition = gameObject.transform.position;
         _standartRotation = gameObject.transform.rotation;

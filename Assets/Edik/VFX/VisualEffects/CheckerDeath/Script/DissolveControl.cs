@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class DissolvingControllerTut : MonoBehaviour
+public class DissolveControl : MonoBehaviour
 {
     public SkinnedMeshRenderer skinnedMesh;
     public VisualEffect VFXDeath;
@@ -21,37 +21,29 @@ public class DissolvingControllerTut : MonoBehaviour
             skinnedMaterials = skinnedMesh.materials;
             currentDissolve = skinnedMaterials[0].GetFloat("_DissolveAmount");
 
-            StartCoroutine(SpawnCo());  
+            StartCoroutine(SpawnCoroutine());  
         }
     }
 
-    void Update()
+    public void SetDissolve(float dissolve_amount)
     {
-        /*if(Input.GetKeyDown (KeyCode.Space))
-        {
-            StartCoroutine(DissolveCo());
-        }
+        currentDissolve = dissolve_amount;
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            StartCoroutine(SpawnCo());
-        }*/
+        for (int i = 0; i < skinnedMaterials.Length; i++)
+            skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolve);
     }
 
-    IEnumerator DissolveCo ()
+    public IEnumerator DeathCoroutine ()
     {
         if(VFXDeath != null)
-        {
             VFXDeath.Play();
-        }
 
         if (skinnedMaterials.Length > 0)
         {
-           
-
             while (currentDissolve < 1)
             {
                 currentDissolve += dissolveRate;
+
                 for (int i = 0; i < skinnedMaterials.Length; i++)
                 {
                     skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolve);
@@ -61,17 +53,13 @@ public class DissolvingControllerTut : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnCo()
+    public IEnumerator SpawnCoroutine()
     {
         if (VFXSpawn != null)
-        {
             VFXSpawn.Play();
-        }
 
         if (skinnedMaterials.Length > 0)
         {
-          
-
             while (currentDissolve > 0)
             {
                 currentDissolve -= dissolveRate;

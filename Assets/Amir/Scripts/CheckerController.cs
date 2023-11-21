@@ -7,7 +7,6 @@ public enum CheckerState { Died, Standing, Moving, Turning }
 
 public class CheckerController : MonoBehaviour
 {
-    public UnityEvent onCheckerReady;
     public GameObject marker;
 
     /// <summary>
@@ -17,13 +16,14 @@ public class CheckerController : MonoBehaviour
     public readonly float _minRadius = 1.25f; // min_size = 0.25f
     public readonly float _launchStrength = 8;
     
-    internal Transform _standardPosition;
     internal CheckerState _state { get; private set; } = CheckerState.Died;
     internal bool _isPlayer { get; private set; } = false;
 
     GameObject _chargeVFX;
     GameObject _speedVFX;
     Rigidbody _rigidbody;
+    Vector3 _standartPosition;
+    Quaternion _standartRotation;
     Vector3 _directionMove;
     float _currentRadius;
 
@@ -90,7 +90,11 @@ public class CheckerController : MonoBehaviour
     public void ResetPosition()
     {
         gameObject.SetActive(true);
-        gameObject.transform.position = _standardPosition.position;
+
+        gameObject.transform.position = _standartPosition;
+        gameObject.transform.rotation = _standartRotation;
+
+        SetState(CheckerState.Moving);
     }
 
     public void SetState(CheckerState state)
@@ -100,6 +104,8 @@ public class CheckerController : MonoBehaviour
         switch (_state)
         {
             case CheckerState.Died:
+                _rigidbody.angularVelocity -= _rigidbody.angularVelocity;
+                _rigidbody.velocity -= _rigidbody.velocity;
                 gameObject.SetActive(false);
                 TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
@@ -121,17 +127,13 @@ public class CheckerController : MonoBehaviour
     {
         if (_rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
         {
-            SetState(CheckerState.Standing);
-
-            _chargeVFX.SetActive(false);
             _speedVFX.SetActive(false);
+            _chargeVFX.SetActive(false);
 
-            onCheckerReady.Invoke(); //////////////////////////////////////////////////////////// здесь внутри вызывается SetCheckerReady
+            SetState(CheckerState.Standing);
         }
         else // иначе (шашка не ходит) и она (активна и двигается)
-        {
             SetState(CheckerState.Moving);
-        }
     }
 
 
@@ -188,7 +190,9 @@ public class CheckerController : MonoBehaviour
         _chargeVFX = gameObject.transform.GetChild(1).gameObject;
         _speedVFX = gameObject.transform.GetChild(2).gameObject;
         _rigidbody = gameObject.GetComponent<Rigidbody>();
-        _standardPosition = gameObject.transform;
+
+        _standartPosition = gameObject.transform.position;
+        _standartRotation = gameObject.transform.rotation;
 
         if (_isPlayer)
             TurnSystem.Instance.AddToLists(this, marker);

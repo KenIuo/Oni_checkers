@@ -47,14 +47,9 @@ public class TurnSystem : MonoBehaviour
         {
             _playersQueue.Add(checker);
             _markers.Add(marker);
-            checker.onCheckerReady.AddListener(CheckConditions);
 
             if (_playersQueue.Count == 4)
-            {
-                //_textMeshPro = _title.GetComponent<TextMeshPro>();
-                //_textMeshPro.text = "start game";
                 Invoke(nameof(StartGame), 2.0f);
-            }
         }
     }
 
@@ -75,18 +70,10 @@ public class TurnSystem : MonoBehaviour
                 _isReadyList.RemoveAt(_isReadyList.IndexOf(checker));
         }
 
-        CheckConditions();
-    }
-
-    public void CheckConditions()
-    {
         if (_isReadyList.Count == _playersQueue.Count) // если услови€ подход€т, то вызывать новый ход
         {
-            //_deathByFall.CheckQueue(); // правильное место дл€ проверки ?
-
-            // вызывать смену интерфейса
             CheckQueue();
-            CheckEndOfGameConditions();
+            CheckConditions();
         }
     }
 
@@ -129,26 +116,29 @@ public class TurnSystem : MonoBehaviour
                 _playersQueue[i].SetMass(mass);
     }
 
-    public void CheckEndOfGameConditions() // провер€ет выполнились ли услови€ победы
+    public void CheckConditions() // провер€ет выполнились ли услови€ победы
     {
-        //_playersQueue.RemoveAt(_playersQueue.IndexOf(checker)); // ?
-        //GetDeathByFall().OnEnter(checker.gameObject);
-
         if (_playersQueue.Count == 1)
         {
             if (_playersQueue[0]._isPlayer)
-
                 GameManager.Instance.ChangeScreen(GameManager.Instance.WinScreen, true);
             else
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
         }
         else
             NewTurn();
-
-        //CheckConditions();
     }
 
 
+
+    void StartGame()
+    {
+        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
+
+        //EmptyTitle();
+        ResetMarkers();
+        NewTurn();
+    }
 
     void ResetStates()
     {
@@ -187,15 +177,6 @@ public class TurnSystem : MonoBehaviour
             // обновление очереди игроков в интерфейсе
             _eliminationQueue.Clear();
         }
-    }
-
-    void StartGame()
-    {
-        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
-
-        //EmptyTitle();
-        ResetMarkers();
-        NewTurn();
     }
 
     void EmptyTitle()

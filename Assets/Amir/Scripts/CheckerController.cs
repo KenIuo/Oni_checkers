@@ -13,8 +13,8 @@ public class CheckerController : MonoBehaviour
     /// <summary>
     /// соотношение 5 к 1, если расстояние больше заданного, то оно равно ему, если меньше, то 0
     /// </summary>
-    public readonly float _max_radius = 5.00f; // max_size = 1.00f
-    public readonly float _min_radius = 1.25f; // min_size = 0.25f
+    public readonly float _maxRadius = 5.00f; // max_size = 1.00f
+    public readonly float _minRadius = 1.25f; // min_size = 0.25f
     public readonly float _launchStrength = 8;
     
     internal Transform _standardPosition;
@@ -33,12 +33,12 @@ public class CheckerController : MonoBehaviour
     {
         float current_radius = Vector3.Distance(hit_position, gameObject.transform.position);
 
-        if (current_radius > _max_radius)
+        if (current_radius > _maxRadius)
         {
-            current_radius = _max_radius;
+            current_radius = _maxRadius;
             _chargeVFX.SetActive(true);
         }
-        else if (current_radius < _min_radius)
+        else if (current_radius < _minRadius)
         {
             current_radius = 0;
             _chargeVFX.SetActive(false);
@@ -51,12 +51,12 @@ public class CheckerController : MonoBehaviour
 
     float GetCurrentRadius(float current_radius)
     {
-        if (current_radius > _max_radius)
+        if (current_radius > _maxRadius)
         {
-            current_radius = _max_radius;
+            current_radius = _maxRadius;
             _chargeVFX.SetActive(true);
         }
-        else if (current_radius < _min_radius)
+        else if (current_radius < _minRadius)
         {
             current_radius = 0;
             _chargeVFX.SetActive(false);
@@ -67,15 +67,30 @@ public class CheckerController : MonoBehaviour
         return current_radius;
     }
 
-    public void ResetPosition()
+
+
+    public void LaunchChecker(float current_radius, Vector3 direction_move)
     {
-        gameObject.transform.position = _standardPosition.position;
-        gameObject.SetActive(true);
+        if (current_radius == _maxRadius)
+            TurnSystem.Instance.SetMassToOther(0.1f);
+
+        GameManager.Instance.SoundManager.PlayLaunchSound();
+        //_playerCheckerController.SetMovedState();
+        SetState(CheckerState.Moving);
+        _speedVFX.SetActive(true);
+
+        _rigidbody.velocity = direction_move * (current_radius * _launchStrength);
     }
 
     public void SetMass(float mass)
     {
         _rigidbody.mass = mass;
+    }
+
+    public void ResetPosition()
+    {
+        gameObject.SetActive(true);
+        gameObject.transform.position = _standardPosition.position;
     }
 
     public void SetState(CheckerState state)
@@ -100,6 +115,28 @@ public class CheckerController : MonoBehaviour
         }
     }
 
+
+
+    void CheckReadyState()
+    {
+        if (_rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
+        {
+            SetState(CheckerState.Standing);
+
+            _chargeVFX.SetActive(false);
+            _speedVFX.SetActive(false);
+
+            onCheckerReady.Invoke(); //////////////////////////////////////////////////////////// здесь внутри вызывается SetCheckerReady
+        }
+        else // иначе (шашка не ходит) и она (активна и двигается)
+        {
+            SetState(CheckerState.Moving);
+        }
+    }
+
+
+
+    #region AI
     public void ChooseAttackVector()
     {
         byte player_to_attack = (byte)UnityEngine.Random.Range(0, 3);
@@ -116,21 +153,6 @@ public class CheckerController : MonoBehaviour
         //LaunchChecker(random_radius, random_player_position);
     }
 
-    public void LaunchChecker(float current_radius, Vector3 direction_move)
-    {
-        if (current_radius == _max_radius)
-            TurnSystem.Instance.SetMassToOther(0.1f);
-
-        GameManager.Instance.SoundManager.PlayLaunchSound();
-        //_playerCheckerController.SetMovedState();
-        SetState(CheckerState.Moving);
-        _speedVFX.SetActive(true);
-
-        _rigidbody.velocity = direction_move * (current_radius * _launchStrength);
-    }
-
-
-
     Vector3 GetDirectionVector(Vector3 direction_vector)
     {
         direction_vector.y = gameObject.transform.position.y;
@@ -143,7 +165,7 @@ public class CheckerController : MonoBehaviour
 
     Vector3 GetPositionToKill(Vector3 direction_vector)
     {
-        _currentRadius = GetCurrentRadius(UnityEngine.Random.Range(_min_radius, 10.0f));
+        _currentRadius = GetCurrentRadius(UnityEngine.Random.Range(_minRadius, 10.0f));
 
         gameObject.transform.rotation = Quaternion.LookRotation(direction_vector);
         //initial_position.Normalize();
@@ -155,23 +177,7 @@ public class CheckerController : MonoBehaviour
         LaunchChecker(_currentRadius, _directionMove);
         //SetState(CheckerState.Standing);
     }
-
-    void CheckReadyState()
-    {
-        if (_rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
-        {
-            SetState(CheckerState.Standing);
-
-            _chargeVFX.SetActive(false);
-            _speedVFX.SetActive(false);
-
-            onCheckerReady.Invoke();
-        }
-        else // иначе (шашка не ходит) и она (активна и двигается)
-        {
-            SetState(CheckerState.Moving);
-        }
-    }
+    #endregion
 
 
 
@@ -179,16 +185,13 @@ public class CheckerController : MonoBehaviour
     {
         _isPlayer = gameObject.TryGetComponent(out PointerSystemController _);
 
-        if (_isPlayer)
-            TurnSystem.Instance.AddToLists(this, marker);
-
-        //EventSystem.Instance.OnStartGame.AddListener(ChangeGameStat);
         _chargeVFX = gameObject.transform.GetChild(1).gameObject;
         _speedVFX = gameObject.transform.GetChild(2).gameObject;
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _standardPosition = gameObject.transform;
 
-        gameObject.SetActive(true);
+        if (_isPlayer)
+            TurnSystem.Instance.AddToLists(this, marker);
     }
 
     void Start()

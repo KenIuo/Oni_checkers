@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -9,10 +10,14 @@ public class TurnSystem : MonoBehaviour
     internal bool _gameStarted = false;
     internal bool _isOnPause { get; private set; } = false;
 
+    [SerializeField] GameObject _title;
+
     List<GameObject> _markers = new();
     List<CheckerController> _eliminationQueue = new();
     List<CheckerController> _isReadyList = new ();
+    TextMeshPro _textMeshPro;
     bool _isReady = false;
+
 
 
     #region Singleton
@@ -45,7 +50,11 @@ public class TurnSystem : MonoBehaviour
             checker.onCheckerReady.AddListener(CheckConditions);
 
             if (_playersQueue.Count == 4)
-                StartGame();
+            {
+                //_textMeshPro = _title.GetComponent<TextMeshPro>();
+                //_textMeshPro.text = "start game";
+                Invoke(nameof(StartGame), 2.0f);
+            }
         }
     }
 
@@ -93,17 +102,13 @@ public class TurnSystem : MonoBehaviour
         else
             ++_currentPlayer;
 
-        //_playersQueue[_currentPlayer].ChangeGameStat(true);
-
         ResetStates();
 
         _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 460);
         // менять интерфейс (выводить надпись + выдвигать нужную иконку игрока + задвигать других игроков + удалять иконки удалённых игроков)
 
         if (!_playersQueue[_currentPlayer]._isPlayer) // если ведущий - НЕ игрок
-            _playersQueue[_currentPlayer].ChooseAttackVector(); // вызывать функцию выбора вектора и выстрела
-                                                                //else // иначе
-                                                                //_currentPlayer = _currentPlayer; // разблокировать управление
+            _isReady = true;
     }
 
     public void ResetMarkers()
@@ -133,9 +138,9 @@ public class TurnSystem : MonoBehaviour
         {
             if (_playersQueue[0]._isPlayer)
 
-                GameManager.Instance.ChangeScreen(GameManager.Instance.WinScreen);
+                GameManager.Instance.ChangeScreen(GameManager.Instance.WinScreen, true);
             else
-                GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen);
+                GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
         }
         else
             NewTurn();
@@ -177,7 +182,7 @@ public class TurnSystem : MonoBehaviour
             }
 
             if (_eliminationQueue[0]._isPlayer)
-                GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen);
+                GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
 
             // обновление очереди игроков в интерфейсе
             _eliminationQueue.Clear();
@@ -188,25 +193,24 @@ public class TurnSystem : MonoBehaviour
     {
         GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
 
+        //EmptyTitle();
         ResetMarkers();
-        //EventSystem.Instance.StartGame(true);
         NewTurn();
-        //Instance.GetDeathByFall();
-        //for (byte i = 0; i < 4; i++)
-        //_gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
-        //GameObject.Find("Game");.transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    void EmptyTitle()
+    {
+        _textMeshPro.text = "";
     }
 
 
 
     void Update()
     {
-        if (!_isOnPause)
+        if (!_isOnPause && _isReady)
         {
-            if (_isReady)
-            {
-
-            }
+            _playersQueue[_currentPlayer].ChooseAttackVector();
+            _isReady = false;
         }
     }
 }

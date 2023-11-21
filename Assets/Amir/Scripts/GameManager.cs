@@ -39,27 +39,15 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void ChangeScreen(GameObject screen, bool disable = true)
+    public void ChangeScreen(GameObject screen, bool set_pause = false, bool disable = true)
     {
         if (_currentScreen != null)
             _currentScreen.SetActive(!disable);
 
         _currentScreen = screen;
         _currentScreen.SetActive(true);
-    }
 
-    void ToPauseScreen()
-    {
-        ChangeScreen(PauseScreen, false);
-
-        TurnSystem.Instance.LockAllCheckers(true);
-    }
-
-    void FromPauseScreen()
-    {
-        ChangeScreen(GameScreen);
-
-        TurnSystem.Instance.LockAllCheckers(false);
+        TurnSystem.Instance.LockAllCheckers(set_pause);
     }
 
 
@@ -73,18 +61,18 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-                 if (_currentScreen == SettingsScreen)
-                ChangeScreen(MainMenuScreen);
+            if (_currentScreen == SettingsScreen)
+                ButtonScript.OnBackClick();
             else if (_currentScreen == CreditsScreen)
-                ChangeScreen(MainMenuScreen);
-            else if (_currentScreen == GameScreen)
-                ToPauseScreen();
+                ButtonScript.OnBackClick();
             else if (_currentScreen == PauseScreen)
-                FromPauseScreen();
+                ChangeScreen(GameScreen, false);
+            else if (_currentScreen == GameScreen)
+                ChangeScreen(PauseScreen, true, false);
             else if (_currentScreen == LoseScreen)
-                ChangeScreen(MainMenuScreen);
+                ButtonScript.OnMainMenuClick();
             else if (_currentScreen == WinScreen)
-                ChangeScreen(MainMenuScreen);
+                ButtonScript.OnMainMenuClick();
         }
 
         SoundManager.Update();

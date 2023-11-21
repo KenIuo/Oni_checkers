@@ -12,16 +12,16 @@ public class ButtonScript : MonoBehaviour
         SceneManager.LoadScene("Arena1Scene");
     }
 
-    public static void OnRestartClick()
+    /*public static void OnRestartClick()
     {
         GameManager.Instance.SoundManager.PlayMenuChoose();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    }*/
 
     public static void OnSettingsClick()
     {
         GameManager.Instance.SoundManager.PlayMenuTransit();
-        //GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen);
+        //GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen, true);
     }
 
     public static void OnCreditsClick()
@@ -33,9 +33,17 @@ public class ButtonScript : MonoBehaviour
     public static void OnResumeClick()
     {
         GameManager.Instance.SoundManager.PlayMenuTransit();
-        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
+        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen, false);
+    }
 
-        TurnSystem.Instance.LockAllCheckers(false);
+    public static void OnBackClick()
+    {
+        GameManager.Instance.SoundManager.PlayMenuTransit();
+
+        if (GameManager.Instance.MainMenuScreen == null)
+            GameManager.Instance.ChangeScreen(GameManager.Instance.PauseScreen, true);
+        else
+            GameManager.Instance.ChangeScreen(GameManager.Instance.MainMenuScreen);
     }
 
     public static void OnMainMenuClick()

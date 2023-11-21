@@ -56,6 +56,9 @@ public class TurnSystem : MonoBehaviour
             _playersQueue.Add(checker);
             _markers.Add(marker);
             checker.onCheckerReady.AddListener(CheckConditions);
+
+            if (_playersQueue.Count == 4)
+                StartGame();
         }
     }
 
@@ -197,13 +200,16 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
+    void StartGame()
+    {
+        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
 
-
-    //void Awake()
-    //{
+        ResetMarkers();
+        //EventSystem.Instance.StartGame(true);
+        NewTurn();
         //Instance.GetDeathByFall();
         //for (byte i = 0; i < 4; i++)
         //_gameScreen[i] = GameObject.Find("Game").transform.GetChild(i).gameObject.transform;
         //GameObject.Find("Game");.transform.GetChild(1).gameObject.SetActive(false);
-    //}
+    }
 }

@@ -27,7 +27,7 @@ public class DissolvingControllerTut : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown (KeyCode.Space))
+        /*if(Input.GetKeyDown (KeyCode.Space))
         {
             StartCoroutine(DissolveCo());
         }
@@ -35,9 +35,9 @@ public class DissolvingControllerTut : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             StartCoroutine(SpawnCo());
-        }
-
+        }*/
     }
+
     IEnumerator DissolveCo ()
     {
         if(VFXDeath != null)

@@ -3,11 +3,11 @@ using UnityEngine.Events;
 
 public class EventSystem : MonoBehaviour
 {
-    public UnityEvent<bool> OnStartGame;
+    //public UnityEvent<bool> OnStartGame;
 
 
 
-    #region Singleton
+    /*#region Singleton
     private static EventSystem _instance;
     public static EventSystem Instance
     {
@@ -19,12 +19,12 @@ public class EventSystem : MonoBehaviour
             return _instance;
         }
     }
-    #endregion
+    #endregion*/
 
 
 
-    public void StartGame(bool state)
-    {
-        OnStartGame.Invoke(state);
-    }
+    //public void StartGame(bool state)
+    //{
+        //OnStartGame.Invoke(state);
+    //}
 }

@@ -103,8 +103,6 @@ public class CheckerController : MonoBehaviour
 
         Vector3 random_player_position = TurnSystem.Instance._playersQueue[player_to_attack].gameObject.transform.position;
 
-        _currentRadius = GetCurrentRadius(UnityEngine.Random.Range(0.0f, 8.0f));
-
         random_player_position = GetDirectionVector(random_player_position);
         _directionMove = GetPositionToKill(random_player_position);
 
@@ -139,6 +137,8 @@ public class CheckerController : MonoBehaviour
 
     Vector3 GetPositionToKill(Vector3 direction_vector)
     {
+        _currentRadius = GetCurrentRadius(UnityEngine.Random.Range(_min_radius, 10.0f));
+
         gameObject.transform.rotation = Quaternion.LookRotation(direction_vector);
         //initial_position.Normalize();
         return direction_vector;

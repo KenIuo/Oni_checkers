@@ -40,7 +40,9 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScreen(GameObject screen, bool disable = true)
     {
-        _currentScreen.SetActive(!disable);
+        if (_currentScreen != null)
+            _currentScreen.SetActive(!disable);
+
         _currentScreen = screen;
         _currentScreen.SetActive(true);
     }
@@ -56,10 +58,6 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (_currentScreen == MainMenuScreen)
-            {
-                ButtonScript.OnExitClick();
-            }
             if (_currentScreen == SettingsScreen)
             {
                 ChangeScreen(MainMenuScreen);

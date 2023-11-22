@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject MainMenuScreen;
     public GameObject SettingsScreen;
     public GameObject CreditsScreen;
+    public GameObject RulesScreen;
     public GameObject GameScreen;
     public GameObject PauseScreen;
     public GameObject LoseScreen;
@@ -64,6 +65,8 @@ public class GameManager : MonoBehaviour
             if (_currentScreen == SettingsScreen)
                 ButtonScript.OnBackClick();
             else if (_currentScreen == CreditsScreen)
+                ButtonScript.OnBackClick();
+            else if (_currentScreen == RulesScreen)
                 ButtonScript.OnBackClick();
             else if (_currentScreen == PauseScreen)
                 ChangeScreen(GameScreen, false);

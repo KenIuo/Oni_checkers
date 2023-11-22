@@ -15,10 +15,21 @@ public class ButtonScript : MonoBehaviour
         //GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen, true);
     }
 
+    public static void OnRulesClick()
+    {
+        GameManager.Instance.SoundManager.PlayMenuTransit();
+        GameManager.Instance.ChangeScreen(GameManager.Instance.RulesScreen);
+    }
+
     public static void OnCreditsClick()
     {
         GameManager.Instance.SoundManager.PlayMenuTransit();
         GameManager.Instance.ChangeScreen(GameManager.Instance.CreditsScreen);
+    }
+
+    public static void OnCreditsNameClick(string link)
+    {
+        Application.OpenURL(link);
     }
 
     public static void OnResumeClick()

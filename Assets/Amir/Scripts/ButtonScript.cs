@@ -12,7 +12,11 @@ public class ButtonScript : MonoBehaviour
     public static void OnSettingsClick()
     {
         GameManager.Instance.SoundManager.PlayMenuTransit();
-        //GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen, true);
+
+        if (GameManager.Instance.MainMenuScreen == null)
+            GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen);
+        else
+            GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen, true);
     }
 
     public static void OnRulesClick()

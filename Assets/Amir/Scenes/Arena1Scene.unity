@@ -3356,6 +3356,7 @@ MonoBehaviour:
   MainMenuScreen: {fileID: 0}
   SettingsScreen: {fileID: 136032479}
   CreditsScreen: {fileID: 0}
+  RulesScreen: {fileID: 0}
   GameScreen: {fileID: 9636657}
   PauseScreen: {fileID: 502936919}
   LoseScreen: {fileID: 47170639}

@@ -9,15 +9,31 @@ public class CursorManager : MonoBehaviour
 
     Vector2 _cursorHotspot = new Vector2(40, 5);
 
-    // Start is called before the first frame update
-    void Start()
+
+
+    #region Singleton
+    private static CursorManager _instance;
+    public static CursorManager Instance
     {
-        
+        get
+        {
+            if (_instance == null)
+                _instance = FindObjectOfType<CursorManager>();
+
+            return _instance;
+        }
+    }
+    #endregion
+
+
+
+    public void SetStandartCursor()
+    {
+        Cursor.SetCursor(cursor1, _cursorHotspot, CursorMode.Auto);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetHandCursor()
     {
-        
+        Cursor.SetCursor(cursor2, _cursorHotspot, CursorMode.Auto);
     }
 }

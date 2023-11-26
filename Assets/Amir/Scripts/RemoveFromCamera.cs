@@ -6,11 +6,13 @@ public class RemoveFromCamera : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        other.gameObject.SetActive(false);
+        if (other.gameObject.layer == gameObject.layer)
+            other.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     void OnTriggerExit(Collider other)
     {
-        other.gameObject.SetActive(true);
+        if (other.gameObject.layer == gameObject.layer)
+            other.gameObject.transform.GetChild(0).gameObject.SetActive(true);
     }
 }

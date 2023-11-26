@@ -19,6 +19,8 @@ public class CheckerController : MonoBehaviour
     internal CheckerState _state { get; private set; } = CheckerState.Died;
     internal bool _isPlayer { get; private set; } = false;
 
+    [SerializeField] MeshRenderer _bodyMaterial;
+
     GameObject _chargeVFX;
     GameObject _speedVFX;
     Rigidbody _rigidbody;
@@ -27,6 +29,8 @@ public class CheckerController : MonoBehaviour
     Quaternion _standartRotation;
     Vector3 _directionMove;
     float _currentRadius;
+    
+    Ray ray;
 
 
 
@@ -115,7 +119,13 @@ public class CheckerController : MonoBehaviour
                 TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Standing:
-                TurnSystem.Instance.SetCheckerReady(this, true);
+                /*if(!CheckFloor())
+                {
+                    _rigidbody.freezeRotation = false;
+                    SetState(CheckerState.Moving);
+                }
+                else*/
+                    TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Moving:
                 TurnSystem.Instance.SetCheckerReady(this, false);
@@ -141,15 +151,29 @@ public class CheckerController : MonoBehaviour
             SetState(CheckerState.Moving);
     }
 
+    bool CheckFloor()
+    {
+        Vector3 point_to = gameObject.transform.position;
+        point_to.y = 1;
+        //point_to.Normalize();
+
+        ray = new(gameObject.transform.position, point_to);
+
+        if (Physics.Raycast(ray, out _, float.PositiveInfinity, LayerMask.GetMask("Playing_Field")))
+            return true;
+        else
+            return false;
+    }
+
 
 
     #region AI
     public void ChooseAttackVector()
     {
-        byte player_to_attack = (byte)UnityEngine.Random.Range(0, 3);
+        byte player_to_attack = (byte)UnityEngine.Random.Range(0, TurnSystem.Instance._playersQueue.Count);
 
         while (player_to_attack == TurnSystem.Instance._currentPlayer)
-            player_to_attack = (byte)UnityEngine.Random.Range(0, 3);
+            player_to_attack = (byte)UnityEngine.Random.Range(0, TurnSystem.Instance._playersQueue.Count);
 
         Vector3 random_player_position = TurnSystem.Instance._playersQueue[player_to_attack].gameObject.transform.position;
 
@@ -201,6 +225,8 @@ public class CheckerController : MonoBehaviour
         _standartPosition = gameObject.transform.position;
         _standartRotation = gameObject.transform.rotation;
 
+        //_bodyMaterial.material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
         if (_isPlayer)
             TurnSystem.Instance.AddToLists(this, marker);
     }
@@ -229,5 +255,11 @@ public class CheckerController : MonoBehaviour
             GameManager.Instance.SoundManager.PlayCollideSound();
             _speedVFX.SetActive(false);
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(ray.origin, ray.direction);
     }
 }

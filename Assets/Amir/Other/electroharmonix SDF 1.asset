@@ -70,7 +70,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.2
+    - _OutlineWidth: 0.3
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333
@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: electroharmonix SDF 1
   m_EditorClassIdentifier: 
-  hashCode: -1071776015
+  hashCode: 1067025248
   material: {fileID: -3507165797009724552}
-  materialHashCode: 1455235505
+  materialHashCode: -919664192
   m_Version: 1.1.0
   m_SourceFontFileGUID: b580fe2e82919b14f95f2629faa22eb6
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: b580fe2e82919b14f95f2629faa22eb6,

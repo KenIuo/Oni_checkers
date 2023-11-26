@@ -1,66 +1,96 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ButtonScript : MonoBehaviour
 {
+    internal GameObject _previousScreen;
+
+
+
     public static void OnPlayClick()
     {
-        GameManager.Instance.SoundManager.PlayMenuChoose();
+        UIManager.Instance.PlayMenuChoose();
         SceneManager.LoadScene("Arena1Scene");
     }
 
+    public static void OnMainMenuClick()
+    {
+        UIManager.Instance.PlayMenuBack();
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
+    public static void OnExitClick()
+    {
+        UIManager.Instance.PlayMenuBack();
+        Application.Quit();
+    }
+
+
+
     public static void OnSettingsClick()
     {
-        GameManager.Instance.SoundManager.PlayMenuTransit();
+        UIManager.Instance.PlayMenuTransit();
 
-        if (GameManager.Instance.MainMenuScreen == null)
-            GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen);
+        if (UIManager.Instance.MainMenuScreen != null)
+            UIManager.Instance.ChangeScreen(UIManager.Instance.SettingsScreen);
         else
             GameManager.Instance.ChangeScreen(GameManager.Instance.SettingsScreen, true);
     }
 
+    public static void OnBackClick()
+    {
+        UIManager.Instance.PlayMenuTransit();
+
+        if (UIManager.Instance.MainMenuScreen != null)
+            UIManager.Instance.ChangeScreen(UIManager.Instance.MainMenuScreen);
+        else
+            GameManager.Instance.ChangeScreen(GameManager.Instance.PauseScreen, true);
+    }
+
+
+
     public static void OnRulesClick()
     {
-        GameManager.Instance.SoundManager.PlayMenuTransit();
-        GameManager.Instance.ChangeScreen(GameManager.Instance.RulesScreen);
+        UIManager.Instance.PlayMenuTransit();
+        UIManager.Instance.ChangeScreen(UIManager.Instance.RulesScreen);
     }
 
     public static void OnCreditsClick()
     {
-        GameManager.Instance.SoundManager.PlayMenuTransit();
-        GameManager.Instance.ChangeScreen(GameManager.Instance.CreditsScreen);
+        UIManager.Instance.PlayMenuTransit();
+        UIManager.Instance.ChangeScreen(UIManager.Instance.CreditsScreen);
     }
+
+
+
+    public static void OnResumeClick()
+    {
+        UIManager.Instance.PlayMenuTransit();
+        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen, false);
+    }
+
+
 
     public static void OnCreditsNameClick(string link)
     {
         Application.OpenURL(link);
     }
 
-    public static void OnResumeClick()
+
+
+    void OnMouseEnter()
     {
-        GameManager.Instance.SoundManager.PlayMenuTransit();
-        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen, false);
+        CursorManager.Instance.SetHandCursor();
     }
 
-    public static void OnBackClick()
+    void OnMouseExit()
     {
-        GameManager.Instance.SoundManager.PlayMenuTransit();
-
-        if (GameManager.Instance.MainMenuScreen == null)
-            GameManager.Instance.ChangeScreen(GameManager.Instance.PauseScreen, true);
-        else
-            GameManager.Instance.ChangeScreen(GameManager.Instance.MainMenuScreen);
+        CursorManager.Instance.SetStandartCursor();
     }
 
-    public static void OnMainMenuClick()
+    void OnMouseOver()
     {
-        GameManager.Instance.SoundManager.PlayMenuBack();
-        SceneManager.LoadScene("MainMenuScene");
-    }
-
-    public static void OnExitClick()
-    {
-        GameManager.Instance.SoundManager.PlayMenuBack();
-        Application.Quit();
+        CursorManager.Instance.SetHandCursor();
     }
 }

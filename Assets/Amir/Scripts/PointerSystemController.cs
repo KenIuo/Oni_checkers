@@ -23,6 +23,8 @@ public class PointerSystemController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            CursorManager.Instance.SetHandCursor();
+
             _currentRadius = _playerCheckerController.GetCurrentRadius(hit_position);
 
             if (_currentRadius != 0)
@@ -39,6 +41,7 @@ public class PointerSystemController : MonoBehaviour
             if (_currentRadius != 0)
                 _playerCheckerController.LaunchChecker(_currentRadius, direction_move);
 
+            CursorManager.Instance.SetStandartCursor();
             _pointingArrow.SetActive(false);
         }
     }
@@ -80,7 +83,10 @@ public class PointerSystemController : MonoBehaviour
             &&  gameObject.activeInHierarchy)
                 DrawArrow(hit.point);
             else
+            {
+                CursorManager.Instance.SetStandartCursor();
                 _pointingArrow.SetActive(false);
+            }
         }
     }
 }

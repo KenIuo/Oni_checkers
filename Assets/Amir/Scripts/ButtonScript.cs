@@ -1,8 +1,9 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
-public class ButtonScript : MonoBehaviour
+public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     internal GameObject _previousScreen;
 
@@ -79,18 +80,13 @@ public class ButtonScript : MonoBehaviour
 
 
 
-    void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         CursorManager.Instance.SetHandCursor();
     }
 
-    void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
         CursorManager.Instance.SetStandartCursor();
-    }
-
-    void OnMouseOver()
-    {
-        CursorManager.Instance.SetHandCursor();
     }
 }

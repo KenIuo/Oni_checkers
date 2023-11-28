@@ -260,7 +260,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2405582750029037293}
-  - component: {fileID: 9065772769417045380}
   - component: {fileID: 9113424878994941767}
   m_Layer: 0
   m_Name: PlayingField
@@ -285,14 +284,6 @@ Transform:
   - {fileID: 7414771365146878525}
   m_Father: {fileID: 1596044783404845677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &9065772769417045380
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3616545211967986328}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!64 &9113424878994941767
 MeshCollider:
   m_ObjectHideFlags: 0

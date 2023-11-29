@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject SettingsScreen;
     public GameObject CreditsScreen;
     public GameObject RulesScreen;
+    public GameObject ArenaSelectionScreen;
 
     [SerializeField] AudioSource audioMenuChoose;
     [SerializeField] AudioSource audioMenuTransit;

@@ -791,6 +791,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 489617059}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &512969071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2480574917283990987, guid: a8204584c19200d41baa4c64448269e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1148121785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &716030818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,95 +1839,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 14879443}
     m_Modifications:
-    - target: {fileID: 1257189337787175962, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1949492372}
-    - target: {fileID: 1257189337787175962, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1949492372}
-    - target: {fileID: 1257189337787175962, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetHandCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257189337787175962, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetStandartCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257189337787175962, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257189337787175962, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257189337787175962, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257189337787175962, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1969086860100719887, guid: d019eda389342e6499ec50932c287ac3,
         type: 3}
       propertyPath: m_Name
       value: MainMenu Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 1969086860100719887, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121631610971161232, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1949492372}
-    - target: {fileID: 3121631610971161232, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1949492372}
-    - target: {fileID: 3121631610971161232, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetHandCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121631610971161232, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetStandartCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121631610971161232, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121631610971161232, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121631610971161232, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121631610971161232, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3276549171323709108, guid: d019eda389342e6499ec50932c287ac3,
         type: 3}
@@ -2023,106 +1944,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3391298288914399505, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1949492372}
-    - target: {fileID: 3391298288914399505, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1949492372}
-    - target: {fileID: 3391298288914399505, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetHandCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3391298288914399505, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetStandartCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3391298288914399505, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3391298288914399505, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3391298288914399505, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3391298288914399505, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249792509111913491, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1949492372}
-    - target: {fileID: 4249792509111913491, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1949492372}
-    - target: {fileID: 4249792509111913491, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetHandCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249792509111913491, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetStandartCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249792509111913491, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249792509111913491, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CursorManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249792509111913491, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249792509111913491, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6394608309093163079, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 6394608309093163079, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 375
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564944997430156749, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_text
-      value: v1.1.0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8492800879283492041, guid: d019eda389342e6499ec50932c287ac3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2195,6 +2016,7 @@ MonoBehaviour:
   SettingsScreen: {fileID: 1930117008}
   CreditsScreen: {fileID: 1645668410}
   RulesScreen: {fileID: 905809075}
+  ArenaSelectionScreen: {fileID: 512969071}
   audioMenuChoose: {fileID: 1044916650}
   audioMenuTransit: {fileID: 1044916649}
   audioMenuBack: {fileID: 1044916648}
@@ -3416,5 +3238,5 @@ SceneRoots:
   - {fileID: 774915116}
   - {fileID: 14879443}
   - {fileID: 1825538712}
-  - {fileID: 4796509979462328307}
   - {fileID: 809876005}
+  - {fileID: 4796509979462328307}

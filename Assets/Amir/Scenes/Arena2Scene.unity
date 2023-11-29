@@ -2488,9 +2488,10 @@ MonoBehaviour:
   SettingsScreen: {fileID: 0}
   CreditsScreen: {fileID: 0}
   RulesScreen: {fileID: 0}
-  audioMenuChoose: {fileID: 0}
-  audioMenuTransit: {fileID: 0}
-  audioMenuBack: {fileID: 0}
+  ArenaSelectionScreen: {fileID: 0}
+  audioMenuChoose: {fileID: 1114003682}
+  audioMenuTransit: {fileID: 1114003681}
+  audioMenuBack: {fileID: 1114003680}
 --- !u!1 &866121855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3255,6 +3256,24 @@ PrefabInstance:
 --- !u!4 &1114003679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 270501988884144545, guid: 06e0bc3566d116540bf19b19a75eab4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1114003678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1114003680 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6390897210471092104, guid: 06e0bc3566d116540bf19b19a75eab4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1114003678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1114003681 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9064534859458279327, guid: 06e0bc3566d116540bf19b19a75eab4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1114003678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1114003682 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 946455822347933416, guid: 06e0bc3566d116540bf19b19a75eab4e,
     type: 3}
   m_PrefabInstance: {fileID: 1114003678}
   m_PrefabAsset: {fileID: 0}

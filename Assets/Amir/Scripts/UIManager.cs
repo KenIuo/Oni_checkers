@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
 
     public void ChangeScreen(GameObject screen)
     {
-        //CursorManager.Instance.SetStandartCursor();
+        CursorManager.Instance.SetStandartCursor();
 
         if (_currentScreen != null)
             _currentScreen.SetActive(false);

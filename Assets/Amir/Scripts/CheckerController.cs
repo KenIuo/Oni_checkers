@@ -20,6 +20,7 @@ public class CheckerController : MonoBehaviour
     internal bool _isPlayer { get; private set; } = false;
 
     [SerializeField] MeshRenderer _bodyMaterial;
+    [SerializeField] private LayerMask _layer;
 
     GameObject _chargeVFX;
     GameObject _speedVFX;
@@ -159,6 +160,24 @@ public class CheckerController : MonoBehaviour
 
         ray = new(gameObject.transform.position, point_to);
 
+        //серж начал тут говнокодить
+
+        //RaycastHit hit;
+        //Ray ray1 = new Ray(transform.position, Vector3.down);
+
+        //if (Physics.Raycast(ray1, out hit, 2, _layer))
+        //{
+        //    Debug.Log(hit.transform.name);
+        //    if (hit.transform.name == "CubeBottom")
+        //    {
+        //        return true;
+        //    }
+        //}
+
+        //return false;
+
+        //тут закончил говнокодить
+
         if (Physics.Raycast(ray, out _, float.PositiveInfinity, LayerMask.GetMask("Playing_Field")))
             return true;
         else
@@ -239,6 +258,16 @@ public class CheckerController : MonoBehaviour
 
     void Update()
     {
+        //if (CheckFloor())
+        //{
+        //    _rigidbody.constraints = RigidbodyConstraints.None;
+        //}
+        //else
+        //{
+        //    _rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ;
+        //    _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX;
+        //}
+
         if (!_state.Equals(CheckerState.Died) && !_state.Equals(CheckerState.Turning))
             CheckReadyState();
     }

@@ -916,7 +916,7 @@ PrefabInstance:
     - target: {fileID: 2726016720853725097, guid: ab114702423c2784db17b822dc276d9e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnPlayClick
+      value: OnRestartClick
       objectReference: {fileID: 0}
     - target: {fileID: 2726016720853725097, guid: ab114702423c2784db17b822dc276d9e,
         type: 3}

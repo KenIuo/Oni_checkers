@@ -344,6 +344,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   marker: {fileID: 0}
   _bodyMaterial: {fileID: 6662194820860247125}
+  _layer:
+    serializedVersion: 2
+    m_Bits: 247
 --- !u!114 &4540442715010699894
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class PointerSystemController : MonoBehaviour
     CheckerController _playerCheckerController;
     Vector3 _playerPos;
     float _currentRadius;
+    Vector3 direction_move;
 
 
 
@@ -19,7 +20,7 @@ public class PointerSystemController : MonoBehaviour
                                  0.1f,
                                  gameObject.transform.position.z);
 
-        Vector3 direction_move = GetDirectionVector(hit_position);
+        direction_move = GetDirectionVector(hit_position);
 
         if (Input.GetMouseButton(0))
         {
@@ -88,5 +89,11 @@ public class PointerSystemController : MonoBehaviour
                 _pointingArrow.SetActive(false);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(Vector3.zero, direction_move);
     }
 }

@@ -12,7 +12,6 @@ public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public static void OnPlayClick()
     {
         UIManager.Instance.PlayMenuChoose();
-        //SceneManager.LoadScene("Arena1Scene");
         UIManager.Instance.ChangeScreen(UIManager.Instance.ArenaSelectionScreen);
     }
     

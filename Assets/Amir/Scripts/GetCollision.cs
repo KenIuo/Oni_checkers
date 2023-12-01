@@ -6,7 +6,7 @@ public class GetCollision : MonoBehaviour
     {
         GameManager.Instance.SoundManager.PlayDeathSound();
         // воспроизводить анимацию смерти шашки
-        other.GetComponent<CheckerController>().SetState(CheckerState.Died);
+        other.GetComponentInParent<CheckerController>().SetState(CheckerState.Died);
 
         //TurnSystem.Instance.CheckEndOfGameConditions(other.gameObject.GetComponent<CheckerController>());
         //TurnSystem.Instance.GetDeathByFall().OnEnter(other.gameObject);

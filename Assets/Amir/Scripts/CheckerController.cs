@@ -114,6 +114,8 @@ public class CheckerController : MonoBehaviour
                 _rigidbody.angularVelocity -= _rigidbody.angularVelocity;
                 _rigidbody.velocity -= _rigidbody.velocity;
 
+                // воспроизводить анимацию смерти шашки
+
                 _dissolveControl.SetDissolve(1);
                 gameObject.SetActive(false);
 
@@ -155,10 +157,10 @@ public class CheckerController : MonoBehaviour
     bool CheckFloor()
     {
         Vector3 point_to = gameObject.transform.position;
-        point_to.y = 1;
+        //point_to.y = 1;
         //point_to.Normalize();
 
-        ray = new(gameObject.transform.position, Vector3.down);
+        ray = new(point_to, Vector3.down);
 
         //серж начал тут говнокодить
 

@@ -69,9 +69,12 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)
+        &&  MainMenuScreen != null)
         {
-            if (_currentScreen == SettingsScreen)
+            if (_currentScreen == ArenaSelectionScreen)
+                ButtonScript.OnBackClick();
+            else if (_currentScreen == SettingsScreen)
                 ButtonScript.OnBackClick();
             else if (_currentScreen == CreditsScreen)
                 ButtonScript.OnBackClick();

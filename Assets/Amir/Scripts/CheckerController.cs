@@ -19,11 +19,11 @@ public class CheckerController : MonoBehaviour
     internal CheckerState _state { get; private set; } = CheckerState.Died;
     internal bool _isPlayer { get; private set; } = false;
 
+    [SerializeField] GameObject _chargeVFX;
+    [SerializeField] GameObject _speedVFX;
     [SerializeField] MeshRenderer _bodyMaterial;
-    [SerializeField] private LayerMask _layer;
+    //[SerializeField] private LayerMask _layer;
 
-    GameObject _chargeVFX;
-    GameObject _speedVFX;
     Rigidbody _rigidbody;
     DissolveControl _dissolveControl;
     Vector3 _standartPosition;
@@ -120,12 +120,12 @@ public class CheckerController : MonoBehaviour
                 TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Standing:
-                /*if(!CheckFloor())
+                if(!CheckFloor())
                 {
                     _rigidbody.freezeRotation = false;
                     SetState(CheckerState.Moving);
                 }
-                else*/
+                else
                     TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Moving:
@@ -158,7 +158,7 @@ public class CheckerController : MonoBehaviour
         point_to.y = 1;
         //point_to.Normalize();
 
-        ray = new(gameObject.transform.position, point_to);
+        ray = new(gameObject.transform.position, Vector3.down);
 
         //серж начал тут говнокодить
 
@@ -235,8 +235,8 @@ public class CheckerController : MonoBehaviour
     {
         _isPlayer = gameObject.TryGetComponent(out PointerSystemController _);
 
-        _chargeVFX = gameObject.transform.GetChild(1).gameObject;
-        _speedVFX = gameObject.transform.GetChild(2).gameObject;
+        //_chargeVFX = gameObject.transform.GetChild(1).gameObject;
+        //_speedVFX = gameObject.transform.GetChild(2).gameObject;
 
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _dissolveControl = gameObject.GetComponent<DissolveControl>();
@@ -283,12 +283,22 @@ public class CheckerController : MonoBehaviour
         {
             GameManager.Instance.SoundManager.PlayCollideSound();
             _speedVFX.SetActive(false);
+
+            //collision.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.8f, 0.8f, 0.8f, 0.8f);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.name == "PlayingField")
+        {
+            _rigidbody.freezeRotation = false;
         }
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(ray.origin, ray.direction);
+        //Gizmos.DrawSphere(ray.origin, 0.1f); // Vector3.down);
     }
 }

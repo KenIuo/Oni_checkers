@@ -74,20 +74,24 @@ public class TurnSystem : MonoBehaviour
         {
             CheckQueue();
             CheckConditions();
+            NewTurn();
         }
     }
 
-    public void NewTurn()
+    public void NewTurn(bool add_counter = true)
     {
         _isReadyList.Clear();
 
         _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 540);
         SetMassToOther(1);
 
-        if (_currentPlayer >= _playersQueue.Count - 1)
-            _currentPlayer = 0;
-        else
-            ++_currentPlayer;
+        if (add_counter)
+        {
+            if (_currentPlayer >= _playersQueue.Count - 1)
+                _currentPlayer = 0;
+            else
+                ++_currentPlayer;
+        }
 
         ResetStates();
 
@@ -98,14 +102,24 @@ public class TurnSystem : MonoBehaviour
             _isReady = true;
     }
 
+    /*[ContextMenu("Test")]
+    void Test()
+    {
+        _markers[0].transform.localPosition = new Vector3(-210, 240);
+        _markers[0].gameObject.GetComponent<RectTransform>().localPosition = new Vector3(-210, 200);
+    }*/
+
     public void ResetMarkers()
     {
-        for (byte i = 0; i < _playersQueue.Count; i++)
+        _markers[0].SetActive(true);
+        //_markers[0].transform.localPosition = new Vector3(-210, 540);
+        _markers[0].gameObject.GetComponent<RectTransform>().localPosition = new Vector3(-210, 200);
+
+        for (byte i = 1; i < _playersQueue.Count; i++)
         {
             _markers[i].SetActive(true);
-
-            _markers[0].transform.localPosition = new Vector3(_markers[0].transform.localPosition.x, 540);
-            //_markers[i].transform.SetLocalPositionAndRotation(new Vector3(0, 0), new Quaternion()); // _markers[i].transform.localPosition.x + (i * 140)
+            //_markers[i].transform.localPosition = new Vector3(_markers[0].transform.localPosition.x + (i * 140), 540);
+            _markers[i].gameObject.GetComponent<RectTransform>().localPosition = new Vector3(_markers[0].gameObject.GetComponent<RectTransform>().localPosition.x + (i * 140), 200);
         }
     }
 
@@ -125,8 +139,6 @@ public class TurnSystem : MonoBehaviour
             else
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
         }
-        else
-            NewTurn();
     }
 
 
@@ -177,12 +189,16 @@ public class TurnSystem : MonoBehaviour
             // исчезновение из системы ходов
             foreach (CheckerController player in _eliminationQueue)
             {
-                _markers[_playersQueue.IndexOf(player)].SetActive(false);
-                _playersQueue.RemoveAt(_playersQueue.IndexOf(player));
+                //_markers[_playersQueue.IndexOf(player)].SetActive(false);
+
+                byte player_index = (byte)_playersQueue.IndexOf(player);
+
+                _playersQueue.RemoveAt(player_index);
+                _markers.RemoveAt(player_index);
             }
 
-            // обновление очереди игроков в интерфейсе
             _eliminationQueue.Clear();
+            ResetMarkers();
         }
     }
 

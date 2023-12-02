@@ -5,7 +5,6 @@ public class PointerSystemController : MonoBehaviour
     [SerializeField] GameObject _pointingArrow; // настраивается только местоположение (на середине шашки игрока) и поворот (изначально смотрит вперёд)
     [SerializeField] GameObject _tensionForce; // настраивается только длина (Z координата) (изначально на максимальной или почти максимальной длине)
     [SerializeField] Camera _camera;
-    [SerializeField] LayerMask _layerMask;
 
     CheckerController _playerCheckerController;
     Vector3 _playerPos;
@@ -79,7 +78,7 @@ public class PointerSystemController : MonoBehaviour
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, _layerMask)
+            if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, LayersTags.ARROW_LAYER)
             && !TurnSystem.Instance._isOnPause
             &&  gameObject.activeInHierarchy)
                 DrawArrow(hit.point);

@@ -2,33 +2,36 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public enum CheckerState { Died, Standing, Moving, Turning }
 
 public class CheckerController : MonoBehaviour
 {
-    public GameObject marker;
+    public GameObject _marker;
+    public VisualEffect _chargeVFX;
 
     /// <summary>
     /// соотношение 5 к 1, если расстояние больше заданного, то оно равно ему, если меньше, то 0
     /// </summary>
-    public readonly float _maxRadius = 5.00f; // max_size = 1.00f
-    public readonly float _minRadius = 1.25f; // min_size = 0.25f
-    public readonly float _launchStrength = 8;
-    
+    internal const float _maxRadius = 5.00f; // max_size = 1.00f
+    internal const float _minRadius = 1.25f; // min_size = 0.25f
+    internal const float _launchStrength = 8;
+
     internal CheckerState _state { get; private set; } = CheckerState.Died;
     internal bool _isPlayer { get; private set; } = false;
 
-    [SerializeField] GameObject _chargeVFX;
-    [SerializeField] GameObject _speedVFX;
-    [SerializeField] MeshRenderer _bodyMaterial;
-    //[SerializeField] private LayerMask _layer;
+    [SerializeField] VisualEffect _speedVFX;
+    [SerializeField] LayerMask _layer;
 
     Rigidbody _rigidbody;
     DissolveControl _dissolveControl;
-    Vector3 _standartPosition;
+    CheckerAppearance _checkerAppearance;
     Quaternion _standartRotation;
+    Vector3 _standartPosition;
     Vector3 _directionMove;
+    RigidbodyConstraints _standartConstraints;
     float _currentRadius;
     
     Ray ray;
@@ -39,36 +42,17 @@ public class CheckerController : MonoBehaviour
     {
         float current_radius = Vector3.Distance(hit_position, gameObject.transform.position);
 
-        if (current_radius > _maxRadius)
-        {
-            current_radius = _maxRadius;
-            _chargeVFX.SetActive(true);
-        }
-        else if (current_radius < _minRadius)
-        {
-            current_radius = 0;
-            _chargeVFX.SetActive(false);
-        }
-        else
-            _chargeVFX.SetActive(false);
-
-        return current_radius;
+        return GetCurrentRadius(current_radius);
     }
 
     float GetCurrentRadius(float current_radius)
     {
         if (current_radius > _maxRadius)
-        {
             current_radius = _maxRadius;
-            _chargeVFX.SetActive(true);
-        }
         else if (current_radius < _minRadius)
-        {
             current_radius = 0;
-            _chargeVFX.SetActive(false);
-        }
-        else
-            _chargeVFX.SetActive(false);
+
+        _chargeVFX.enabled = current_radius >= _maxRadius;
 
         return current_radius;
     }
@@ -81,9 +65,9 @@ public class CheckerController : MonoBehaviour
             TurnSystem.Instance.SetMassToOther(0.1f);
 
         GameManager.Instance.SoundManager.PlayLaunchSound();
-        //_playerCheckerController.SetMovedState();
+        
         SetState(CheckerState.Moving);
-        _speedVFX.SetActive(true);
+        _speedVFX.enabled = true;
 
         _rigidbody.velocity = direction_move * (current_radius * _launchStrength);
     }
@@ -124,7 +108,9 @@ public class CheckerController : MonoBehaviour
             case CheckerState.Standing:
                 if(!CheckFloor())
                 {
-                    _rigidbody.freezeRotation = false;
+                    //_rigidbody.freezeRotation = false;
+                    _rigidbody.constraints = RigidbodyConstraints.None;
+
                     SetState(CheckerState.Moving);
                 }
                 else
@@ -145,8 +131,8 @@ public class CheckerController : MonoBehaviour
     {
         if (_rigidbody.velocity.magnitude == 0) // проверка состояния, что шашка не двигается
         {
-            _speedVFX.SetActive(false);
-            _chargeVFX.SetActive(false);
+            _speedVFX.enabled = false;
+            _chargeVFX.enabled = false;
 
             SetState(CheckerState.Standing);
         }
@@ -156,11 +142,7 @@ public class CheckerController : MonoBehaviour
 
     bool CheckFloor()
     {
-        Vector3 point_to = gameObject.transform.position;
-        //point_to.y = 1;
-        //point_to.Normalize();
-
-        ray = new(point_to, Vector3.down);
+        ray = new(transform.position + transform.up, -transform.up);
 
         //серж начал тут говнокодить
 
@@ -180,10 +162,7 @@ public class CheckerController : MonoBehaviour
 
         //тут закончил говнокодить
 
-        if (Physics.Raycast(ray, out _, float.PositiveInfinity, LayerMask.GetMask("Playing_Field")))
-            return true;
-        else
-            return false;
+        return Physics.Raycast(ray, out _, float.PositiveInfinity, LayersTags.PF_LAYER);
     }
 
 
@@ -242,20 +221,21 @@ public class CheckerController : MonoBehaviour
 
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _dissolveControl = gameObject.GetComponent<DissolveControl>();
+        _checkerAppearance = gameObject.GetComponent<CheckerAppearance>();
 
         _standartPosition = gameObject.transform.position;
         _standartRotation = gameObject.transform.rotation;
 
-        //_bodyMaterial.material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        _standartConstraints = _rigidbody.constraints;
 
         if (_isPlayer)
-            TurnSystem.Instance.AddToLists(this, marker);
+            TurnSystem.Instance.AddToLists(this, _marker);
     }
 
     void Start()
     {
         if (!_isPlayer)
-            TurnSystem.Instance.AddToLists(this, marker);
+            TurnSystem.Instance.AddToLists(this, _marker);
     }
 
     void Update()
@@ -279,18 +259,17 @@ public class CheckerController : MonoBehaviour
         if (collision.gameObject.GetComponent<CheckerController>())
         {
             GameManager.Instance.SoundManager.PlayHitSound();
-            _chargeVFX.SetActive(false);
+            _chargeVFX.enabled = false;
+            _speedVFX.enabled = false;
         }
         else if (collision.gameObject.name != "PlayingField")
         {
             GameManager.Instance.SoundManager.PlayCollideSound();
-            _speedVFX.SetActive(false);
-
-            //collision.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.8f, 0.8f, 0.8f, 0.8f);
+            _speedVFX.enabled = false;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.name == "PlayingField")
         {
@@ -300,7 +279,7 @@ public class CheckerController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(ray.origin, 0.1f); // Vector3.down);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position - transform.up);
     }
 }

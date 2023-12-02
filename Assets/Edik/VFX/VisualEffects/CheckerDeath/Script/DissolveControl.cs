@@ -6,8 +6,8 @@ using UnityEngine.VFX;
 public class DissolveControl : MonoBehaviour
 {
     public SkinnedMeshRenderer skinnedMesh;
-    public VisualEffect VFXDeath;
-    public VisualEffect VFXSpawn;
+
+    [SerializeField] VisualEffect _spawnVFX;
 
     float dissolveRate = 0.0125f;
     float refreshRate = 0.025f;
@@ -33,7 +33,7 @@ public class DissolveControl : MonoBehaviour
             skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolve);
     }
 
-    public IEnumerator DeathCoroutine ()
+    /*public IEnumerator DeathCoroutine ()
     {
         if(VFXDeath != null)
             VFXDeath.Play();
@@ -51,12 +51,12 @@ public class DissolveControl : MonoBehaviour
                 yield return new WaitForSeconds(refreshRate);
             }
         }
-    }
+    }*/
 
     public IEnumerator SpawnCoroutine()
     {
-        if (VFXSpawn != null)
-            VFXSpawn.Play();
+        if (_spawnVFX != null)
+            _spawnVFX.Play();
 
         if (skinnedMaterials.Length > 0)
         {

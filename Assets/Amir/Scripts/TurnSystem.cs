@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class TurnSystem : MonoBehaviour
     List<CheckerController> _isReadyList = new ();
     TextMeshPro _textMeshPro;
     bool _isReady = false;
-    bool _changePlayer = true;
 
 
 
@@ -78,22 +78,20 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
-    public void NewTurn()
+    public void NewTurn(bool add_counter = true)
     {
         _isReadyList.Clear();
 
         _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 540);
         SetMassToOther(1);
 
-        if (_changePlayer)
+        if (add_counter)
         {
             if (_currentPlayer >= _playersQueue.Count - 1)
                 _currentPlayer = 0;
             else
                 ++_currentPlayer;
         }
-        else
-            _changePlayer = true;
 
         ResetStates();
 
@@ -147,6 +145,8 @@ public class TurnSystem : MonoBehaviour
 
     void StartGame()
     {
+        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
+
         //EmptyTitle();
         ResetMarkers();
         NewTurn();
@@ -166,7 +166,7 @@ public class TurnSystem : MonoBehaviour
     void CheckQueue() // удаляет игроков со сцены
     {
         if (_eliminationQueue.Count > 1
-        && _eliminationQueue.Contains(_playersQueue[_currentPlayer]))
+        &&  _eliminationQueue.Contains(_playersQueue[_currentPlayer]))
         {
             foreach (CheckerController player in _eliminationQueue)
                 player.ResetPosition();
@@ -178,49 +178,28 @@ public class TurnSystem : MonoBehaviour
             if (_eliminationQueue[0]._isPlayer)
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
 
-            RemoveFromPlayersQueue();
+            if (!_eliminationQueue.Contains(_playersQueue[_currentPlayer]))
+            {
+                if (_currentPlayer <= 0)
+                    _currentPlayer = (byte)(_playersQueue.Count - 1);
+                else
+                    _currentPlayer--;
+            }
+
+            // исчезновение из системы ходов
+            foreach (CheckerController player in _eliminationQueue)
+            {
+                //_markers[_playersQueue.IndexOf(player)].SetActive(false);
+
+                byte player_index = (byte)_playersQueue.IndexOf(player);
+
+                _playersQueue.RemoveAt(player_index);
+                _markers.RemoveAt(player_index);
+            }
 
             _eliminationQueue.Clear();
             ResetMarkers();
         }
-    }
-
-    void RemoveFromPlayersQueue()
-    {
-        CheckerController current_player = _playersQueue[_currentPlayer];
-
-        if (!_eliminationQueue.Contains(_playersQueue[_currentPlayer]))
-        {
-            _changePlayer = true;
-
-            if (_currentPlayer <= 0)
-                _currentPlayer = (byte)(_playersQueue.Count - 1);
-            else
-                _currentPlayer--;
-        }
-        else
-            _changePlayer = false;
-
-        // исчезновение из системы ходов
-        foreach (CheckerController player in _eliminationQueue)
-        {
-            //_markers[_playersQueue.IndexOf(player)].SetActive(false);
-
-            byte player_index = (byte)_playersQueue.IndexOf(player);
-
-            _playersQueue.RemoveAt(player_index);
-            _markers.RemoveAt(player_index);
-        }
-
-        if (!_changePlayer)
-            for (byte i = 0; i < _playersQueue.Count; i++)
-                if (_playersQueue[i] == current_player)
-                    _currentPlayer = i;
-    }
-
-    void RecalcQueue()
-    {
-        //for ()
     }
 
     void EmptyTitle()
@@ -229,11 +208,6 @@ public class TurnSystem : MonoBehaviour
     }
 
 
-
-    void Awake()
-    {
-        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
-    }
 
     void Update()
     {

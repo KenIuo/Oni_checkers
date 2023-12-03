@@ -24,7 +24,7 @@ public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public static void OnMainMenuClick()
     {
         UIManager.Instance.PlayMenuBack();
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene(NamesTags.MAIN_MENU_SCENE);
     }
 
     public static void OnExitClick()
@@ -36,13 +36,19 @@ public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public static void LoadArena1()
     {
         UIManager.Instance.PlayMenuChoose();
-        SceneManager.LoadScene("Arena1Scene");
+        SceneManager.LoadScene(NamesTags.ARENA_1_SCENE);
     }
 
     public static void LoadArena2()
     {
         UIManager.Instance.PlayMenuChoose();
-        SceneManager.LoadScene("Arena2Scene");
+        SceneManager.LoadScene(NamesTags.ARENA_2_SCENE);
+    }
+
+    public static void LoadArena3()
+    {
+        UIManager.Instance.PlayMenuChoose();
+        SceneManager.LoadScene(NamesTags.ARENA_3_SCENE);
     }
 
 

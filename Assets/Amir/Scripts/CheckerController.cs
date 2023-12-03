@@ -40,7 +40,7 @@ public class CheckerController : MonoBehaviour
 
     public float GetCurrentRadius(Vector3 hit_position)
     {
-        float current_radius = Vector3.Distance(hit_position, gameObject.transform.position);
+        float current_radius = Vector3.Distance(hit_position, transform.position);
 
         return GetCurrentRadius(current_radius);
     }
@@ -81,8 +81,8 @@ public class CheckerController : MonoBehaviour
     {
         gameObject.SetActive(true);
         
-        gameObject.transform.position = _standartPosition;
-        gameObject.transform.rotation = _standartRotation;
+        transform.position = _standartPosition;
+        transform.rotation = _standartRotation;
 
         SetState(CheckerState.Moving);
         StartCoroutine(_dissolveControl.SpawnCoroutine());
@@ -106,15 +106,7 @@ public class CheckerController : MonoBehaviour
                 TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Standing:
-                if(!CheckFloor())
-                {
-                    //_rigidbody.freezeRotation = false;
-                    _rigidbody.constraints = RigidbodyConstraints.None;
-
-                    SetState(CheckerState.Moving);
-                }
-                else
-                    TurnSystem.Instance.SetCheckerReady(this, true);
+                TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Moving:
                 TurnSystem.Instance.SetCheckerReady(this, false);
@@ -144,24 +136,6 @@ public class CheckerController : MonoBehaviour
     {
         ray = new(transform.position + transform.up, -transform.up);
 
-        //серж начал тут говнокодить
-
-        //RaycastHit hit;
-        //Ray ray1 = new Ray(transform.position, Vector3.down);
-
-        //if (Physics.Raycast(ray1, out hit, 2, _layer))
-        //{
-        //    Debug.Log(hit.transform.name);
-        //    if (hit.transform.name == "CubeBottom")
-        //    {
-        //        return true;
-        //    }
-        //}
-
-        //return false;
-
-        //тут закончил говнокодить
-
         return Physics.Raycast(ray, out _, float.PositiveInfinity, LayersTags.PF_LAYER);
     }
 
@@ -175,7 +149,7 @@ public class CheckerController : MonoBehaviour
         while (player_to_attack == TurnSystem.Instance._currentPlayer)
             player_to_attack = (byte)UnityEngine.Random.Range(0, TurnSystem.Instance._playersQueue.Count);
 
-        Vector3 random_player_position = TurnSystem.Instance._playersQueue[player_to_attack].gameObject.transform.position;
+        Vector3 random_player_position = TurnSystem.Instance._playersQueue[player_to_attack].transform.position;
 
         random_player_position = GetDirectionVector(random_player_position);
         _directionMove = GetPositionToKill(random_player_position);
@@ -186,9 +160,9 @@ public class CheckerController : MonoBehaviour
 
     Vector3 GetDirectionVector(Vector3 direction_vector)
     {
-        direction_vector.y = gameObject.transform.position.y;
+        direction_vector.y = transform.position.y;
 
-        Vector3 direction_move = direction_vector - gameObject.transform.position;
+        Vector3 direction_move = direction_vector - transform.position;
         direction_move.Normalize();
 
         return direction_move;
@@ -198,7 +172,7 @@ public class CheckerController : MonoBehaviour
     {
         _currentRadius = GetCurrentRadius(UnityEngine.Random.Range(_minRadius, 10.0f));
 
-        gameObject.transform.rotation = Quaternion.LookRotation(direction_vector);
+        transform.rotation = Quaternion.LookRotation(direction_vector);
         //initial_position.Normalize();
         return direction_vector;
     }
@@ -223,8 +197,8 @@ public class CheckerController : MonoBehaviour
         _dissolveControl = gameObject.GetComponent<DissolveControl>();
         _checkerAppearance = gameObject.GetComponent<CheckerAppearance>();
 
-        _standartPosition = gameObject.transform.position;
-        _standartRotation = gameObject.transform.rotation;
+        _standartPosition = transform.position;
+        _standartRotation = transform.rotation;
 
         _standartConstraints = _rigidbody.constraints;
 
@@ -240,18 +214,15 @@ public class CheckerController : MonoBehaviour
 
     void Update()
     {
-        //if (CheckFloor())
-        //{
-        //    _rigidbody.constraints = RigidbodyConstraints.None;
-        //}
-        //else
-        //{
-        //    _rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ;
-        //    _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX;
-        //}
-
         if (!_state.Equals(CheckerState.Died) && !_state.Equals(CheckerState.Turning))
+        {
+            if (!CheckFloor())
+                _rigidbody.constraints = RigidbodyConstraints.None;
+            else if (_state.Equals(CheckerState.Standing))
+                _rigidbody.constraints = _standartConstraints;
+
             CheckReadyState();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -262,7 +233,7 @@ public class CheckerController : MonoBehaviour
             _chargeVFX.enabled = false;
             _speedVFX.enabled = false;
         }
-        else if (collision.gameObject.name != "PlayingField")
+        else if (collision.gameObject.name != NamesTags.PLAYING_FIELD)
         {
             GameManager.Instance.SoundManager.PlayCollideSound();
             _speedVFX.enabled = false;
@@ -271,7 +242,7 @@ public class CheckerController : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        if(collision.gameObject.name == "PlayingField")
+        if(collision.gameObject.name == NamesTags.PLAYING_FIELD)
         {
             _rigidbody.freezeRotation = false;
         }
@@ -280,6 +251,9 @@ public class CheckerController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position - transform.up);
+        Gizmos.DrawLine(transform.position + transform.up, transform.position - transform.up);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position + transform.up, 0.1f);
     }
 }

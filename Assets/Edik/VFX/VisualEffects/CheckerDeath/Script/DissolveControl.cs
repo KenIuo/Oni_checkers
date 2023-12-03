@@ -9,17 +9,19 @@ public class DissolveControl : MonoBehaviour
 
     [SerializeField] VisualEffect _spawnVFX;
 
+    Material[] skinnedMaterials;
     float dissolveRate = 0.0125f;
     float refreshRate = 0.025f;
     float currentDissolve;
-    Material[] skinnedMaterials;
+
+    const string _dissolveValue = "_DissolveAmount";
 
     void Start()
     {
         if (skinnedMesh != null)
         {
             skinnedMaterials = skinnedMesh.materials;
-            currentDissolve = skinnedMaterials[0].GetFloat("_DissolveAmount");
+            currentDissolve = skinnedMaterials[0].GetFloat(_dissolveValue);
 
             StartCoroutine(SpawnCoroutine());  
         }
@@ -30,7 +32,7 @@ public class DissolveControl : MonoBehaviour
         currentDissolve = dissolve_amount;
 
         for (int i = 0; i < skinnedMaterials.Length; i++)
-            skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolve);
+            skinnedMaterials[i].SetFloat(_dissolveValue, currentDissolve);
     }
 
     /*public IEnumerator DeathCoroutine ()
@@ -46,7 +48,7 @@ public class DissolveControl : MonoBehaviour
 
                 for (int i = 0; i < skinnedMaterials.Length; i++)
                 {
-                    skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolve);
+                    skinnedMaterials[i].SetFloat(_dissolveValue, currentDissolve);
                 }
                 yield return new WaitForSeconds(refreshRate);
             }
@@ -66,7 +68,7 @@ public class DissolveControl : MonoBehaviour
 
                 foreach (Material mat in skinnedMaterials)
                 {
-                    mat.SetFloat("_DissolveAmount", currentDissolve);
+                    mat.SetFloat(_dissolveValue, currentDissolve);
                 }
                 yield return new WaitForSeconds(refreshRate);
             }

@@ -176,7 +176,12 @@ public class TurnSystem : MonoBehaviour
         else if (_eliminationQueue.Count > 0)
         {
             if (_eliminationQueue[0]._isPlayer)
+            {
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
+                _changePlayer = true;
+            }
+            else
+                _changePlayer = false;
 
             RemoveFromPlayersQueue();
 

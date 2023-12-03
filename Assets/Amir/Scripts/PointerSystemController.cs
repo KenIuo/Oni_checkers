@@ -15,9 +15,7 @@ public class PointerSystemController : MonoBehaviour
 
     void DrawArrow(Vector3 hit_position)
     {
-        _playerPos = new Vector3(gameObject.transform.position.x,
-                                 0.1f,
-                                 gameObject.transform.position.z);
+        _playerPos = new Vector3(transform.position.x, 0.1f, transform.position.z);
 
         direction_move = GetDirectionVector(hit_position);
 
@@ -29,7 +27,7 @@ public class PointerSystemController : MonoBehaviour
 
             if (_currentRadius != 0)
             {
-                gameObject.transform.rotation = Quaternion.LookRotation(direction_move);
+                transform.rotation = Quaternion.LookRotation(direction_move);
 
                 TransformPointingArrow(direction_move);
             }
@@ -92,7 +90,7 @@ public class PointerSystemController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(Vector3.zero, direction_move);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(_playerPos, _playerPos + (direction_move * 2));
     }
 }

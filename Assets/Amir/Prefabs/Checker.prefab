@@ -315,8 +315,8 @@ GameObject:
   - component: {fileID: 623847522776067301}
   - component: {fileID: 7839669159761762952}
   - component: {fileID: 6845589923947001306}
-  - component: {fileID: 6903090921956968764}
   - component: {fileID: 9063737983205660703}
+  - component: {fileID: 6903090921956968764}
   m_Layer: 0
   m_Name: Checker
   m_TagString: Untagged
@@ -390,6 +390,22 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &9063737983205660703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6764211504394987261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b834255daf075b041b2c3f2a6858a8ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bodyMaterial: {fileID: 6662194820860247125}
+  _chargeVFX: {fileID: 6053774855005749178}
+  _markerImage: {fileID: 357987705274744565}
+  _playerColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &6903090921956968764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,21 +420,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skinnedMesh: {fileID: 6602086809339188494}
   _spawnVFX: {fileID: 7506193391707305484}
---- !u!114 &9063737983205660703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6764211504394987261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b834255daf075b041b2c3f2a6858a8ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bodyMaterial: {fileID: 6662194820860247125}
-  _markerImage: {fileID: 357987705274744565}
-  _playerColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1001 &2343752132402731857
 PrefabInstance:
   m_ObjectHideFlags: 0

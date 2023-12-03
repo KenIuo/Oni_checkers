@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -17,6 +16,7 @@ public class TurnSystem : MonoBehaviour
     List<CheckerController> _isReadyList = new ();
     TextMeshPro _textMeshPro;
     bool _isReady = false;
+    bool _changePlayer = true;
 
 
 
@@ -78,20 +78,22 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
-    public void NewTurn(bool add_counter = true)
+    public void NewTurn()
     {
         _isReadyList.Clear();
 
         _markers[_currentPlayer].transform.localPosition = new Vector3(_markers[_currentPlayer].transform.localPosition.x, 540);
         SetMassToOther(1);
 
-        if (add_counter)
+        if (_changePlayer)
         {
             if (_currentPlayer >= _playersQueue.Count - 1)
                 _currentPlayer = 0;
             else
                 ++_currentPlayer;
         }
+        else
+            _changePlayer = true;
 
         ResetStates();
 
@@ -145,8 +147,6 @@ public class TurnSystem : MonoBehaviour
 
     void StartGame()
     {
-        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
-
         //EmptyTitle();
         ResetMarkers();
         NewTurn();
@@ -176,7 +176,12 @@ public class TurnSystem : MonoBehaviour
         else if (_eliminationQueue.Count > 0)
         {
             if (_eliminationQueue[0]._isPlayer)
+            {
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
+                _changePlayer = true;
+            }
+            else
+                _changePlayer = false;
 
             if (!_eliminationQueue.Contains(_playersQueue[_currentPlayer]))
             {
@@ -208,6 +213,11 @@ public class TurnSystem : MonoBehaviour
     }
 
 
+
+    void Awake()
+    {
+        GameManager.Instance.ChangeScreen(GameManager.Instance.GameScreen);
+    }
 
     void Update()
     {

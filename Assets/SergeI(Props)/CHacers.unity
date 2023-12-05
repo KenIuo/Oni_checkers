@@ -975,57 +975,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65264886823221972, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 65264886823221972, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 841063435353923694, guid: ca5fc4a70a947294ea2f7a1c3186e3ae,
+    - target: {fileID: 841063435353923694, guid: a47145af61e82e5469a8856f361ed3ab,
         type: 3}
       propertyPath: m_Name
       value: Checers_FINAL
@@ -1034,7 +1034,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ca5fc4a70a947294ea2f7a1c3186e3ae, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: a47145af61e82e5469a8856f361ed3ab, type: 3}
 --- !u!1001 &3969131233986413712
 PrefabInstance:
   m_ObjectHideFlags: 0

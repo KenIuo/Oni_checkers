@@ -166,7 +166,7 @@ public class TurnSystem : MonoBehaviour
     void CheckQueue() // удаляет игроков со сцены
     {
         if (_eliminationQueue.Count > 1
-        &&  _eliminationQueue.Contains(_playersQueue[_currentPlayer]))
+        && _eliminationQueue.Contains(_playersQueue[_currentPlayer]))
         {
             foreach (CheckerController player in _eliminationQueue)
                 player.ResetPosition();
@@ -176,35 +176,51 @@ public class TurnSystem : MonoBehaviour
         else if (_eliminationQueue.Count > 0)
         {
             if (_eliminationQueue[0]._isPlayer)
-            {
                 GameManager.Instance.ChangeScreen(GameManager.Instance.LoseScreen, true);
-                _changePlayer = true;
-            }
-            else
-                _changePlayer = false;
 
-            if (!_eliminationQueue.Contains(_playersQueue[_currentPlayer]))
-            {
-                if (_currentPlayer <= 0)
-                    _currentPlayer = (byte)(_playersQueue.Count - 1);
-                else
-                    _currentPlayer--;
-            }
-
-            // исчезновение из системы ходов
-            foreach (CheckerController player in _eliminationQueue)
-            {
-                //_markers[_playersQueue.IndexOf(player)].SetActive(false);
-
-                byte player_index = (byte)_playersQueue.IndexOf(player);
-
-                _playersQueue.RemoveAt(player_index);
-                _markers.RemoveAt(player_index);
-            }
+            RemoveFromPlayersQueue();
 
             _eliminationQueue.Clear();
             ResetMarkers();
         }
+    }
+
+    void RemoveFromPlayersQueue()
+    {
+        CheckerController current_player = _playersQueue[_currentPlayer];
+
+        if (!_eliminationQueue.Contains(_playersQueue[_currentPlayer]))
+        {
+            _changePlayer = true;
+
+            if (_currentPlayer <= 0)
+                _currentPlayer = (byte)(_playersQueue.Count - 1);
+            else
+                _currentPlayer--;
+        }
+        else
+            _changePlayer = false;
+
+        // исчезновение из системы ходов
+        foreach (CheckerController player in _eliminationQueue)
+        {
+            //_markers[_playersQueue.IndexOf(player)].SetActive(false);
+
+            byte player_index = (byte)_playersQueue.IndexOf(player);
+
+            _playersQueue.RemoveAt(player_index);
+            _markers.RemoveAt(player_index);
+        }
+
+        if (!_changePlayer)
+            for (byte i = 0; i < _playersQueue.Count; i++)
+                if (_playersQueue[i] == current_player)
+                    _currentPlayer = i;
+    }
+
+    void RecalcQueue()
+    {
+        //for ()
     }
 
     void EmptyTitle()

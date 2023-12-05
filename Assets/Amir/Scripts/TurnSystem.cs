@@ -191,7 +191,7 @@ public class TurnSystem : MonoBehaviour
 
         if (!_eliminationQueue.Contains(_playersQueue[_currentPlayer]))
         {
-            _changePlayer = true;
+            _changePlayer = false;
 
             if (_currentPlayer <= 0)
                 _currentPlayer = (byte)(_playersQueue.Count - 1);
@@ -199,7 +199,7 @@ public class TurnSystem : MonoBehaviour
                 _currentPlayer--;
         }
         else
-            _changePlayer = false;
+            _changePlayer = true;
 
         // исчезновение из системы ходов
         foreach (CheckerController player in _eliminationQueue)

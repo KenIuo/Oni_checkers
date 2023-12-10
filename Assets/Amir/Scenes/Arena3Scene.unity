@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38616657, g: 0.8274712, b: 0.7313267, a: 1}
+  m_IndirectSpecularColor: {r: 0.38748664, g: 0.82763016, b: 0.7313313, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -374,11 +374,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7af1a592ae9e44f9d46131e0f63f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SettingsScreen: {fileID: 0}
+  SettingsScreen: {fileID: 76076349}
   GameScreen: {fileID: 1670681198}
-  PauseScreen: {fileID: 0}
-  LoseScreen: {fileID: 0}
-  WinScreen: {fileID: 0}
+  PauseScreen: {fileID: 1075618282}
+  LoseScreen: {fileID: 1166521054}
+  WinScreen: {fileID: 774315038}
   _soundManager:
     audioHit1: {fileID: 15437966}
     audioHit2: {fileID: 15437965}
@@ -768,6 +768,12 @@ PrefabInstance:
 --- !u!224 &76076348 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2197595000738341730, guid: 571afd7c5edc90f42899c58b4b3d2b5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 76076347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &76076349 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5203156731766418729, guid: 571afd7c5edc90f42899c58b4b3d2b5b,
     type: 3}
   m_PrefabInstance: {fileID: 76076347}
   m_PrefabAsset: {fileID: 0}
@@ -2932,6 +2938,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e1362cb9e17cd342b0038adae01c7e1, type: 3}
+--- !u!1 &774315038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2782204043984709090, guid: 8e1362cb9e17cd342b0038adae01c7e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 774315037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &825826596
 GameObject:
   m_ObjectHideFlags: 0
@@ -4225,6 +4237,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3dc194c68bdd9d4e9edba720d45cf5c, type: 3}
+--- !u!1 &1075618282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8660752148884795621, guid: d3dc194c68bdd9d4e9edba720d45cf5c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1075618281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1087987383
 GameObject:
   m_ObjectHideFlags: 0
@@ -4888,6 +4906,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e56bc43cc07761a4181b138cd73840cb, type: 3}
+--- !u!1 &1166521054 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8916632353926401718, guid: e56bc43cc07761a4181b138cd73840cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1166521053}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1188237736
 GameObject:
   m_ObjectHideFlags: 0

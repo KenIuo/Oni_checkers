@@ -83,6 +83,7 @@ public class CheckerController : MonoBehaviour
         
         transform.position = _standartPosition;
         transform.rotation = _standartRotation;
+        _rigidbody.constraints = _standartConstraints;
 
         SetState(CheckerState.Moving);
         StartCoroutine(_dissolveControl.SpawnCoroutine());

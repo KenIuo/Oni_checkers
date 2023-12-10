@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b834255daf075b041b2c3f2a6858a8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bodyMaterial: {fileID: 6662194820860247125}
+  _bodyMaterial: {fileID: 1760756318481393403}
   _chargeVFX: {fileID: 6053774855005749178}
   _markerImage: {fileID: 357987705274744565}
   _playerColor: {r: 1, g: 1, b: 1, a: 0}
@@ -659,6 +659,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2530077145493768485, guid: f542f1950034b50489b5cbfbf3178c2f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a4b5d9775499ce4389daea9ecf013dc, type: 2}
     - target: {fileID: 3483995277914208384, guid: f542f1950034b50489b5cbfbf3178c2f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -679,6 +684,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f542f1950034b50489b5cbfbf3178c2f, type: 3}
+--- !u!23 &1760756318481393403 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3483995277914208384, guid: f542f1950034b50489b5cbfbf3178c2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2897738387789012603}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3439743823911074192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f542f1950034b50489b5cbfbf3178c2f,
@@ -1454,12 +1465,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4de6cd093b702cb42a23d446ba2ca591, type: 3}
---- !u!23 &6662194820860247125 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -6843054336819016778, guid: 4de6cd093b702cb42a23d446ba2ca591,
-    type: 3}
-  m_PrefabInstance: {fileID: 9042182083256432611}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8860535188331679752 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4de6cd093b702cb42a23d446ba2ca591,

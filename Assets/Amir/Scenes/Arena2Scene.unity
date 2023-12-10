@@ -6381,6 +6381,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1620340951}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1620340953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8660752148884795621, guid: d3dc194c68bdd9d4e9edba720d45cf5c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620340951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1626493410
 GameObject:
   m_ObjectHideFlags: 0
@@ -6721,9 +6727,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SettingsScreen: {fileID: 1229249279}
   GameScreen: {fileID: 487902239}
-  PauseScreen: {fileID: 0}
-  LoseScreen: {fileID: 0}
-  WinScreen: {fileID: 0}
+  PauseScreen: {fileID: 1620340953}
+  LoseScreen: {fileID: 1971531133}
+  WinScreen: {fileID: 1918566498}
   _soundManager:
     audioHit1: {fileID: 2138775262}
     audioHit2: {fileID: 610220326}
@@ -7590,6 +7596,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1918566496}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1918566498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2782204043984709090, guid: 8e1362cb9e17cd342b0038adae01c7e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1918566496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1953162134
 GameObject:
   m_ObjectHideFlags: 0
@@ -7799,6 +7811,12 @@ PrefabInstance:
 --- !u!224 &1971531132 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5590378840592563469, guid: e56bc43cc07761a4181b138cd73840cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1971531131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1971531133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8916632353926401718, guid: e56bc43cc07761a4181b138cd73840cb,
     type: 3}
   m_PrefabInstance: {fileID: 1971531131}
   m_PrefabAsset: {fileID: 0}

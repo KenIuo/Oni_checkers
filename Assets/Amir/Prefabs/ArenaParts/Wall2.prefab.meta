@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Amir/Prefabs/ArenaParts/Wall2.prefab.meta
 guid: 5ff09198acae98a4a95ca6f1cee37123
 PrefabImporter:
+========
+guid: 3c55a78565408724e87fbd25e910ba3d
+NativeFormatImporter:
+>>>>>>>> 6430af8 (1.1.0 (10.12/1) удалены дубликаты префабов экранов, добавлены материалы для новых сеток шашек, добавлено отключение вращения, если шашка была восстановлена на арену):Assets/Amir/Materials/CheckerMaterial2.mat.meta
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

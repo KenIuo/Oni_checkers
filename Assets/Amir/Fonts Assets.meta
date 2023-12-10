@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Amir/Fonts Assets.meta
 guid: 5716defb11de33f4da97663ed4f27762
+========
+guid: 3366875e43417914898668b145f465c4
+>>>>>>>> 6430af8 (1.1.0 (10.12/1) удалены дубликаты префабов экранов, добавлены материалы для новых сеток шашек, добавлено отключение вращения, если шашка была восстановлена на арену):Assets/Amir/Materials/Old.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

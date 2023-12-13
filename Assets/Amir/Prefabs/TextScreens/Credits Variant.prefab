@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 4082548274884218886}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.025, y: 0.041666668, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7480539400818142923}
@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 380, y: 230}
+  m_SizeDelta: {x: 280, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3566772193465643728
 CanvasRenderer:
@@ -66,8 +66,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "project leader\ngame designer\nprogrammer\n\ncheckers\narena props\nenvironment
-    props\n\nvisual effects\nenvironment\n\n                                                        
-    created by\n\nspecial thanks:"
+    props\n\nvisual effects\nenvironment\n\n                               created
+    by\n\nspecial thanks:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e26aa9cca5e8ba4ea9c706087752453, type: 2}
   m_sharedMaterial: {fileID: -3507165797009724552, guid: 9e26aa9cca5e8ba4ea9c706087752453,
@@ -164,7 +164,7 @@ RectTransform:
   m_GameObject: {fileID: 9174339607962525907}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.025, y: 0.041666668, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7511206673346602819}
@@ -182,7 +182,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 380, y: 230}
+  m_SizeDelta: {x: 280, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6510299520102025400
 CanvasRenderer:
@@ -214,28 +214,29 @@ MonoBehaviour:
       m_Calls: []
   m_text: '- eduard
 
-    - anton
+    - Anton P.
 
-    - amir
+    - Amir R.
 
 
-    - sergei
+    - Sergei P.
 
-    - mikhail
+    - Mikhail
+    D.
 
-    -
-    kirill
+    - Kirill N.
 
 
     - eduard
 
-    - anton
+    - Anton P.
 
 
     nazad_group
 
 
-    tim M., sergei a., '
+    Tim
+    M., Sergei G., '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 430f1bd57f96d414a8d01bdb2bda2aec, type: 2}
   m_sharedMaterial: {fileID: -3507165797009724552, guid: 430f1bd57f96d414a8d01bdb2bda2aec,

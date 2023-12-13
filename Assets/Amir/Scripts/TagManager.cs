@@ -16,4 +16,9 @@ public class NamesTags
 
     public static readonly string PLAYING_FIELD = "PlayingField";
     public static readonly string BGM_TAG = "GameMusic";
+
+    public static readonly string VOLUME_MASTER = "MasterVolume";
+    public static readonly string VOLUME_MUSIC = "MusicVolume";
+    public static readonly string VOLUME_EFFECTS = "EffectsVolume";
+    public static readonly string VOLUME_ENVIRONMENT = "EnvironmentVolume";
 }

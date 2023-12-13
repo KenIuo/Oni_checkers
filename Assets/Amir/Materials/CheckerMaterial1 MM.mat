@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CheckerMaterial2
+  m_Name: CheckerMaterial1 MM
   m_Shader: {fileID: -6465566751694194690, guid: ec306abb365a5c24db3e73a2416c1a45,
     type: 3}
   m_Parent: {fileID: 0}
@@ -30,7 +30,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 1976
+  m_CustomRenderQueue: 2426
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -190,7 +190,7 @@ Material:
     - _BASE_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_color: {r: 0.28627452, g: 0.5647059, b: 0.81568635, a: 0}
-    - _Base_color_1: {r: 1, g: 1, b: 1, a: 0}
+    - _Base_color_1: {r: 0.18649602, g: 0.20645495, b: 0.752, a: 1}
     - _Cavity: {r: 0.15761836, g: 0.19933069, b: 0.4339623, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color_1: {r: 0.16470589, g: 0.5019608, b: 0.7607844, a: 1}

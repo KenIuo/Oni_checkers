@@ -270,3 +270,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 6204184604621836303}
   _rotationSpeed: 2
+  _cameraMesh: {fileID: -1710425572717105975, guid: 4edcc9672fa1a224bafabfad5c18610c,
+    type: 3}

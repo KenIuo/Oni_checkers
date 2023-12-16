@@ -146,8 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85485367473fdf544919404f43417bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor1: {fileID: 2800000, guid: bea5fb035a7ad6640ac7c1db6f902fd0, type: 3}
-  cursor2: {fileID: 2800000, guid: 9f7a9fefe21a92b49af37340485c353c, type: 3}
 --- !u!1 &7350502342458793984
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,16 +213,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8e34adc44bac3144a81f234e6a665121, type: 2}
-  m_sharedMaterial: {fileID: -3507165797009724552, guid: 8e34adc44bac3144a81f234e6a665121,
+  m_fontAsset: {fileID: 11400000, guid: 430f1bd57f96d414a8d01bdb2bda2aec, type: 2}
+  m_sharedMaterial: {fileID: -3507165797009724552, guid: 430f1bd57f96d414a8d01bdb2bda2aec,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -30,7 +30,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 1976
+  m_CustomRenderQueue: 2426
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -190,7 +190,11 @@ Material:
     - _BASE_COLOR: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_color: {r: 0.28627452, g: 0.5647059, b: 0.81568635, a: 0}
+<<<<<<<< HEAD:Assets/SergeI(Props)/Checers V2.0/Chacers_Material_1.0.mat
+    - _Base_color_1: {r: 1, g: 1, b: 1, a: 1}
+========
     - _Base_color_1: {r: 1, g: 1, b: 1, a: 0}
+>>>>>>>> 32472e84afcecf3c8fbd6ef4a8010a64de55fca7:Assets/Amir/Materials/CheckerMaterial2.mat
     - _Cavity: {r: 0.15761836, g: 0.19933069, b: 0.4339623, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color_1: {r: 0.16470589, g: 0.5019608, b: 0.7607844, a: 1}

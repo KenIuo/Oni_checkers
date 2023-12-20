@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.03098051, g: 0.06603809, b: 0.08359417, a: 1}
+  m_IndirectSpecularColor: {r: 0.031097759, g: 0.066050306, b: 0.08359414, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -597,28 +597,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.42
       objectReference: {fileID: 0}
     - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 6.35
       objectReference: {fileID: 0}
     - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
         type: 3}
@@ -659,11 +644,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7509434459141485942, guid: c692cd22b7b624d4ca544433271b6677,
         type: 3}
@@ -1697,21 +1677,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1759,11 +1724,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7509434459141485942, guid: c692cd22b7b624d4ca544433271b6677,
         type: 3}
@@ -2188,11 +2148,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8510176941648730181, guid: d7bc6327fc4c9a942a2c90903fa781c4,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: e25829726b94f214c806a4dbe8c58d8a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2944,21 +2899,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.2
       objectReference: {fileID: 0}
@@ -3007,11 +2947,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1755714287882317082, guid: c692cd22b7b624d4ca544433271b6677,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7509434459141485942, guid: c692cd22b7b624d4ca544433271b6677,
         type: 3}
       propertyPath: m_Name
@@ -3051,7 +2986,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.107912086, g: 0.107912086, b: 0.23584908, a: 1}
+  m_Color: {r: 0.15694118, g: 0.15694118, b: 0.23529412, a: 1}
   m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 30

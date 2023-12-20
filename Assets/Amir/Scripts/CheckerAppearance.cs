@@ -16,8 +16,8 @@ public class CheckerAppearance : MonoBehaviour
     void Awake()
     {
         _markerImage.color = _playerColor;
-        //_bodyMaterial.SetVector4("Base_color", _playerColor);
-        _bodyMaterial.SetVectorArray("Color", new List<Vector4> { _playerColor, _playerColor });
+        _bodyMaterial.SetVector("Base_color", _playerColor);
+        //_bodyMaterial.SetVectorArray("Color", new List<Vector4> { _playerColor, _playerColor });
         _chargeVFX.SetVector4("Color", _playerColor);
 
         //collision.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.8f, 0.8f, 0.8f, 0.8f);

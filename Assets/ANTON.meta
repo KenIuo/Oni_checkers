@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ANTON.meta
 guid: d544773bbceba6149a139946016e5d7b
+========
+guid: a96689f6e75079c439464325f3e0d1ac
+>>>>>>>> fab579e (Добавил портал нейтральный,синий и красный):Assets/Edik/Scene.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

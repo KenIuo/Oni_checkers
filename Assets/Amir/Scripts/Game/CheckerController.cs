@@ -97,7 +97,7 @@ public class CheckerController : MonoBehaviour
 
                 // воспроизводить анимацию смерти шашки
 
-                _dissolveControl.SetDissolve(1);
+                //_dissolveControl.SetDissolve(1);
                 gameObject.SetActive(false);
 
                 TurnSystem.Instance.SetCheckerReady(this, true);

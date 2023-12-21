@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 
 public class CheckerAppearance : MonoBehaviour
 {
+    [SerializeField] MeshRenderer _bodyMesh;
     [SerializeField] Material _bodyMaterial;
     [SerializeField] VisualEffect _chargeVFX;
     [SerializeField] Image _markerImage;
@@ -15,10 +16,11 @@ public class CheckerAppearance : MonoBehaviour
 
     void Awake()
     {
+        _bodyMaterial.SetVector(NamesTags.SHADER_COLOR, _playerColor);
+        _bodyMesh.material = _bodyMaterial;
+
         _markerImage.color = _playerColor;
-        _bodyMaterial.SetVector("Base_color", _playerColor);
-        //_bodyMaterial.SetVectorArray("Color", new List<Vector4> { _playerColor, _playerColor });
-        _chargeVFX.SetVector4("Color", _playerColor);
+        _chargeVFX.SetVector4(NamesTags.VFX_COLOR, _playerColor);
 
         //collision.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0.8f, 0.8f, 0.8f, 0.8f);
     }

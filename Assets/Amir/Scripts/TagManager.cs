@@ -21,4 +21,10 @@ public class NamesTags
     public static readonly string VOLUME_MUSIC = "MusicVolume";
     public static readonly string VOLUME_EFFECTS = "EffectsVolume";
     public static readonly string VOLUME_ENVIRONMENT = "EnvironmentVolume";
+
+    public static readonly string SHADER_COLOR = "_Color";
+    public static readonly string SHADER_SECOND_COLOR = "_Shadow";
+
+    public static readonly string VFX_COLOR = "Color2";
+    public static readonly string DISSOLVE = "_DissolveAmount";
 }

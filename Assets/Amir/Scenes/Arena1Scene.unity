@@ -658,11 +658,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1760756318481393403, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3c55a78565408724e87fbd25e910ba3d, type: 2}
     - target: {fileID: 2376713684588591434, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -693,6 +688,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6903090921956968764, guid: a80a01b44e6c53f458ba29d01e431030,
+        type: 3}
+      propertyPath: _materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3c55a78565408724e87fbd25e910ba3d, type: 2}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _bodyMaterial
@@ -706,17 +706,17 @@ PrefabInstance:
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.b
-      value: 0.47009614
+      value: 0.43776473
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.g
-      value: 0.7169812
+      value: 0.7176471
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.r
-      value: 0.55052084
+      value: 0.52661633
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2745,11 +2745,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1760756318481393403, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 30c202c2ef0526d4899a6eec85148596, type: 2}
     - target: {fileID: 2376713684588591434, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2780,6 +2775,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6903090921956968764, guid: a80a01b44e6c53f458ba29d01e431030,
+        type: 3}
+      propertyPath: _materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 30c202c2ef0526d4899a6eec85148596, type: 2}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _bodyMaterial
@@ -2793,17 +2793,17 @@ PrefabInstance:
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.b
-      value: 0.3901172
+      value: 0.21952623
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.g
-      value: 0.36667857
+      value: 0.18447503
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.r
-      value: 0.754717
+      value: 0.7681514
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2899,11 +2899,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1760756318481393403, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f4c0302fa56dcd04dbc66f2e0de32c6c, type: 2}
     - target: {fileID: 2376713684588591434, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2934,6 +2929,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6903090921956968764, guid: a80a01b44e6c53f458ba29d01e431030,
+        type: 3}
+      propertyPath: _materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f4c0302fa56dcd04dbc66f2e0de32c6c, type: 2}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _bodyMaterial
@@ -2947,17 +2947,17 @@ PrefabInstance:
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.b
-      value: 0.33174616
+      value: 0.084376216
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.g
-      value: 0.47621843
+      value: 0.32314324
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.r
-      value: 0.6698113
+      value: 0.6444799
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4231,30 +4231,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1760756318481393403, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2c6e4f088b264cd4f858bba789b4491c, type: 2}
-    - target: {fileID: 2663804842767573802, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2751505350747093307, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: m_text
       value: Pl
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322106476011837599, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6284610430626225639, guid: a80a01b44e6c53f458ba29d01e431030,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6764211504394987261, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
@@ -4266,11 +4246,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8195743608635886258, guid: a80a01b44e6c53f458ba29d01e431030,
+    - target: {fileID: 6903090921956968764, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: _materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2c6e4f088b264cd4f858bba789b4491c, type: 2}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _bodyMaterial
@@ -4284,17 +4264,17 @@ PrefabInstance:
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.b
-      value: 0.7264151
+      value: 0.7176471
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.g
-      value: 0.5166272
+      value: 0.3068597
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}
       propertyPath: _playerColor.r
-      value: 0.51054645
+      value: 0.29495296
       objectReference: {fileID: 0}
     - target: {fileID: 9063737983205660703, guid: a80a01b44e6c53f458ba29d01e431030,
         type: 3}

@@ -1,37 +1,30 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
 public class DissolveControl : MonoBehaviour
 {
-    public SkinnedMeshRenderer skinnedMesh;
-
+    [SerializeField] List<Material> _materials;
     [SerializeField] VisualEffect _spawnVFX;
 
-    Material[] skinnedMaterials;
     float dissolveRate = 0.0125f;
     float refreshRate = 0.025f;
-    float currentDissolve;
-
-    const string _dissolveValue = "_DissolveAmount";
+    float currentDissolve = 0;
 
     void Start()
     {
-        if (skinnedMesh != null)
-        {
-            skinnedMaterials = skinnedMesh.materials;
-            currentDissolve = skinnedMaterials[0].GetFloat(_dissolveValue);
+        SetDissolve(1);
 
-            StartCoroutine(SpawnCoroutine());  
-        }
+        StartCoroutine(SpawnCoroutine());
     }
 
     public void SetDissolve(float dissolve_amount)
     {
         currentDissolve = dissolve_amount;
 
-        for (int i = 0; i < skinnedMaterials.Length; i++)
-            skinnedMaterials[i].SetFloat(_dissolveValue, currentDissolve);
+        foreach (var mat in _materials)
+            mat.SetFloat(NamesTags.DISSOLVE, currentDissolve);
     }
 
     /*public IEnumerator DeathCoroutine ()
@@ -59,18 +52,15 @@ public class DissolveControl : MonoBehaviour
         if (_spawnVFX != null)
             _spawnVFX.Play();
 
-        if (skinnedMaterials.Length > 0)
+        while (currentDissolve > 0)
         {
-            while (currentDissolve > 0)
-            {
-                currentDissolve -= dissolveRate;
+            currentDissolve -= dissolveRate;
 
-                foreach (Material mat in skinnedMaterials)
-                {
-                    mat.SetFloat(_dissolveValue, currentDissolve);
-                }
-                yield return new WaitForSeconds(refreshRate);
+            foreach (Material mat in _materials)
+            {
+                mat.SetFloat(NamesTags.DISSOLVE, currentDissolve);
             }
+            yield return new WaitForSeconds(refreshRate);
         }
     }
 }

@@ -24,6 +24,7 @@ public class CheckerController : MonoBehaviour
     Rigidbody _rigidbody;
     DissolveControl _dissolveControl;
     CheckerAppearance _checkerAppearance;
+    MarkAnimationController _markAnimationController;
     Quaternion _standartRotation;
     Vector3 _standartPosition;
     Vector3 _directionMove;
@@ -98,17 +99,21 @@ public class CheckerController : MonoBehaviour
                 // воспроизводить анимацию смерти шашки
 
                 //_dissolveControl.SetDissolve(1);
+                _markAnimationController.Kill();
                 gameObject.SetActive(false);
 
                 TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Standing:
+                _markAnimationController.Pull(false);
                 TurnSystem.Instance.SetCheckerReady(this, true);
                 break;
             case CheckerState.Moving:
+                _markAnimationController.Pull(false);
                 TurnSystem.Instance.SetCheckerReady(this, false);
                 break;
             case CheckerState.Turning:
+                _markAnimationController.Pull(true);
                 TurnSystem.Instance.SetCheckerReady(this, false);
                 break;
         }
@@ -141,10 +146,10 @@ public class CheckerController : MonoBehaviour
     #region AI
     public void ChooseAttackVector()
     {
-        byte player_to_attack = (byte)UnityEngine.Random.Range(0, TurnSystem.Instance._playersQueue.Count);
+        byte player_to_attack = (byte)Random.Range(0, TurnSystem.Instance._playersQueue.Count);
 
         while (player_to_attack == TurnSystem.Instance._currentPlayer)
-            player_to_attack = (byte)UnityEngine.Random.Range(0, TurnSystem.Instance._playersQueue.Count);
+            player_to_attack = (byte)Random.Range(0, TurnSystem.Instance._playersQueue.Count);
 
         Vector3 random_player_position = TurnSystem.Instance._playersQueue[player_to_attack].transform.position;
 
@@ -167,7 +172,7 @@ public class CheckerController : MonoBehaviour
 
     Vector3 GetPositionToKill(Vector3 direction_vector)
     {
-        _currentRadius = GetCurrentRadius(UnityEngine.Random.Range(_minRadius, 10.0f));
+        _currentRadius = GetCurrentRadius(Random.Range(_minRadius, 10.0f));
 
         transform.rotation = Quaternion.LookRotation(direction_vector);
         //initial_position.Normalize();
@@ -193,6 +198,7 @@ public class CheckerController : MonoBehaviour
         _rigidbody = gameObject.GetComponent<Rigidbody>();
         _dissolveControl = gameObject.GetComponent<DissolveControl>();
         _checkerAppearance = gameObject.GetComponent<CheckerAppearance>();
+        _markAnimationController = gameObject.GetComponentInChildren<MarkAnimationController>();
 
         _standartPosition = transform.position;
         _standartRotation = transform.rotation;

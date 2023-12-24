@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -30,6 +31,12 @@ public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         UIManager.Instance.PlayMenuBack();
         Application.Quit();
+    }
+
+    public static void LoadArena(string arena_name)
+    {
+        UIManager.Instance.PlayMenuChoose();
+        SceneManager.LoadScene(arena_name);
     }
 
     public static void LoadArena1()

@@ -28,3 +28,9 @@ public class NamesTags
     public static readonly string VFX_COLOR = "Color2";
     public static readonly string DISSOLVE = "_DissolveAmount";
 }
+
+public class AnimationTags
+{
+    public const string KILL = "Dead";
+    public const string PULL = "Pulled";
+}

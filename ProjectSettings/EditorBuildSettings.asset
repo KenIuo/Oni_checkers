@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Amir/Scenes/MainMenuScene.unity
     guid: 92b2616cb26b7cb499bfd9748bf7a99a
   - enabled: 1
-    path: Assets/Amir/Scenes/Arena1Scene.unity
+    path: Assets/Amir/Scenes/Arena1.unity
     guid: 610e04a1d1d61d84d9ce7c45711381da
   - enabled: 1
-    path: Assets/Amir/Scenes/Arena2Scene.unity
+    path: Assets/Amir/Scenes/Arena2.unity
     guid: 603dadbfa48a6f541973f867780e2a37
   - enabled: 1
-    path: Assets/Amir/Scenes/Arena3Scene.unity
+    path: Assets/Amir/Scenes/Arena3.unity
     guid: 20963c9d10a9e204d9aafacc966a0763
   m_configObjects: {}

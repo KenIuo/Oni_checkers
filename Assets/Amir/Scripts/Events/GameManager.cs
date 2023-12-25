@@ -52,9 +52,9 @@ public class GameManager : MonoBehaviour
 
 
 
-    void Awake()
+    void Start()
     {
-        _currentScreen = GameScreen;
+        ChangeScreen(GameScreen);
     }
 
     void Update()

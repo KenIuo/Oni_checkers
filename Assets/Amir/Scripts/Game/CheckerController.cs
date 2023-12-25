@@ -20,11 +20,11 @@ public class CheckerController : MonoBehaviour
 
     [SerializeField] VisualEffect _speedVFX;
     [SerializeField] LayerMask _layer;
-
-    Rigidbody _rigidbody;
-    DissolveControl _dissolveControl;
-    CheckerAppearance _checkerAppearance;
-    MarkAnimationController _markAnimationController;
+    [SerializeField] Rigidbody _rigidbody;
+    [SerializeField] DissolveControl _dissolveControl;
+    [SerializeField] CheckerAppearance _checkerAppearance;
+    [SerializeField] MarkAnimationController _markAnimationController;
+    
     Quaternion _standartRotation;
     Vector3 _standartPosition;
     Vector3 _directionMove;
@@ -32,6 +32,75 @@ public class CheckerController : MonoBehaviour
     float _currentRadius;
     
     Ray ray;
+
+
+
+    void Awake()
+    {
+        _isPlayer = gameObject.TryGetComponent(out PointerSystemController _);
+
+        //_chargeVFX = gameObject.transform.GetChild(1).gameObject;
+        //_speedVFX = gameObject.transform.GetChild(2).gameObject;
+
+        _standartPosition = transform.position;
+        _standartRotation = transform.rotation;
+
+        _standartConstraints = _rigidbody.constraints;
+
+        if (_isPlayer)
+            TurnSystem.Instance.AddToLists(this, _marker);
+    }
+
+    void Start()
+    {
+        if (!_isPlayer)
+            TurnSystem.Instance.AddToLists(this, _marker);
+    }
+
+    void Update()
+    {
+        if (!_state.Equals(CheckerState.Died) && !_state.Equals(CheckerState.Turning))
+        {
+            if (!CheckFloor())
+                _rigidbody.constraints = RigidbodyConstraints.None;
+            else if (_state.Equals(CheckerState.Standing))
+                _rigidbody.constraints = _standartConstraints;
+
+            CheckReadyState();
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<CheckerController>())
+        {
+            GameManager.Instance.SoundManager.PlayHitSound();
+            _chargeVFX.enabled = false;
+            _speedVFX.enabled = false;
+        }
+        else if (collision.gameObject.name != NamesTags.PLAYING_FIELD)
+        {
+            GameManager.Instance.SoundManager.PlayCollideSound();
+            _speedVFX.enabled = false;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == NamesTags.PLAYING_FIELD)
+        {
+            _rigidbody.freezeRotation = false;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position + transform.up, transform.position - transform.up);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position + transform.up, 0.1f);
+    }
 
 
 
@@ -98,7 +167,7 @@ public class CheckerController : MonoBehaviour
 
                 // воспроизводить анимацию смерти шашки
 
-                //_dissolveControl.SetDissolve(1);
+                _dissolveControl.SetDissolve(1);
                 _markAnimationController.Kill();
                 gameObject.SetActive(false);
 
@@ -185,78 +254,4 @@ public class CheckerController : MonoBehaviour
         //SetState(CheckerState.Standing);
     }
     #endregion
-
-
-
-    void Awake()
-    {
-        _isPlayer = gameObject.TryGetComponent(out PointerSystemController _);
-
-        //_chargeVFX = gameObject.transform.GetChild(1).gameObject;
-        //_speedVFX = gameObject.transform.GetChild(2).gameObject;
-
-        _rigidbody = gameObject.GetComponent<Rigidbody>();
-        _dissolveControl = gameObject.GetComponent<DissolveControl>();
-        _checkerAppearance = gameObject.GetComponent<CheckerAppearance>();
-        _markAnimationController = gameObject.GetComponentInChildren<MarkAnimationController>();
-
-        _standartPosition = transform.position;
-        _standartRotation = transform.rotation;
-
-        _standartConstraints = _rigidbody.constraints;
-
-        if (_isPlayer)
-            TurnSystem.Instance.AddToLists(this, _marker);
-    }
-
-    void Start()
-    {
-        if (!_isPlayer)
-            TurnSystem.Instance.AddToLists(this, _marker);
-    }
-
-    void Update()
-    {
-        if (!_state.Equals(CheckerState.Died) && !_state.Equals(CheckerState.Turning))
-        {
-            if (!CheckFloor())
-                _rigidbody.constraints = RigidbodyConstraints.None;
-            else if (_state.Equals(CheckerState.Standing))
-                _rigidbody.constraints = _standartConstraints;
-
-            CheckReadyState();
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.GetComponent<CheckerController>())
-        {
-            GameManager.Instance.SoundManager.PlayHitSound();
-            _chargeVFX.enabled = false;
-            _speedVFX.enabled = false;
-        }
-        else if (collision.gameObject.name != NamesTags.PLAYING_FIELD)
-        {
-            GameManager.Instance.SoundManager.PlayCollideSound();
-            _speedVFX.enabled = false;
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if(collision.gameObject.name == NamesTags.PLAYING_FIELD)
-        {
-            _rigidbody.freezeRotation = false;
-        }
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position + transform.up, transform.position - transform.up);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position + transform.up, 0.1f);
-    }
 }

@@ -5,7 +5,9 @@ using UnityEngine.VFX;
 
 public class DissolveControl : MonoBehaviour
 {
-    [SerializeField] List<Material> _materials;
+    [SerializeField] List<MeshRenderer> _checkerMeshes;
+    [SerializeField] List<Material> _checkerMaterials;
+    [Space]
     [SerializeField] VisualEffect _spawnVFX;
 
     float dissolveRate = 0.0125f;
@@ -14,8 +16,12 @@ public class DissolveControl : MonoBehaviour
 
     void Start()
     {
-        SetDissolve(1);
+        _checkerMeshes[0].material = _checkerMaterials[0];
 
+        for (byte i = 1; i < _checkerMeshes.Count; i++)
+            _checkerMeshes[i].material = _checkerMaterials[1];
+
+        SetDissolve(1);
         StartCoroutine(SpawnCoroutine());
     }
 
@@ -23,7 +29,7 @@ public class DissolveControl : MonoBehaviour
     {
         currentDissolve = dissolve_amount;
 
-        foreach (var mat in _materials)
+        foreach (var mat in _checkerMaterials)
             mat.SetFloat(NamesTags.DISSOLVE, currentDissolve);
     }
 
@@ -56,7 +62,7 @@ public class DissolveControl : MonoBehaviour
         {
             currentDissolve -= dissolveRate;
 
-            foreach (Material mat in _materials)
+            foreach (Material mat in _checkerMaterials)
             {
                 mat.SetFloat(NamesTags.DISSOLVE, currentDissolve);
             }

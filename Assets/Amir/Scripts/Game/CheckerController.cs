@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.VFX;
 
 public enum CheckerState { Died, Standing, Moving, Turning }
@@ -23,8 +24,8 @@ public class CheckerController : MonoBehaviour
     [SerializeField] Rigidbody _rigidbody;
     [SerializeField] DissolveControl _dissolveControl;
     [SerializeField] CheckerAppearance _checkerAppearance;
-    [SerializeField] MarkAnimationController _markAnimationController;
     
+    MarkAnimationController _markAnimationController;
     Quaternion _standartRotation;
     Vector3 _standartPosition;
     Vector3 _directionMove;
@@ -38,6 +39,11 @@ public class CheckerController : MonoBehaviour
     void Awake()
     {
         _isPlayer = gameObject.TryGetComponent(out PointerSystemController _);
+
+        _markAnimationController = _marker.GetComponent<MarkAnimationController>();
+
+        _checkerAppearance.SetChargeVFXColor(_chargeVFX);
+        _checkerAppearance.SetMarkerImageColor(_marker.GetComponentInChildren<UnityEngine.UI.Image>());
 
         //_chargeVFX = gameObject.transform.GetChild(1).gameObject;
         //_speedVFX = gameObject.transform.GetChild(2).gameObject;

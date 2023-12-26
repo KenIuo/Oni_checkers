@@ -5,6 +5,7 @@ using UnityEngine.VFX;
 
 public class DissolveControl : MonoBehaviour
 {
+    [SerializeField] CheckerAppearance _checkerAppearance;
     [SerializeField] List<MeshRenderer> _checkerMeshes;
     [SerializeField] List<Material> _checkerMaterials;
     [Space]
@@ -16,6 +17,8 @@ public class DissolveControl : MonoBehaviour
 
     void Start()
     {
+        _checkerAppearance.SetBodyMaterialColor(_checkerMaterials[0]);
+
         _checkerMeshes[0].material = _checkerMaterials[0];
 
         for (byte i = 1; i < _checkerMeshes.Count; i++)

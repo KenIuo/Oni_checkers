@@ -160,7 +160,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DisolveWidth: 0.02
-    - _DissolveAmount: 0.025000673
+    - _DissolveAmount: -0.012499328
     - _DissolveScale: 40
     - _DstBlend: 0
     - _DstBlendAlpha: 0

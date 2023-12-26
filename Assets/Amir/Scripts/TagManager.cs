@@ -34,3 +34,11 @@ public class AnimationTags
     public const string KILL = "Dead";
     public const string PULL = "Pulled";
 }
+
+public class AxisTags
+{
+    public const string HORIZONTAL_AXIS = "Horizontal";
+    public const string VERTICAL_AXIS = "Vertical";
+    public const string MOUSE_X = "Mouse X";
+    public const string MOUSE_Y = "Mouse Y";
+}

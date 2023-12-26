@@ -5,10 +5,6 @@ using UnityEditor;
 
 public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    internal GameObject _previousScreen;
-
-
-
     public static void OnPlayClick()
     {
         UIManager.Instance.PlayMenuChoose();
@@ -37,24 +33,6 @@ public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         UIManager.Instance.PlayMenuChoose();
         SceneManager.LoadScene(arena_name);
-    }
-
-    public static void LoadArena1()
-    {
-        UIManager.Instance.PlayMenuChoose();
-        SceneManager.LoadScene(NamesTags.ARENA_1_SCENE);
-    }
-
-    public static void LoadArena2()
-    {
-        UIManager.Instance.PlayMenuChoose();
-        SceneManager.LoadScene(NamesTags.ARENA_2_SCENE);
-    }
-
-    public static void LoadArena3()
-    {
-        UIManager.Instance.PlayMenuChoose();
-        SceneManager.LoadScene(NamesTags.ARENA_3_SCENE);
     }
 
 

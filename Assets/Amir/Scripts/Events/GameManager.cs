@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] SoundManager _soundManager;
 
     GameObject _currentScreen;
+    GameObject _previousScreen;
 
 
 
@@ -44,7 +45,20 @@ public class GameManager : MonoBehaviour
     public void ChangeScreen(GameObject screen)
     {
         if (_currentScreen != null)
+        {
             _currentScreen.SetActive(false);
+
+            if (_currentScreen != GameScreen
+            && _currentScreen != SettingsScreen)
+                _previousScreen = _currentScreen;
+            else if (_currentScreen == SettingsScreen)
+            {
+                _currentScreen = screen;
+                screen = _previousScreen;
+
+                _previousScreen.SetActive(false);
+            }
+        }
 
         _currentScreen = screen;
         _currentScreen.SetActive(true);

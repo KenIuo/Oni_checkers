@@ -1341,6 +1341,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1485477184}
+  - {fileID: 1015341667}
   - {fileID: 1633351692}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1704,7 +1705,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1633351692}
+    m_TransformParent: {fileID: 774915116}
     m_Modifications:
     - target: {fileID: 1641162887259451369, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
@@ -1724,7 +1725,7 @@ PrefabInstance:
     - target: {fileID: 6660442669517488471, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 6660442669517488471, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
@@ -1744,12 +1745,12 @@ PrefabInstance:
     - target: {fileID: 6660442669517488471, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6660442669517488471, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6660442669517488471, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
@@ -1769,12 +1770,12 @@ PrefabInstance:
     - target: {fileID: 8714146098558715042, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_Name
-      value: Camera
+      value: Preview Camera
       objectReference: {fileID: 0}
     - target: {fileID: 8714146098558715042, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -2360,12 +2361,12 @@ PrefabInstance:
     - target: {fileID: 8714146098558715042, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_Name
-      value: Camera
+      value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 8714146098558715042, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -2565,7 +2566,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1015341667}
   - {fileID: 15615991}
   - {fileID: 1400599210}
   - {fileID: 1164204055}

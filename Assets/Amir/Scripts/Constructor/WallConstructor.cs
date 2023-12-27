@@ -1,8 +1,11 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class WallConstructor : MonoBehaviour
 {
     [SerializeField] GameObject _asset;
+    [SerializeField] Mesh _cubeMeshExample;
 	[Space]
 	[SerializeField] float _radius = 1f;
     [Min(2)]
@@ -16,21 +19,25 @@ public class WallConstructor : MonoBehaviour
         Gizmos.color = Color.white;
 
         float anglePerSphere = 360f / _count;
-        /*
-            float rotation = transform.localRotation.eulerAngles.y;
-
-            float cos = Mathf.Cos((angle - anglePerSphere + rotation) * Mathf.Deg2Rad) * _radius;
-            float sin = Mathf.Sin((angle - anglePerSphere + rotation) * Mathf.Deg2Rad) * _radius;
-        */
 
         for (float angle = 0f; angle < 360f; angle += anglePerSphere)
         {
             float cos = Mathf.Cos(angle * Mathf.Deg2Rad) * _radius;
             float sin = Mathf.Sin(angle * Mathf.Deg2Rad) * _radius;
 
-            Gizmos.DrawSphere(new Vector3(transform.position.x + sin,
-                                          transform.position.y,
-                                          transform.position.z + cos), 1f);
+            if (_cubeMeshExample != null)
+            {
+                Quaternion rotation = transform.rotation;
+
+                if (_rotateAroundCenter)
+                    rotation *= Quaternion.AngleAxis(angle, Vector3.up);
+
+                Gizmos.DrawMesh(_cubeMeshExample,
+                                new Vector3(transform.position.x + sin,
+                                            transform.position.y,
+                                            transform.position.z + cos),
+                                rotation);
+            }
         }
     }
 
@@ -41,26 +48,25 @@ public class WallConstructor : MonoBehaviour
         ClearScene();
 
         float anglePerSphere = 360f / _count;
-        int repeats = 1;
+        sbyte repeats = 1;
 
-        for (float angle = 0f; angle < 360f; angle += anglePerSphere, repeats++)
+        for (float angle = 0f; angle < 360f; angle += anglePerSphere)
         {
+            GameObject box = PrefabUtility.InstantiatePrefab(_asset, transform) as GameObject;
+
+            box.name = $"{_asset.name} {repeats++}";
+            box.layer = transform.gameObject.layer;
+            box.transform.parent = transform;
+                
             if (_rotateAroundCenter)
-            {
-                GameObject box = Instantiate(_asset);
+                box.transform.rotation *= Quaternion.AngleAxis(angle, Vector3.up);
 
-                box.name = $"{_asset.name}{repeats}";
-                box.layer = transform.gameObject.layer;
-                box.transform.parent = transform;
-                box.transform.rotation = transform.rotation * Quaternion.AngleAxis(angle, Vector3.up);
+            float cos = Mathf.Cos(angle * Mathf.Deg2Rad) * _radius;
+            float sin = Mathf.Sin(angle * Mathf.Deg2Rad) * _radius;
 
-                float cos = Mathf.Cos(angle * Mathf.Deg2Rad) * _radius;
-                float sin = Mathf.Sin(angle * Mathf.Deg2Rad) * _radius;
-
-                box.transform.position = new Vector3(transform.position.x + sin,
-                                                     transform.position.y,
-                                                     transform.position.z + cos);
-            }
+            box.transform.position = new Vector3(transform.position.x + sin,
+                                                 transform.position.y,
+                                                 transform.position.z + cos);
         }
     }
 

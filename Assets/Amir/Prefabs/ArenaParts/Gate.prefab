@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8934586149058234532}
   m_Layer: 0
-  m_Name: Gates
+  m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +181,7 @@ PrefabInstance:
     - target: {fileID: 7000773422513440428, guid: f36434c73437d02429636b5ec6c19644,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7000773422513440428, guid: f36434c73437d02429636b5ec6c19644,
         type: 3}

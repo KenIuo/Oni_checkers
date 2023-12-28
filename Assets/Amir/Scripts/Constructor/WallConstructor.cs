@@ -10,8 +10,10 @@ public class WallConstructor : MonoBehaviour
 	[SerializeField] float _radius = 1f;
     [Min(2)]
     [SerializeField] sbyte _count = 2;
-    [SerializeField] bool _rotateAroundCenter = true;
+    [SerializeField] bool _lookAtTheCenter = true;
+    [SerializeField] RotateEnum _rotateAround = RotateEnum.Self;
 
+    enum RotateEnum { Self, Parent }
 
 
     void OnDrawGizmosSelected()
@@ -29,7 +31,7 @@ public class WallConstructor : MonoBehaviour
             {
                 Quaternion rotation = transform.rotation;
 
-                if (_rotateAroundCenter)
+                if (_lookAtTheCenter)
                     rotation *= Quaternion.AngleAxis(angle, Vector3.up);
 
                 Gizmos.DrawMesh(_cubeMeshExample,
@@ -58,7 +60,7 @@ public class WallConstructor : MonoBehaviour
             box.layer = transform.gameObject.layer;
             box.transform.parent = transform;
                 
-            if (_rotateAroundCenter)
+            if (_lookAtTheCenter)
                 box.transform.rotation *= Quaternion.AngleAxis(angle, Vector3.up);
 
             float cos = Mathf.Cos(angle * Mathf.Deg2Rad) * _radius;

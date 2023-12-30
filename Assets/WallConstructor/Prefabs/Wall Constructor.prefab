@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _asset: {fileID: 0}
-  _cubeMeshExample: {fileID: -5495902117074765545, guid: 0a0abb973951afc4989bf89d7fd0e337,
+  _cubeMeshGizmo: {fileID: -5495902117074765545, guid: 0a0abb973951afc4989bf89d7fd0e337,
+    type: 3}
+  _prismMeshGizmo: {fileID: -5495902117074765545, guid: 0a0abb973951afc4989bf89d7fd0e337,
     type: 3}
   _radius: 5
   _count: 4
-  _rotateAroundCenter: 1
+  _lookAtTheCenter: 1
+  _rotateAround: 0

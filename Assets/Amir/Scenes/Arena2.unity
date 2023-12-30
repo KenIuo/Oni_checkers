@@ -3781,6 +3781,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2131846549}
     m_Modifications:
+    - target: {fileID: 1641162887259451369, guid: b4616a8890060a4428b5cf46ed13bbb8,
+        type: 3}
+      propertyPath: _smoothSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1641162887259451369, guid: b4616a8890060a4428b5cf46ed13bbb8,
+        type: 3}
+      propertyPath: _playerTransform
+      value: 
+      objectReference: {fileID: 970703700}
+    - target: {fileID: 1641162887259451369, guid: b4616a8890060a4428b5cf46ed13bbb8,
+        type: 3}
+      propertyPath: _minDesiredDistanceAlone
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2578236988838632818, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -3790,11 +3805,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -5.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4305950638127722124, guid: b4616a8890060a4428b5cf46ed13bbb8,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6660442669517488471, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
@@ -3849,7 +3859,7 @@ PrefabInstance:
     - target: {fileID: 8714146098558715042, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: m_Name
-      value: CameraPoint
+      value: Camera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

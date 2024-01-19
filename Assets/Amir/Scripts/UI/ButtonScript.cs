@@ -1,7 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEditor;
 
 public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {

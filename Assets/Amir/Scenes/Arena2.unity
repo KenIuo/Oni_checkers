@@ -3228,6 +3228,7 @@ GameObject:
   - component: {fileID: 823906298}
   - component: {fileID: 823906300}
   - component: {fileID: 823906299}
+  - component: {fileID: 823906301}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -3284,6 +3285,14 @@ MonoBehaviour:
   audioMenuChoose: {fileID: 779722123}
   audioMenuTransit: {fileID: 1083348697}
   audioMenuBack: {fileID: 622398599}
+--- !u!81 &823906301
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823906297}
+  m_Enabled: 1
 --- !u!1 &866121855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3783,12 +3792,17 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1641162887259451369, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
-      propertyPath: _smoothSpeed
-      value: 0.01
-      objectReference: {fileID: 0}
+      propertyPath: _mainTarget
+      value: 
+      objectReference: {fileID: 970703700}
     - target: {fileID: 1641162887259451369, guid: b4616a8890060a4428b5cf46ed13bbb8,
         type: 3}
       propertyPath: _playerTransform
+      value: 
+      objectReference: {fileID: 970703700}
+    - target: {fileID: 1641162887259451369, guid: b4616a8890060a4428b5cf46ed13bbb8,
+        type: 3}
+      propertyPath: _mainTargetTransform
       value: 
       objectReference: {fileID: 970703700}
     - target: {fileID: 1641162887259451369, guid: b4616a8890060a4428b5cf46ed13bbb8,

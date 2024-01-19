@@ -29,10 +29,9 @@ public class CheckerController : MonoBehaviour
     Quaternion _standartRotation;
     Vector3 _standartPosition;
     Vector3 _directionMove;
+    Ray _rayToFloor;
     RigidbodyConstraints _standartConstraints;
     float _currentRadius;
-    
-    Ray ray;
 
 
 
@@ -211,9 +210,9 @@ public class CheckerController : MonoBehaviour
 
     bool CheckFloor()
     {
-        ray = new(transform.position + transform.up, -transform.up);
+        _rayToFloor = new(transform.position + transform.up, -transform.up);
 
-        return Physics.Raycast(ray, out _, float.PositiveInfinity, LayersTags.PF_LAYER);
+        return Physics.Raycast(_rayToFloor, out _, float.PositiveInfinity, LayersTags.PF_LAYER);
     }
 
 

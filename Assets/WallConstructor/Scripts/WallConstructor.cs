@@ -6,8 +6,7 @@ public class WallConstructor : MonoBehaviour
     [SerializeField] GameObject _asset;
 	[Space]
 	[SerializeField] float _radius = 1f;
-    [Min(2)]
-    [SerializeField] sbyte _count = 2;
+    [SerializeField, Range(2, 100)] sbyte _count = 2;
     [SerializeField] bool _lookAtTheCenter = true;
     [SerializeField] RotateEnum _rotateAround = RotateEnum.Self;
 
@@ -47,6 +46,7 @@ public class WallConstructor : MonoBehaviour
 
 
 
+    [ContextMenu("Some")]
     public void BuildScene()
     {
         ClearScene();
